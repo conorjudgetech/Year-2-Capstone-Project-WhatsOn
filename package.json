@@ -1,0 +1,20 @@
+{
+  "name": "npm-init-package",
+  "version": "1.0.0",
+  "description": "This will contain all the depencies that are used for this project. Please use the command \"npm install\" to download all the depencies I am using for this project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "team",
+    "package.json",
+    "npm",
+    "init"
+  ],
+  "author": "David O Connor",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
