@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require('express'); //calls the express libary
 
-const app = express();
+const app = express(); // changes the name of the express call to app, saves time on typing
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); // this calls for the ejs libary
 
-app.listen(3000);
+app.listen(3000); //sets the port number to 3000
 
 
 app.use((req, res, next) => {
@@ -16,11 +16,11 @@ app.use((req, res, next) => {
 }); 
 
 
-/* app.get('/', (req, res) => {
-    res.render('index', {title: 'Home'});
+/* app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
+    res.render('index', {title: 'Home'}); // tells the code to render the index file
 });
 
-app.use((req, res) => {
+app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
     res.status(404).render('404', {title: '404 Page'});
 });
 
