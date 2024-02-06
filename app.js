@@ -7,6 +7,9 @@ app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.listen(3000); //sets the port number to 3000
 
 
+//middle ware to access static files
+app.use(express.static('css'));
+
 app.use((req, res, next) => {
     console.log('new request has been made');
     console.log('Host name: ', req.hostname);
