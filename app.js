@@ -19,12 +19,19 @@ app.use((req, res, next) => {
 }); 
 
 
-/* app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
+ app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
     res.render('index', {title: 'Home'}); // tells the code to render the index file
 });
+
+app.get('/signup', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
+    res.render('signup', {title: 'Home'}); // tells the code to render the index file
+});
+
+app.get('/login', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
+    res.render('login', {title: 'Home'}); // tells the code to render the index file
+});
+
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
     res.status(404).render('404', {title: '404 Page'});
 });
-
-*/
