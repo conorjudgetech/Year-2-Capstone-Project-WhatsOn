@@ -52,35 +52,33 @@
 /*Login Styling*/
 
 .forming {
-    height: 500px;
+    height: 700px;
     width: 500px;
     border:solid var(--clr-bright) 5px;
     margin: 0 auto;
+    margin-top: 50px;
     
 }
 
+/*Positioning of the elements for login/signup */
+
 .forming{
+    
     display: grid;
     grid-template-columns: 100px 100px 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px 100px 100px;
 }
 
-.namel{
-    margin-left: 10px;
+.labels{
+    text-align: center;
     line-height: 100px;
 }
 
-
-.namel{
-
-background-color: var(--clr-blue);
-grid-row:1/1;
-grid-column: 2/3;
-}
-
-.nametf{
-    grid-row: 2/3;
-    grid-column: 1/6;
+.sign{
+    grid-row:1/2;
+    grid-column: 2/3;
+    text-align: center;
+    line-height: 100px;
 }
 
 .emailS{
@@ -88,12 +86,13 @@ grid-column: 2/3;
 }
 
 .emailS{
-    grid-row: 3/4;
+    grid-row: 2/3;
+    grid-column: 2/3;
 }
 
 .emailtf{
-    grid-row: 4/5;
-    grid-column: 1/6;
+    grid-row: 3/4;
+    grid-column: 2/5;
 }
 
 .passwordl{
@@ -101,7 +100,18 @@ grid-column: 2/3;
 }
 
 .passwordl{
-    grid-row:5/6;
+    grid-row:4/5;
+    grid-column: 2/3;
+}
+
+.passwordtf{
+    grid-row: 5/6;
+    grid-column: 2/5;
+}
+
+#submit{
+    grid-row: 6/7;
+    grid-column: 2/5;
 }
 
 

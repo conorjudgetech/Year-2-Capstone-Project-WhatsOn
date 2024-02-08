@@ -17,6 +17,10 @@ app.use(morgan('dev'));
     res.render('index', {title: 'Home'}); // tells the code to render the index file
 });
 
+app.get('/follow', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
+    res.render('follow', {title: 'Follow Page'}); // tells the code to render the index file
+});
+
 app.get('/signup', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
     res.render('signup', {title: 'Sign Up'}); // tells the code to render the index file
 });
