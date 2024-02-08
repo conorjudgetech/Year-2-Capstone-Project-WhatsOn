@@ -1,3 +1,7 @@
 :root{  /* set variables as colours, will save time when the colours in the page has to change*/
     --clr-blue:rgb(83, 201, 224); /*this is how a variable in css must be set up*/
 }
+
+body{
+    background-color: var(--clr-blue);
+}
