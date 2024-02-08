@@ -56,4 +56,55 @@
     width: 500px;
     border:solid var(--clr-bright) 5px;
     margin: 0 auto;
+    
 }
+
+.forming{
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px 100px;
+}
+
+.namel{
+    margin-left: 10px;
+    line-height: 100px;
+}
+
+
+.namel{
+
+background-color: var(--clr-blue);
+grid-row:1/1;
+grid-column: 2/3;
+}
+
+.nametf{
+    grid-row: 2/3;
+    grid-column: 1/6;
+}
+
+.emailS{
+    background-color: var(--clr-blue);
+}
+
+.emailS{
+    grid-row: 3/4;
+}
+
+.emailtf{
+    grid-row: 4/5;
+    grid-column: 1/6;
+}
+
+.passwordl{
+    background-color: var(--clr-blue);
+}
+
+.passwordl{
+    grid-row:5/6;
+}
+
+
+
+
+
