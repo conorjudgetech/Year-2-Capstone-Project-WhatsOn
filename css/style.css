@@ -16,9 +16,7 @@
 
 
 
-body{
-    background-color: var(--clr-blue);
-}
+/*Home Page styling*/
 
 .map-div{
     height: 1920px;
@@ -51,3 +49,11 @@ body{
     justify-content: space-evenly;
 }
 
+/*Login Styling*/
+
+.forming {
+    height: 500px;
+    width: 500px;
+    border:solid var(--clr-bright) 5px;
+    margin: 0 auto;
+}

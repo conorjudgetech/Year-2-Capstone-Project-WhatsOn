@@ -18,11 +18,15 @@ app.use(morgan('dev'));
 });
 
 app.get('/signup', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
-    res.render('signup', {title: 'Home'}); // tells the code to render the index file
+    res.render('signup', {title: 'Sign Up'}); // tells the code to render the index file
 });
 
 app.get('/login', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
-    res.render('login', {title: 'Home'}); // tells the code to render the index file
+    res.render('login', {title: 'Login'}); // tells the code to render the index file
+});
+
+app.get('/contact-us', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
+    res.render('contact-us', {title: 'Conact Us'}); // tells the code to render the index file
 });
 
 
