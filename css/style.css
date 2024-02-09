@@ -22,7 +22,7 @@
     height: 1920px;
     width: 100%;
     border: solid var(--clr-blue) 5px;
-    background-color: var(--clr-blue);
+    background-image: url("tempMap.png");
     margin: 0 auto;
 }
 
@@ -37,7 +37,7 @@
     width: 200px;
     height: 100%;
     background-color: var(--clr-blue);
-    color: var(--clr-bright);
+    border: solid var(--clr-white) 5px;
     text-align: center;
     border-radius: 20px;
    
@@ -45,6 +45,7 @@
 
 
 .nav-bar{
+    position: sticky;
     display: flex;
     justify-content: space-evenly;
 }
