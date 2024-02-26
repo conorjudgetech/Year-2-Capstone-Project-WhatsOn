@@ -5,8 +5,15 @@
         console.log(popUpPage);
         
           function popUpContactFunction(){
+            popUpPage.innerHTML = '';
             popUpPage.classList.add("open-contactPage");
             popUpPage.innerHTML = '<embed type="text/html" src="/contact-us" width="800px" height="800px">';
+          }
+
+          function popUpRegistryFunction(){
+            popUpPage.innerHTML = '';
+            popUpPage.classList.add("open-contactPage");
+            popUpPage.innerHTML = '<embed type="text/html" src="/login" width="800px" height="800px">';
           }
 
 
