@@ -39,10 +39,13 @@
     width: 200px;
     height: 100%;
     background-color: var(--clr-blue);
-    border: solid var(--clr-white) 5px;
+    border: solid var(--clr-white) 15px;
     text-align: center;
+    font-size: 200%;
     border-radius: 20px;
-    cursor: pointer;
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
    
 }
 
@@ -51,6 +54,11 @@
     position: sticky;
     display: flex;
     justify-content: space-evenly;
+}
+
+.home-logo {
+    width: 100%;
+    height: auto;
 }
 
 /*contact pop css, only used for testing purposes */
@@ -83,7 +91,7 @@
 /*you can edit this to how you like */
 
 .contactForm{
-    height: 800px;
+    height: 80vh;
     width: 800px;
     margin: auto;
     border: 5px solid var(--clr-blue);
@@ -101,7 +109,7 @@
 /*Login Styling*/
 
 .forming {
-    height: 700px;
+    height: 80vh;
     width: 500px;
     border:solid var(--clr-bright) 5px;
     margin: 0 auto;

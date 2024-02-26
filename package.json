@@ -4,7 +4,8 @@
   "description": "This will contain all the depencies that are used for this project. Please use the command \"npm install\" to download all the depencies I am using for this project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "keywords": [
     "team",
@@ -20,4 +21,5 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.0.3"
   }
+  
 }
