@@ -1,5 +1,5 @@
 :root{  /* set variables as colours, will save time when the colours in the page has to change*/
-    --clr-blue:rgb(83, 201, 224); /*this is how a variable in css must be set up*/
+    --clr-blue:#bee1ff; /*this is how a variable in css must be set up*/
     --clr-black: black;
     --clr-bright: yellow;
     --clr-white:white;
@@ -19,7 +19,7 @@
 /*Home Page styling*/
 
 .map-div{
-    height: 1920px;
+    height: 100vh;;
     width: 100%;
     border: solid var(--clr-blue) 5px;
    
@@ -55,7 +55,7 @@
 
 /*contact pop css, only used for testing purposes */
 #map-div{
-    height: 1920px;
+    height: 100vh;
     width: 100%;
     margin: 0 auto;
 }
