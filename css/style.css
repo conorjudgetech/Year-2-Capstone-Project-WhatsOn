@@ -63,6 +63,7 @@
     float: left;
 }
 
+/* feel free to edit anything except for the ones that I have a commet above I need them for the pop up */
 .contactPage{
     height: 800px;
     width: 800px;
@@ -70,14 +71,16 @@
   
     text-align: center;
     line-height: 800px;
+    /*don't touch this, need it for the pop up */
     visibility: hidden;
     
 }
-
+/*don't touch this, need it for the pop up */
 .open-contactPage{
     visibility: visible;
 }
 
+/*you can edit this to how you like */
 
 .contactForm{
     height: 800px;
@@ -87,6 +90,7 @@
     text-align: center;
     /* margin auto seems to make old elements to disappear from the form and only display new elements*/
     border: 3px solid blue;
+   /* this keeps the pop ups looking okay */
     overflow-y: hidden;
     overflow-x: hidden;
 }
