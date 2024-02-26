@@ -1,5 +1,37 @@
 <footer>
 
-    Copyright  &copy; David, Eoin & Conor 2024
+    <script>
+        const popUpPage = document.getElementById("contactPage");
+        console.log(popUpPage);
+        
+          function popUpContactFunction(){
+            popUpPage.classList.add("open-contactPage");
+            popUpPage.innerHTML = '<embed type="text/html" src="/contact-us" width="800px" height="800px">';
+          }
+
+
+            /* the following function of code allows the user to close the popups for screens such as log in, contact us or sign up.
+            The user can close the pop up using their escape key on their keyboard. This is the current work around I have close these
+            popups without compromising the design/look of the website. If there is any questions on any of the code within this script tag
+            Please contact me on teams or whatsapp. thank you! */
+          
+           document.onkeydown = function(evt){
+            evt = evt || window.event;
+            var isEscape = false;
+
+            if("key" in evt){
+                isEscape = (evt.key === "Escape" || evt.key ==="Esc");
+            } else {
+                isEscape = (evt.keyCode === 27);
+            }
+            if(isEscape){
+                popUpPage.classList.remove("open-contactPage");
+                popUpPage.innerHTML = '';
+            }
+           }
+          
+        
+        
+        </script>
 
 </footer>

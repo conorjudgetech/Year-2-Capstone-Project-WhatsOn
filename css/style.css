@@ -22,9 +22,11 @@
     height: 1920px;
     width: 100%;
     border: solid var(--clr-blue) 5px;
-    background-image: url("tempMap.png");
+   
     margin: 0 auto;
 }
+
+
 
 .nav-bar{
     margin-top: 20px;
@@ -40,6 +42,7 @@
     border: solid var(--clr-white) 5px;
     text-align: center;
     border-radius: 20px;
+    cursor: pointer;
    
 }
 
@@ -49,6 +52,45 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+/*contact pop css, only used for testing purposes */
+#map-div{
+    height: 1920px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.contactPage{
+    height: 800px;
+    width: 800px;
+    margin: auto;
+   
+    text-align: center;
+    line-height: 800px;
+    visibility: visible;
+    
+}
+
+.open-contactPage{
+    visibility: visible;
+}
+
+
+.contactForm{
+    height: 800px;
+    width: 800px;
+    margin: auto;
+    border: 5px solid var(--clr-blue);
+    text-align: center;
+    /* margin auto seems to make old elements to disappear from the form and only display new elements*/
+    border: 3px solid blue;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+
+
 
 /*Login Styling*/
 
