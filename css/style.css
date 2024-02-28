@@ -19,7 +19,6 @@
 
 .map-div {
     height: 100vh;
-    ;
     width: 100%;
     border: solid var(--clr-blue) 5px;
 
@@ -79,7 +78,6 @@
     float: left;
 }
 
-/* feel free to edit anything except for the ones that I have a commet above I need them for the pop up */
 .contactPage {
     height: 80vh;
     width: 800px;
@@ -87,17 +85,17 @@
 
     text-align: center;
     line-height: 80vh;
-    /*don't touch this, need it for the pop up */
+    
     visibility: hidden;
 
 }
 
-/*don't touch this, need it for the pop up */
+
 .open-contactPage {
     visibility: visible;
 }
 
-/*you can edit this to how you like */
+
 
 .contactForm {
     height: 80vh;
@@ -130,7 +128,6 @@
 /*Positioning of the elements for login/signup */
 
 .forming {
-
     display: grid;
     grid-template-columns: 100px 100px 100px 100px 100px;
     grid-template-rows: 100px 100px 100px 100px 100px 100px;
