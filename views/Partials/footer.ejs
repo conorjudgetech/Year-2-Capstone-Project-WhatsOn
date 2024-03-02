@@ -86,21 +86,31 @@
     }
 
     function moveCrosshair() {
-      // Get the crosshair element
-      var crosshair = document.getElementById('crosshair');
+  // Get the crosshair div
+  var crosshair = document.querySelector('.crosshair');
 
-      // Get the size of the viewport
-      var viewportWidth = window.innerWidth;
-      var viewportHeight = window.innerHeight;
+  // Get the size of .map-div
+  var mapDiv = document.querySelector('.map-div');
+  var mapDivWidth = mapDiv.offsetWidth;
+  var mapDivHeight = mapDiv.offsetHeight;
 
-      // Generate random coordinates within the viewport
-      var randomX = Math.floor(Math.random() * viewportWidth);
-      var randomY = Math.floor(Math.random() * viewportHeight);
+  // Get the height of the navbar
+  var navbarHeight = document.querySelector('.nav-bar').offsetHeight;
 
-      // Position the crosshair at the random coordinates
-      crosshair.style.left = randomX + 'px';
-      crosshair.style.top = randomY + 'px';
-    }
+  // Generate random coordinates within .map-div, below the navbar
+  var randomX = Math.floor(Math.random() * mapDivWidth);
+  var randomY = Math.floor(Math.random() * (mapDivHeight - navbarHeight) + navbarHeight);
+
+  // Position the crosshair at the random coordinates
+  crosshair.style.left = randomX + 'px';
+  crosshair.style.top = randomY + 'px';
+
+  // Make the crosshair visible
+  crosshair.style.visibility = 'visible';
+}
+
+
+
 
   </script>
 

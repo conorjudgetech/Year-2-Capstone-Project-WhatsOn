@@ -18,11 +18,13 @@
 /*Home Page styling*/
 
 .map-div {
+    position: relative;
     height: 100vh;
     width: 100%;
     border: solid var(--clr-blue) 5px;
     background-color: aqua;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 
@@ -46,6 +48,7 @@
     font-weight: 400;
     font-style: normal;
     color: var(--clr-white);
+    cursor: pointer;
 }
 
 
@@ -178,4 +181,16 @@ textarea {
     resize: vertical; /* Allows vertical resize only */
     max-height: 600px; /* Maximum height */
     min-height: 200px; /* Minimum height */
+}
+
+.crosshair {
+    position: absolute;
+    visibility: hidden; /* Make the crosshair initially invisible */
+}
+
+.crosshair img {
+
+    height: 30px; /* Adjust as needed */
+    width: auto;
+
 }
