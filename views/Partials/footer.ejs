@@ -1,44 +1,90 @@
 <footer>
+  <script>
+    // Variable to store the currently open modal
+    var currentModal = null;
 
-    <script>
-        const popUpPage = document.getElementById("contactPage");
-        console.log(popUpPage);
-        
-          function popUpContactFunction(){
-            popUpPage.innerHTML = '';
-            popUpPage.classList.add("open-contactPage");
-            popUpPage.innerHTML = '<embed type="text/html" src="/contact-us" width="800px" height="800px">';
-          }
+    function toggleModal(modalId, event) {
+      // If a modal is currently open, close it
+      if (currentModal) {
+        currentModal.style.display = "none";
+      }
 
-          function popUpRegistryFunction(){
-            popUpPage.innerHTML = '';
-            popUpPage.classList.add("open-contactPage");
-            popUpPage.innerHTML = '<embed type="text/html" src="/login" width="800px" height="800px">';
-          }
+      // Open the new modal
+      currentModal = document.getElementById(modalId);
+      currentModal.style.display = "block";
 
+      // Get the position of the button
+      var button = event.target;
+      var rect = button.getBoundingClientRect();
 
-            /* the following function of code allows the user to close the popups for screens such as log in, contact us or sign up.
-            The user can close the pop up using their escape key on their keyboard. This is the current work around I have close these
-            popups without compromising the design/look of the website. If there is any questions on any of the code within this script tag
-            Please contact me on teams or whatsapp. thank you! */
-          
-           document.onkeydown = function(evt){
-            evt = evt || window.event;
-            var isEscape = false;
+      // Account for the border
+      var border = parseInt(getComputedStyle(button).borderWidth);
 
-            if("key" in evt){
-                isEscape = (evt.key === "Escape" || evt.key ==="Esc");
-            } else {
-                isEscape = (evt.keyCode === 27);
-            }
-            if(isEscape){
-                popUpPage.classList.remove("open-contactPage");
-                popUpPage.innerHTML = '';
-            }
-           }
-          
-        
-        
-        </script>
+      // Calculate the bottom of the button, accounting for the border
+      var buttonBottom = rect.bottom - border;
+
+      // Position the modal below the button
+      currentModal.style.top = (buttonBottom + window.scrollY) + "px";
+
+      // Center the modal horizontally
+      currentModal.style.left = '50%';
+      currentModal.style.transform = 'translateX(-50%)';
+      // If the modal extends off the right edge of the screen, move it back
+      var modalRight = currentModal.offsetLeft + currentModal.offsetWidth;
+      if (modalRight > window.innerWidth) {
+        currentModal.style.left = (window.innerWidth - currentModal.offsetWidth) + "px";
+      }
+
+      // Calculate the bottom of the button, accounting for the border
+      var buttonBottom = rect.bottom - border;
+
+      // Position the modal below the button
+      currentModal.style.top = (buttonBottom + window.scrollY) + "px";
+
+      // Slide the modal down to its final position below the button
+      var finalTop = buttonBottom + window.scrollY;
+      var currentTop = rect.top + window.scrollY;
+      var intervalId = setInterval(function () {
+        if (currentTop < finalTop) {
+          currentTop++;
+          currentModal.style.top = currentTop + "px";
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 5); // Adjust this value to change the speed of the animation
+    }
+
+    function closeAllModals() {
+      var modals = document.getElementsByClassName('modal');
+      for (var i = 0; i < modals.length; i++) {
+        modals[i].style.display = 'none';
+      }
+      // Reset the currently open modal
+      currentModal = null;
+    }
+
+    var isSignupMode = true;
+
+    function switchMode() {
+      var form = document.getElementById('authForm');
+      var submitButton = document.getElementById('submit');
+      var switchButton = document.getElementById('switchMode');
+
+      if (isSignupMode) {
+        // Switch to login mode
+        form.action = "/submit-login";
+        submitButton.value = "Login";
+        switchButton.textContent = "Switch to Sign Up";
+      } else {
+        // Switch to signup mode
+        form.action = "/submit-signup";
+        submitButton.value = "Sign Up";
+        switchButton.textContent = "Switch to Login";
+      }
+
+      isSignupMode = !isSignupMode;
+    }
+
+  </script>
 
 </footer>

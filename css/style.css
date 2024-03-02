@@ -21,7 +21,7 @@
     height: 100vh;
     width: 100%;
     border: solid var(--clr-blue) 5px;
-
+    background-color: aqua;
     margin: 0 auto;
 }
 
@@ -35,18 +35,17 @@
 }
 
 .item {
-    width: 200px;
-    height: 100%;
+    width: 8vw;
+    height: 8vh;
     background-color: var(--clr-blue);
-    border: solid var(--clr-white) 15px;
+    border: solid var(--clr-white) 5px;
     text-align: center;
-    font-size: 200%;
+    font-size: 1.5vw;
     border-radius: 20px;
     font-family: "Itim", cursive;
     font-weight: 400;
     font-style: normal;
-    color:var(--clr-white);
-
+    color: var(--clr-white);
 }
 
 
@@ -66,114 +65,117 @@
     border: none;
 }
 
+/* The Modal (background) */
+.modal {
+    border: solid var(--clr-white) 5px;
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    /* Positioned relative to the button */
+    z-index: 1;
+    /* Sit on top */
+    width: 150%;
+    /* Adjust width as needed */
+    background-color: var(--clr-blue);
+    /* Background color */
+    overflow: none;
+    /* no scroll */
+    margin: 0;
+    /* Remove any margins */
+    border-radius: 20px;
+    transform: translateX(-50%);
+}
 
-/*contact pop css, only used for testing purposes */
-#map-div {
-    height: 100vh;
+
+/* Position the modal below the button */
+.modal:before {
+    content: "";
+    height: 0;
+    width: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fefefe;
+    /* Same color as the modal background */
+    position: absolute;
+    top: -10px;
+    left: calc(50% - 10px);
+}
+
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    /* 10% from the top and centered */
+    padding: 5px;
+    width: 90%;
+    /* Could be more or less, depending on screen size */
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.button-modal-container {
+    position: relative;
+    /* Establish a new positioning context */
+    display: inline-block;
+    /* Allow multiple containers to sit side-by-side */
+}
+
+.modal-content form {
+    /* Center the text in the form */
+    text-align: center;
+}
+
+.modal-content label {
+    /* Change the font size and color of the labels */
+    font-size: 1.2em;
+    color: #333;
+}
+
+.modal-content input[type="email"],
+.modal-content input[type="password"] {
+    /* Style the email and password fields */
     width: 100%;
-    margin: 0 auto;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-.login_signupBTN {
-    float: left;
+.modal-content input[type="submit"] {
+    /* Style the submit button */
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.contactPage {
-    height: 80vh;
-    width: 800px;
-    margin: auto;
-
-    text-align: center;
-    line-height: 80vh;
-    
-    visibility: hidden;
-
+.modal-content input[type="submit"]:hover {
+    /* Change the background color when hovering over the submit button */
+    background-color: #45a049;
 }
 
-
-.open-contactPage {
-    visibility: visible;
+.modal-content button {
+    /* Style the switch mode button */
+    background-color: #f44336;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
 }
 
-
-
-.contactForm {
-    height: 80vh;
-    width: 800px;
-    float: left;
-    margin-top: 100px;
-    border: 5px solid var(--clr-blue);
-    text-align: center;
-
-    border: 3px solid var(--clr-blue);
-
-    overflow-y: hidden;
-    overflow-x: hidden;
+.modal-content button:hover {
+    /* Change the background color when hovering over the switch mode button */
+    background-color: #e60000;
 }
 
-
-
-
-/*Login Styling*/
-
-.forming {
-    height: 80vh;
-    width: 500px;
-    border: solid var(--clr-bright) 5px;
-    margin: 0 auto;
-    margin-top: 500px;
-
-}
-
-/*Positioning of the elements for login/signup */
-
-.forming {
-    display: grid;
-    grid-template-columns: 100px 100px 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px 100px 100px 100px;
-}
-
-.labels {
-    text-align: center;
-    line-height: 100px;
-}
-
-.sign {
-    grid-row: 1/2;
-    grid-column: 2/3;
-    text-align: center;
-    line-height: 100px;
-}
-
-.emailS {
-    background-color: var(--clr-blue);
-}
-
-.emailS {
-    grid-row: 2/3;
-    grid-column: 2/3;
-}
-
-.emailtf {
-    grid-row: 3/4;
-    grid-column: 2/5;
-}
-
-.passwordl {
-    background-color: var(--clr-blue);
-}
-
-.passwordl {
-    grid-row: 4/5;
-    grid-column: 2/3;
-}
-
-.passwordtf {
-    grid-row: 5/6;
-    grid-column: 2/5;
-}
-
-#submit {
-    grid-row: 6/7;
-    grid-column: 2/5;
+textarea {
+    resize: vertical; /* Allows vertical resize only */
+    max-height: 600px; /* Maximum height */
+    min-height: 200px; /* Minimum height */
 }

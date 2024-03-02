@@ -3,3 +3,4 @@
 
 
 https://trello.com/b/maGItaKQ/team-project-edc
+Authors: Eoin Fitzsimons | Conor Judge | David O'Connor

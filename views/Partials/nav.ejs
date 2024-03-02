@@ -1,15 +1,56 @@
-
 <div class="nav-bar">
-    
-    <Button class="item following" onclick="popUpRegistryFunction()">Following</Button>
-    <button class="item random">Random</button>
+    <div class="button-modal-container">
+        <button class="item following" onclick="toggleModal('followingModal', event)">Following</button>
+        <div id="followingModal" class="modal">
+
+            <div class="modal-content">
+                <form id="authForm" action="/submit-signup" method="post">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" required><br>
+                    <input id="submit" type="submit" value="Sign Up">
+                </form>
+                <button id="switchMode" onclick="switchMode()">Switch to Login</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="button-modal-container">
+
+        <button class="item random" onclick="toggleModal('randomModal', event)">Random</button>
+        <div id="randomModal" class="modal">
+            <!-- Modal content goes here -->
+
+            <!-- Pull a random event here -->
+        </div>
+    </div>
+
     <button class="item homeBTN">
         <a href="/">
             <img src="logo.png" alt="Home" class="home-logo">
         </a>
     </button>
-    <button class="item legBTN">Legend</button>
-    <button class="item contactBTN" id="contactusBTN" onclick="popUpContactFunction()">Contact</Button>
-    
-</div>
+    <div class="button-modal-container">
+        <button class="item legBTN" onclick="toggleModal('legendModal', event)">Legend</button>
+        <div id="legendModal" class="modal">
+            <!-- Modal content goes here -->
+        </div>
+    </div>
 
+    <div class="button-modal-container">
+        <button class="item contactBTN" id="contactusBTN" onclick="toggleModal('contactModal', event)">Contact</button>
+        <div id="contactModal" class="modal contact-modal">
+            <div class="modal-content">
+                <form id="contactForm">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name"><br>
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message"></textarea><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
