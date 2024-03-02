@@ -85,6 +85,23 @@
       isSignupMode = !isSignupMode;
     }
 
+    function moveCrosshair() {
+      // Get the crosshair element
+      var crosshair = document.getElementById('crosshair');
+
+      // Get the size of the viewport
+      var viewportWidth = window.innerWidth;
+      var viewportHeight = window.innerHeight;
+
+      // Generate random coordinates within the viewport
+      var randomX = Math.floor(Math.random() * viewportWidth);
+      var randomY = Math.floor(Math.random() * viewportHeight);
+
+      // Position the crosshair at the random coordinates
+      crosshair.style.left = randomX + 'px';
+      crosshair.style.top = randomY + 'px';
+    }
+
   </script>
 
 </footer>
