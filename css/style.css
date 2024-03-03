@@ -27,8 +27,6 @@
     overflow: hidden;
 }
 
-
-
 .nav-bar {
     margin-top: 20px;
     width: 100%;
@@ -193,4 +191,14 @@ textarea {
     height: 30px; /* Adjust as needed */
     width: auto;
 
+}
+
+.modal-content img {
+    height: 30px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.legend-modal {
+    width: 500%; /* Adjust as needed */
 }
