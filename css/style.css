@@ -114,6 +114,10 @@
     padding: 20px;
     text-align: center;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content vertically */
+    justify-content: center; /* Centers the content horizontally */
 }
 
 .button-modal-container {
@@ -131,7 +135,7 @@
 .modal-content label {
     /* Change the font size and color of the labels */
     font-size: 1.2em;
-    color: #333;
+    color: var(--clr-black)
 }
 
 .modal-content input[type="email"],
@@ -193,7 +197,7 @@ textarea {
 
 }
 
-.modal-content img {
+.legend-content img {
     height: 30px;
     width: auto;
     vertical-align: middle;
@@ -203,23 +207,54 @@ textarea {
     width: 555%; /* Adjust as needed */
 }
 
-.modal-content h2 {
+.legend-content h2 {
     font-size: 2em; /* Make the title larger */
     margin-bottom: 20px; /* Add some space below the title */
 }
 
-.modal-content ul {
+.legend-content ul {
     list-style-type: none; /* Remove the default bullet points */
     padding-left: 0; /* Align the list items with the rest of the content */
 }
 
-.modal-content ul li {
+.legend-content ul li {
     margin-bottom: 10px; /* Add some space between list items */
 }
 
-.modal-content ul li img {
+.legend-content ul li img {
     height: 26px;
     width: auto;
     vertical-align: middle;
     margin-right: 10px; /* Add some space between the icon and the text */
+}
+
+.legend-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 85vh; /* Prevents the modal from taking up the whole screen */
+}
+
+.section {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.2em; /* Increase the font size */
+    color: var(--clr-white); /* Change the text color */
+    background-color: var(--clr-blue); /* Change the background color */
+    padding: 10px; /* Add some padding */
+    border-radius: 10px; /* Round the corners */
+}
+
+.event-types-status {
+    display: flex;
+    justify-content: space-around;
+}
+
+.event-types, .event-status {
+    width: 45%; /* Adjust as needed */
+}
+
+.examples {
+    margin-top: auto; /* Pushes the section to the bottom */
 }
