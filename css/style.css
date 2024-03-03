@@ -276,6 +276,8 @@ textarea {
     /* Change the background color */
     padding: 10px;
     /* Add some padding */
+    border-radius: 20px;
+    /* Round the corners */
 }
 
 .event-types-status {
