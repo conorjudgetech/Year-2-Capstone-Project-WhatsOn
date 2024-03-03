@@ -2,9 +2,9 @@
     /* set variables as colours, will save time when the colours in the page has to change*/
     --clr-blue: #bee1ff;
     /*this is how a variable in css must be set up*/
-    --clr-black: black;
-    --clr-bright: yellow;
-    --clr-white: white;
+    --clr-black: #202020;
+    --clr-dark: #454545;
+    --clr-white: #ffffff;
 }
 
 *,
@@ -22,16 +22,17 @@
     height: 100vh;
     width: 100%;
     border: solid var(--clr-blue) 5px;
-    background-color: aqua;
+    background-color: var(--clr-dark);
     margin: 0 auto;
     overflow: hidden;
+    z-index: 0;
 }
 
 .nav-bar {
     margin-top: 20px;
     width: 100%;
     height: 100px;
-
+    z-index: 10;
 }
 
 .item {
@@ -47,6 +48,10 @@
     font-style: normal;
     color: var(--clr-white);
     cursor: pointer;
+    min-width: 100px;
+    /* Adjust as needed */
+    min-height: 50px;
+    /* Adjust as needed */
 }
 
 
@@ -95,7 +100,7 @@
     width: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #fefefe;
+    border-bottom: 10px solid var(--clr-white);
     /* Same color as the modal background */
     position: absolute;
     top: -10px;
@@ -105,7 +110,7 @@
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--clr-white);
     margin: 5% auto;
     /* 10% from the top and centered */
     padding: 5px;
@@ -116,8 +121,10 @@
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the content vertically */
-    justify-content: center; /* Centers the content horizontally */
+    align-items: center;
+    /* Centers the content vertically */
+    justify-content: center;
+    /* Centers the content horizontally */
 }
 
 .button-modal-container {
@@ -130,6 +137,10 @@
 .modal-content form {
     /* Center the text in the form */
     text-align: center;
+    width: 80%;
+    /* Adjust as needed */
+    margin: 0 auto;
+    /* Centers the form horizontally */
 }
 
 .modal-content label {
@@ -139,13 +150,14 @@
 }
 
 .modal-content input[type="email"],
-.modal-content input[type="password"] {
-    /* Style the email and password fields */
+.modal-content input[type="password"],
+.modal-content input[type="text"] {
+    /* Style the email and password fields and name in contact */
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--clr-dark);
 }
 
 .modal-content input[type="submit"] {
@@ -180,19 +192,27 @@
 }
 
 textarea {
-    resize: vertical; /* Allows vertical resize only */
-    max-height: 600px; /* Maximum height */
-    min-height: 200px; /* Minimum height */
+    resize: vertical;
+    /* Allows vertical resize only */
+    max-height: 600px;
+    /* Maximum height */
+    min-height: 200px;
+    /* Minimum height */
+    width: 100%;
+    /* Makes the input fields take up the full width of the form */
+    border: 1px solid var(--clr-dark);
 }
 
 .crosshair {
     position: absolute;
-    visibility: hidden; /* Make the crosshair initially invisible */
+    visibility: hidden;
+    /* Make the crosshair initially invisible */
 }
 
 .crosshair img {
 
-    height: 30px; /* Adjust as needed */
+    height: 30px;
+    /* Adjust as needed */
     width: auto;
 
 }
@@ -204,46 +224,60 @@ textarea {
 }
 
 .legend-modal {
-    width: 555%; /* Adjust as needed */
+    width: 555%;
+    /* Adjust as needed */
 }
 
 .legend-content h2 {
-    font-size: 2em; /* Make the title larger */
-    margin-bottom: 20px; /* Add some space below the title */
+    font-size: 2em;
+    /* Make the title larger */
+    margin-bottom: 20px;
+    /* Add some space below the title */
 }
 
 .legend-content ul {
-    list-style-type: none; /* Remove the default bullet points */
-    padding-left: 0; /* Align the list items with the rest of the content */
+    list-style-type: none;
+    /* Remove the default bullet points */
+    padding-left: 0;
+    /* Align the list items with the rest of the content */
 }
 
 .legend-content ul li {
-    margin-bottom: 10px; /* Add some space between list items */
+    margin-bottom: 10px;
+    /* Add some space between list items */
 }
 
 .legend-content ul li img {
     height: 26px;
     width: auto;
     vertical-align: middle;
-    margin-right: 10px; /* Add some space between the icon and the text */
+    margin-right: 10px;
+    /* Add some space between the icon and the text */
 }
 
 .legend-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto; /* Enables vertical scrolling */
-    max-height: 85vh; /* Prevents the modal from taking up the whole screen */
+    overflow-y: auto;
+    /* Enables vertical scrolling */
+    max-height: 85vh;
+    /* Prevents the modal from taking up the whole screen */
 }
 
 .section {
     width: 100%;
     margin-bottom: 20px;
-    font-size: 1.2em; /* Increase the font size */
-    color: var(--clr-white); /* Change the text color */
-    background-color: var(--clr-blue); /* Change the background color */
-    padding: 10px; /* Add some padding */
-    border-radius: 10px; /* Round the corners */
+    font-size: 1.2em;
+    /* Increase the font size */
+    color: var(--clr-white);
+    /* Change the text color */
+    background-color: var(--clr-blue);
+    /* Change the background color */
+    padding: 10px;
+    /* Add some padding */
+    border-radius: 10px;
+    /* Round the corners */
 }
 
 .event-types-status {
@@ -251,10 +285,13 @@ textarea {
     justify-content: space-around;
 }
 
-.event-types, .event-status {
-    width: 45%; /* Adjust as needed */
+.event-types,
+.event-status {
+    width: 45%;
+    /* Adjust as needed */
 }
 
 .examples {
-    margin-top: auto; /* Pushes the section to the bottom */
+    margin-top: auto;
+    /* Pushes the section to the bottom */
 }
