@@ -200,5 +200,26 @@ textarea {
 }
 
 .legend-modal {
-    width: 500%; /* Adjust as needed */
+    width: 555%; /* Adjust as needed */
+}
+
+.modal-content h2 {
+    font-size: 2em; /* Make the title larger */
+    margin-bottom: 20px; /* Add some space below the title */
+}
+
+.modal-content ul {
+    list-style-type: none; /* Remove the default bullet points */
+    padding-left: 0; /* Align the list items with the rest of the content */
+}
+
+.modal-content ul li {
+    margin-bottom: 10px; /* Add some space between list items */
+}
+
+.modal-content ul li img {
+    height: 26px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 10px; /* Add some space between the icon and the text */
 }
