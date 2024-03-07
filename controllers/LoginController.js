@@ -1,15 +1,15 @@
-const Login = require('../models/LoginSchema');
+const Login = require('../models/LoginSchema'); //importing the object from the login schema or in java terms making an instance of an object
 
 
 
 const signUp = (req, res) => {
     const signUp = new Login(req.body);
-    Login.save()
+    Login.save() //this will upload the newly added accounts to the database
         .then((result) => {
-            res.redirect('/');
+            res.redirect('/'); //will redirect the user to page after logging in
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err); //will send the server there is an error
         });
 };
 
