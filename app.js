@@ -1,10 +1,9 @@
 const express = require('express'); //calls the express libary
-const morgan = require('morgan');
 const app = express(); // changes the name of the express call to app, saves time on typing
-const mongoose = require('mongoose');
-
+const morgan = require('morgan');
+const collection = require('./mongodb/mongo'); //pulls in the schema and mongo db connection code
 app.set('view engine', 'ejs'); // this calls for the ejs libary
-
+app.use(express.urlencoded({extended:false}));
 
 //All of the middle ware technologies
 app.use(express.static('css')); //loads all of the static files from the css folder
@@ -12,26 +11,23 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 app.use(morgan('dev')); //enables logging information regarding the server
 
 
-const dbURI = 'mongodb+srv://usertesting:test123@cluster0.sb4w5pv.mongodb.net/Login?retryWrites=true&w=majority'
-
-
-mongoose.connect(dbURI)
-    .then((result) => console.log('connected to db'), app.listen(3000, () => {
-        console.log('Listening on port 3000');
-        
-    }))
-    .catch((err) => console.log(err));
-
-
-//middle ware to access static files
-
-
 
  app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
     res.render('index', {title: 'Home'}); // tells the code to render the index file
 });
 
+app.post("/signup", async(req,res) => {
+    // the lines below clarify the schema from the db while also taking the information from the index.ejs
+    const data = {
+        email: req.body.email, //taking the email field from the index
+        password:req.body.password //taking the password from the index
+    }
 
+   await collection.insertMany([data]) //since mongo db is ay
+   .then(res.render("/")) // will render the home page after the login/signup is successfull
+   .catch((err) => console.log(err)); // will let us know if there is any errors with the code
+
+});
 
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
