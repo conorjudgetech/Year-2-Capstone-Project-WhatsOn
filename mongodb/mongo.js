@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 
-const dbUri = 'mongodb+srv://usertesting:test123@cluster0.sb4w5pv.mongodb.net/Login?retryWrites=true&w=majority'
+const dbUri = 'mongodb://localhost:27017/Login'
 mongoose.connect(dbUri)
     .then( () => { 
         console.log("The Database has connected successfully without any errors")
@@ -20,5 +20,5 @@ mongoose.connect(dbUri)
         }
     });
 
-    const collection = new mongoose.model("Detail", LoginSchema );
+    const collection = new mongoose.model("Login_Details", LoginSchema );
     module.exports = collection;
