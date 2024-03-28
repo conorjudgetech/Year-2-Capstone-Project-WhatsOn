@@ -2,14 +2,20 @@ const express = require('express'); //calls the express libary
 const app = express(); // changes the name of the express call to app, saves time on typing
 const morgan = require('morgan');
 const collection = require('./mongodb/mongo'); //pulls in the schema and mongo db connection code
-app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.urlencoded({extended:false}));
+const path = require('path');
+app.set('view engine', path.join(__dirname,'views')); // this calls for the ejs libary
 
 //All of the middle ware technologies
 app.use(express.static('css')); //loads all of the static files from the css folder
 //app.use(express.urlencoded({ extende:true })); // parses all of the information from the web page as an object
 app.use(morgan('dev')); //enables logging information regarding the server
 
+const port = process.env.PORT || 3000;
+
+app.listen(port, (req,res) => {
+    console.log('Loading on port: '+port);
+})
 
 
  app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
