@@ -4,7 +4,7 @@ const morgan = require('morgan');
 //const collection = require('./mongodb/mongo'); //pulls in the schema and mongo db connection code
 //app.use(express.urlencoded({extended:false}));
 const path = require('path');
-app.set('view engine', path.join(__dirname,'views')); // this calls for the ejs libary
+app.set('view engine', 'ejs'); // this calls for the ejs libary
 
 //All of the middle ware technologies
 app.use(express.static('css')); //loads all of the static files from the css folder
