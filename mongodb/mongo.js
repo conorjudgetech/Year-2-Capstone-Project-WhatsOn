@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 
-const dbUri = 'mongodb://localhost:27017/Login' //creating a link to load the connection to the mongo db 
+const dbUri = 'mongodb+srv://usertesting:test123@cluster0.sb4w5pv.mongodb.net/Login?retryWrites=true&w=majority' //creating a link to load the connection to the mongo db 
 mongoose.connect(dbUri) // establishing the connection to the mongodb 
     .then( () => {  //works like the next function that we have done in DDL
         console.log("The Database has connected successfully without any errors") //gives a message into the terminal to let the user know that the connection has been established

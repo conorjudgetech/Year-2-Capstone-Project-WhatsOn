@@ -21,6 +21,7 @@ app.listen(port, (req,res) => {
  app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
     res.render('index', {title: 'Home'}); // tells the code to render the index file
 });
+
 /*
 app.post("/signup", async(req,res) => {
     // the lines below clarify the schema from the db while also taking the information from the index.ejs
