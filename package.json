@@ -2,7 +2,7 @@
   "name": "npm-init-package",
   "version": "1.0.0",
   "description": "This will contain all the depencies that are used for this project. Please use the command \"npm install\" to download all the depencies I am using for this project",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
