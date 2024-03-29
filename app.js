@@ -1,8 +1,8 @@
 const express = require('express'); //calls the express libary
 const app = express(); // changes the name of the express call to app, saves time on typing
 const morgan = require('morgan');
-const collection = require('./mongodb/mongo'); //pulls in the schema and mongo db connection code
-app.use(express.urlencoded({extended:false}));
+//const collection = require('./mongodb/mongo'); //pulls in the schema and mongo db connection code
+//app.use(express.urlencoded({extended:false}));
 const path = require('path');
 app.set('view engine', path.join(__dirname,'views')); // this calls for the ejs libary
 
