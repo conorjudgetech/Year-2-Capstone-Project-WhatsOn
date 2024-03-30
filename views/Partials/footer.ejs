@@ -12,48 +12,56 @@
       // Open the new modal
       currentModal = document.getElementById(modalId);
       currentModal.style.display = "block";
+      // Check if the screen width is 600px or less
+      if (window.innerWidth <= 600) {
+        currentModal.style.display = "block";
+        currentModal.style.position = "fixed"; // Set position to fixed
+        // Center the modal vertically and horizontally
+        currentModal.style.top = '50%';
+        currentModal.style.left = '50%';
+        currentModal.style.transform = 'translate(-50%, -50%)';
+      } else {
+        // Get the position of the button
+        var button = event.target;
+        var rect = button.getBoundingClientRect();
 
-      // Get the position of the button
-      var button = event.target;
-      var rect = button.getBoundingClientRect();
+        // Account for the border
+        var border = parseInt(getComputedStyle(button).borderWidth);
 
-      // Account for the border
-      var border = parseInt(getComputedStyle(button).borderWidth);
+        // Calculate the bottom of the button, accounting for the border
+        var buttonBottom = rect.bottom - border;
 
-      // Calculate the bottom of the button, accounting for the border
-      var buttonBottom = rect.bottom - border;
+        // Position the modal below the button
+        currentModal.style.top = (buttonBottom + window.scrollY) + "px";
 
-      // Position the modal below the button
-      currentModal.style.top = (buttonBottom + window.scrollY) + "px";
-
-      // Center the modal horizontally
-      currentModal.style.left = '50%';
-      currentModal.style.transform = 'translateX(-50%)';
-      // If the modal extends off the right edge of the screen, move it back
-      var modalRight = currentModal.offsetLeft + currentModal.offsetWidth;
-      if (modalRight > window.innerWidth) {
-        currentModal.style.left = (window.innerWidth - currentModal.offsetWidth) + "px";
-      }
-
-      // Calculate the bottom of the button, accounting for the border
-      var buttonBottom = rect.bottom - border;
-
-      // Position the modal below the button
-      currentModal.style.top = (buttonBottom + window.scrollY) + "px";
-
-      // Slide the modal down to its final position below the button
-      var finalTop = buttonBottom + window.scrollY;
-      var currentTop = rect.top + window.scrollY;
-      var intervalId = setInterval(function () {
-        if (currentTop < finalTop) {
-          currentTop++;
-          currentModal.style.top = currentTop + "px";
-        } else {
-          clearInterval(intervalId);
+        // Center the modal horizontally
+        currentModal.style.left = '50%';
+        currentModal.style.transform = 'translateX(-50%)';
+        // If the modal extends off the right edge of the screen, move it back
+        var modalRight = currentModal.offsetLeft + currentModal.offsetWidth;
+        if (modalRight > window.innerWidth) {
+          currentModal.style.left = (window.innerWidth - currentModal.offsetWidth) + "px";
         }
-      }, 5); // Adjust this value to change the speed of the animation
-    }
 
+        // Calculate the bottom of the button, accounting for the border
+        var buttonBottom = rect.bottom - border;
+
+        // Position the modal below the button
+        currentModal.style.top = (buttonBottom + window.scrollY) + "px";
+
+        // Slide the modal down to its final position below the button
+        var finalTop = buttonBottom + window.scrollY;
+        var currentTop = rect.top + window.scrollY;
+        var intervalId = setInterval(function () {
+          if (currentTop < finalTop) {
+            currentTop++;
+            currentModal.style.top = currentTop + "px";
+          } else {
+            clearInterval(intervalId);
+          }
+        }, 5); // Adjust this value to change the speed of the animation
+      }
+    }
     function closeAllModals() {
       var modals = document.getElementsByClassName('modal');
       for (var i = 0; i < modals.length; i++) {
@@ -86,28 +94,28 @@
     }
 
     function moveCrosshair() {
-  // Get the crosshair div
-  var crosshair = document.querySelector('.crosshair');
+      // Get the crosshair div
+      var crosshair = document.querySelector('.crosshair');
 
-  // Get the size of .map-div
-  var mapDiv = document.querySelector('.map-div');
-  var mapDivWidth = mapDiv.offsetWidth;
-  var mapDivHeight = mapDiv.offsetHeight;
+      // Get the size of .map-div
+      var mapDiv = document.querySelector('.map-div');
+      var mapDivWidth = mapDiv.offsetWidth;
+      var mapDivHeight = mapDiv.offsetHeight;
 
-  // Get the height of the navbar
-  var navbarHeight = document.querySelector('.nav-bar').offsetHeight;
+      // Get the height of the navbar
+      var navbarHeight = document.querySelector('.nav-bar').offsetHeight;
 
-  // Generate random coordinates within .map-div, below the navbar
-  var randomX = Math.floor(Math.random() * mapDivWidth);
-  var randomY = Math.floor(Math.random() * (mapDivHeight - navbarHeight) + navbarHeight);
+      // Generate random coordinates within .map-div, below the navbar
+      var randomX = Math.floor(Math.random() * mapDivWidth);
+      var randomY = Math.floor(Math.random() * (mapDivHeight - navbarHeight) + navbarHeight);
 
-  // Position the crosshair at the random coordinates
-  crosshair.style.left = randomX + 'px';
-  crosshair.style.top = randomY + 'px';
+      // Position the crosshair at the random coordinates
+      crosshair.style.left = randomX + 'px';
+      crosshair.style.top = randomY + 'px';
 
-  // Make the crosshair visible
-  crosshair.style.visibility = 'visible';
-}
+      // Make the crosshair visible
+      crosshair.style.visibility = 'visible';
+    }
 
   </script>
 
