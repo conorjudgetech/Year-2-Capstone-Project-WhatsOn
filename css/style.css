@@ -5,6 +5,7 @@
     --clr-black: #202020;
     --clr-dark: #454545;
     --clr-white: #ffffff;
+    --clr-bg: #1d8b4b;
 }
 
 *,
@@ -23,7 +24,7 @@
     height: 100vh;
     width: 100%;
     border: solid var(--clr-blue) 5px;
-    background-color: var(--clr-dark);
+    background-color: var(--clr-bg);
     margin: 0 auto;
     overflow: hidden;
     z-index: 0;
