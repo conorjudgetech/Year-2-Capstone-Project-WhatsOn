@@ -3,7 +3,7 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import morgan  from 'morgan';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
