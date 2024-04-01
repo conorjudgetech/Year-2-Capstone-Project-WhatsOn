@@ -1,41 +1,51 @@
-const express = require('express'); //calls the express libary
-const app = express(); // changes the name of the express call to app, saves time on typing
-const morgan = require('morgan');
-//const collection = require('./mongodb/mongo'); //pulls in the schema and mongo db connection code
-//app.use(express.urlencoded({extended:false}));
-const path = require('path');
-app.set('view engine', 'ejs'); // this calls for the ejs libary
+import express from 'express';
+import { ApolloServer, gql } from 'apollo-server-express';
+import morgan  from 'morgan';
 
-//All of the middle ware technologies
+const app = express();
+const port = 3000;
+
+app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
 //app.use(express.urlencoded({ extende:true })); // parses all of the information from the web page as an object
 app.use(morgan('dev')); //enables logging information regarding the server
 
-const port = process.env.PORT || 3000;
 
-app.listen(port, (req,res) => {
-    console.log('Loading on port: '+port);
-})
+const typeDefs = `#graphql
+  type Query {
+    hello: String
+  }
+`;
+
+// A map of functions which return data for the schema.
+//these resolvers queries will be used to load and display the events that are happening the in the website
+const resolvers = {
+  Query: {
+    hello: () => 'world',
+  },
+};
 
 
- app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+});
+
+await server.start();
+
+const startApp = () => {
+    //inject apollo server on express app
+    
+    server.applyMiddleware({app});
+    app.listen(port, () => console.log(`Server is running on port ${port}`));
+}
+
+startApp();
+
+app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
     res.render('index', {title: 'Home'}); // tells the code to render the index file
 });
-
-/*
-app.post("/signup", async(req,res) => {
-    // the lines below clarify the schema from the db while also taking the information from the index.ejs
-    const data = {
-        email: req.body.email, //taking the email field from the index
-        password:req.body.password //taking the password from the index
-    }
-
-   await collection.insertMany([data]) //since mongo db is ay
-   .then(res.render("/")) // will render the home page after the login/signup is successfull
-   .catch((err) => console.log(err)); // will let us know if there is any errors with the code
-
-});
-*/
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
     res.status(404).render('404', {title: '404 Page'});
