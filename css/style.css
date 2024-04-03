@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 :root {
     /* set variables as colours, will save time when the colours in the page has to change*/
     --clr-blue: #bee1ff;
@@ -97,22 +99,6 @@
     border-radius: 20px;
     transform: translateX(-50%);
 }
-
-
-/* Position the modal below the button */
-.modal:before {
-    content: "";
-    height: 0;
-    width: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid var(--clr-white);
-    /* Same color as the modal background */
-    position: absolute;
-    top: -10px;
-    left: calc(50% - 10px);
-}
-
 
 /* Modal Content/Box */
 .modal-content {
