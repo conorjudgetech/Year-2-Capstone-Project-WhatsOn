@@ -1,9 +1,9 @@
 <div class="nav-bar">
     <div class="button-modal-container">
-        <button class="item following" onclick="toggleModal('followingModal', event)">Following</button>
+        <button class="item following" onclick="followingButtonClicked()">Following</button>
         <div id="followingModal" class="modal">
             <div class="modal-content">
-                <form id="authForm" action="/" method="post">
+                <form id="authForm" action="/" method="post" onsubmit="event.preventDefault(); handleFormSubmit();">
                     <div class="input-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required><br>
@@ -16,6 +16,7 @@
             </div>
         </div>
     </div>
+    
 
 
 
