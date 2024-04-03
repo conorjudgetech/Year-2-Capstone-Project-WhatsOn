@@ -144,33 +144,44 @@
 
     //start of davids code
 
-    const test = document.getElementById('loadAPI')
-
     function queryFetch(query, variables) {
+      const token = "cvdgj137jq4nejecgnh6ce0chr"; // Your Meetup API token
+      
       return fetch('https://api.meetup.com/gql', {
           method: 'POST',
-          Authorization: {"Bearer": "cvdgj137jq4nejecgnh6ce0chr"},
-          headers: {"Content-Type": "application/json"},
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` // Authorization header format
+          },
           body: JSON.stringify({
               query: query,
               variables: variables
-              
           })
-      }).then(res => res.json())
-  }
-
-  queryFetch(` 
-  query {
-    event(id: "276754274") {
-      title
-      description
-      dateTime
-    }
+      })
+      .then(res => {
+          if (!res.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return res.json();
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
   }
   
+  queryFetch(`
+      query {
+          event(id: "276754274") {
+              title
+              description
+              dateTime
+          }
+      }
   `).then(data => {
-    console.log(data)
-  })
+      console.log(data);
+  }).catch(error => {
+      console.error('Error:', error);
+  });
 
 
 
