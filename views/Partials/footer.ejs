@@ -55,8 +55,9 @@
         // Calculate the bottom of the button, accounting for the border
         var buttonBottom = rect.bottom - border;
 
-        // Position the modal below the button
-        currentModal.style.top = (buttonBottom + window.scrollY) + "px";
+        // Position the modal above the button initially
+        currentModal.style.top = -(currentModal.offsetHeight) + "px";
+
 
         // Center the modal horizontally
         currentModal.style.left = '50%';
