@@ -147,7 +147,7 @@
     function queryFetch(query, variables) {
       const token = "cvdgj137jq4nejecgnh6ce0chr"; // Your Meetup API token
       
-      return fetch('https://api.meetup.com/gql', {
+      return fetch('https://api.meetup.com/open_venues?&key={cvdgj137jq4nejecgnh6ce0chr}&country={Ireland}&city={Dublin}', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
