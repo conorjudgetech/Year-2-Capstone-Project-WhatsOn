@@ -30,6 +30,7 @@ const resolvers = {
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    persistedQueries: false
 });
 
 await server.start();
