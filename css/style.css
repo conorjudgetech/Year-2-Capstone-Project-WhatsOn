@@ -158,6 +158,11 @@
     transform: translateX(-50%);
 }
 
+.legend-modal {
+    width: 555%;
+    /* Adjust as needed */
+}
+
 @media screen and (max-width: 750px) {
     .modal {
         position: fixed;
@@ -170,6 +175,7 @@
         /* Align to the left */
         transform: none;
         /* Remove the transform */
+        overflow: hidden;
     }
 
     .legend-modal {
@@ -292,11 +298,6 @@ textarea {
     height: 30px;
     width: auto;
     vertical-align: middle;
-}
-
-.legend-modal {
-    width: 555%;
-    /* Adjust as needed */
 }
 
 .legend-content h2 {
