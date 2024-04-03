@@ -1,0 +1,24 @@
+<script>
+
+  var isSignupMode = true;
+
+  function switchMode() {
+      var form = document.getElementById('authForm');
+  var submitButton = document.getElementById('submit');
+  var switchButton = document.getElementById('switchMode');
+
+  if (isSignupMode) {
+    // Switch to login mode
+    form.action = "/submit-login";
+  submitButton.value = "Login";
+  switchButton.textContent = "Switch to Sign Up";
+      } else {
+    // Switch to signup mode
+    form.action = "/submit-signup";
+  submitButton.value = "Sign Up";
+  switchButton.textContent = "Switch to Login";
+      }
+
+  isSignupMode = !isSignupMode;
+    }
+</script>

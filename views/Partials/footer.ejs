@@ -3,28 +3,6 @@
     // Variable to store the currently open modal
     var currentModal = null;
 
-    //Davids Code
-    function messageSent() {
-      var emptyName = document.forms["contactForm"]["name"].value; //grabbing the value from the input field
-      var emptyMessage = document.forms["contactForm"]["message"].value;
-      if (emptyName == "") { //if the name field is empty than it will let the user know to fill in that field inorder for the submit to work
-        alert('You need to fill the name field!');
-        return false;
-      }
-      else if (emptyMessage == "") //if the message field is empty than it will let the user know to fill in that field inorder for the submit to work
-      {
-        alert("You need to fill the message field!");
-        return false;
-      }
-      else //if both fields are full then the message will be sent through succesfully
-      {
-        alert("You message has successfully been sent to our contact services!");
-        return true;
-      }
-    } //end of function
-    //end of davids code
-
-    //Eoins code 
     function toggleModal(modalId, event) {
       // If a modal is currently open, close it
       if (currentModal) {
@@ -68,7 +46,7 @@
         var currentTop = parseInt(currentModal.style.top);
         var intervalId = setInterval(function () {
           if (currentTop < finalTop) {
-            currentTop+=2;
+            currentTop += 2;
             currentModal.style.top = currentTop + "px";
           } else {
             clearInterval(intervalId);
@@ -85,53 +63,9 @@
       // Reset the currently open modal
       currentModal = null;
     }
-
-    var isSignupMode = true;
-
-    function switchMode() {
-      var form = document.getElementById('authForm');
-      var submitButton = document.getElementById('submit');
-      var switchButton = document.getElementById('switchMode');
-
-      if (isSignupMode) {
-        // Switch to login mode
-        form.action = "/submit-login";
-        submitButton.value = "Login";
-        switchButton.textContent = "Switch to Sign Up";
-      } else {
-        // Switch to signup mode
-        form.action = "/submit-signup";
-        submitButton.value = "Sign Up";
-        switchButton.textContent = "Switch to Login";
-      }
-
-      isSignupMode = !isSignupMode;
-    }
-
-    function moveCrosshair() {
-      // Get the crosshair div
-      var crosshair = document.querySelector('.crosshair');
-
-      // Get the size of .map-div
-      var mapDiv = document.querySelector('.map-div');
-      var mapDivWidth = mapDiv.offsetWidth;
-      var mapDivHeight = mapDiv.offsetHeight;
-
-      // Get the height of the navbar
-      var navbarHeight = document.querySelector('.nav-bar').offsetHeight;
-
-      // Generate random coordinates within .map-div, below the navbar
-      var randomX = Math.floor(Math.random() * mapDivWidth);
-      var randomY = Math.floor(Math.random() * (mapDivHeight - navbarHeight) + navbarHeight);
-
-      // Position the crosshair at the random coordinates
-      crosshair.style.left = randomX + 'px';
-      crosshair.style.top = randomY + 'px';
-
-      // Make the crosshair visible
-      crosshair.style.visibility = 'visible';
-    }
-
   </script>
+  <%- include('following') %>
+  <%- include('contact') %>
+  <%- include('random') %>
 
 </footer>
