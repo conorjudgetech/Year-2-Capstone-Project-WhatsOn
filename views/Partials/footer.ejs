@@ -144,6 +144,8 @@
 
     //start of davids code
 
+    const test = document.getElementById('loadAPI');
+
     function queryFetch(query, variables) {
     const token = "cvdgj137jq4nejecgnh6ce0chr"; // Your Meetup API token
     
@@ -167,8 +169,8 @@
         console.error('Request has failed: :'+ error);
     });
 }
-
-queryFetch(`
+function testQuery(tets) {
+return queryFetch(`
     query {
         event(id: "276754274") {
             title
@@ -176,11 +178,10 @@ queryFetch(`
             dateTime
         }
     }
-`).then(data => {
-    console.log(data);
-}).catch(error => {
-    console.error('Error:', error);
+`, {event: test}).then(data => {
+    console.log(data.data.event);
 });
+}
 
 
 
