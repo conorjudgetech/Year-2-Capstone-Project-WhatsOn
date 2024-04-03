@@ -144,10 +144,12 @@
 
     //start of davids code
 
+    const test = document.getElementById('loadAPI')
+
     function queryFetch(query, variables) {
       return fetch('https://api.meetup.com/gql', {
           method: 'POST',
-          Authorization: {"Bearer: cvdgj137jq4nejecgnh6ce0chr"},
+          Authorization: {"Bearer": "cvdgj137jq4nejecgnh6ce0chr"},
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({
               query: query,
