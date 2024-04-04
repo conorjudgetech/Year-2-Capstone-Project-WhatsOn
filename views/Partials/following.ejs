@@ -1,3 +1,50 @@
 <script> 
+    var isSignupMode = true;
+
+    function switchMode() {
+      var form = document.getElementById('authForm');
+      var submitButton = document.getElementById('submit');
+      var switchButton = document.getElementById('switchMode');
+
+      if (isSignupMode) {
+        // Switch to login mode
+        form.action = "/submit-login";
+        submitButton.value = "Login";
+        switchButton.textContent = "Switch to Sign Up";
+      } else {
+        // Switch to signup mode
+        form.action = "/submit-signup";
+        submitButton.value = "Sign Up";
+        switchButton.textContent = "Switch to Login";
+      }
+
+      isSignupMode = !isSignupMode;
+    }
+
+    function moveCrosshair() {
+      // Get the crosshair div
+      var crosshair = document.querySelector('.crosshair');
+
+      // Get the size of .map-div
+      var mapDiv = document.querySelector('.map-div');
+      var mapDivWidth = mapDiv.offsetWidth;
+      var mapDivHeight = mapDiv.offsetHeight;
+
+      // Get the height of the navbar
+      var navbarHeight = document.querySelector('.nav-bar').offsetHeight;
+
+      // Generate random coordinates within .map-div, below the navbar
+      var randomX = Math.floor(Math.random() * mapDivWidth);
+      var randomY = Math.floor(Math.random() * (mapDivHeight - navbarHeight) + navbarHeight);
+
+      // Position the crosshair at the random coordinates
+      crosshair.style.left = randomX + 'px';
+      crosshair.style.top = randomY + 'px';
+
+      // Make the crosshair visible
+      crosshair.style.visibility = 'visible';
+    }
+    //end of Eoins code 
+
     
 </script>
