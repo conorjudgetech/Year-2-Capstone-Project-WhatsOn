@@ -3,28 +3,6 @@
     // Variable to store the currently open modal
     var currentModal = null;
 
-    //Davids Code
-    function messageSent()
-    {
-      var emptyName = document.forms["contactForm"]["name"].value; //grabbing the value from the input field
-      var emptyMessage = document.forms["contactForm"]["message"].value;
-      if(emptyName == "")
-      { //if the name field is empty than it will let the user know to fill in that field inorder for the submit to work
-        alert('You need to fill the name field!');
-        return false;
-      } 
-      else if(emptyMessage == "") //if the message field is empty than it will let the user know to fill in that field inorder for the submit to work
-      {
-          alert("You need to fill the message field!");
-          return false;
-      } 
-      else //if both fields are full then the message will be sent through succesfully
-      {
-          alert("You message has successfully been sent to our contact services!");
-          return true;
-      }
-    } //end of function
-    //end of davids code
 
     //Eoins code 
     function toggleModal(modalId, event) {
@@ -142,46 +120,7 @@
     }
     //end of Eoins code 
 
-    //start of davids code
-
-    const test = document.getElementById('loadAPI');
-
-    function queryFetch(query, variables) {
-    const token = "cvdgj137jq4nejecgnh6ce0chr"; // Your Meetup API token
-    
-    return fetch('https://api.meetup.com/gql', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // Authorization header format
-        },
-        body: JSON.stringify({
-            query: query,
-            variables: variables
-        })
-    })
-    .then(res => {
-       console.log("request was a success!");
-       return res.json();
-    })
-    .catch(error => {
-        console.error('Request has failed: :'+ error);
-    });
-}
-function testQuery(tets) {
-return queryFetch(`
-    query {
-        event(id: "276754274") {
-            title
-            description
-            dateTime
-        }
-    }
-`, {event: test}).then(data => {
-    console.log(data.data.event);
-  });
-}
+   
 
 
 
