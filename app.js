@@ -1,6 +1,7 @@
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
 import morgan  from 'morgan';
+import fetch from 'node-fetch';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,26 +12,65 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 app.use(morgan('dev')); //enables logging information regarding the server
 
 
-const typeDefs = `#graphql
-  type Query {
-    hello: String
-  }
+const typeDefs = `
+type Query {
+  self: SelfInfo
+}
+
+type SelfInfo {
+  id: ID
+  name: String
+}
 `;
 
 // A map of functions which return data for the schema.
 //these resolvers queries will be used to load and display the events that are happening the in the website
 const resolvers = {
-  Query: {
-    hello: () => 'world',
-  },
-};
+  Query:{
+    self: async (_,__, {token}) => {
+      const query = `
+      query{self{id, name}}`;
+
+      const variables = {
+        "query": "query"
+      };
+
+      const response = await fetch('https://api.meetup.com/gql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+        body: JSON.stringify({query, variables})
+      });
+
+      const {data, errors} = await response.json();
+
+      if(errors)
+      {
+        throw new Error(`failed to fetch from api: ${errors[0].message}`);
+      }
+      console.log('data fetched: '+data);
+
+        return data.self;
+      }
+    }
+  };
+
 
 
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    persistedQueries: false
+    context: ({req}) => {
+      const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
+
+      return {token};
+    },
+    cacheControl: {
+      defaultMaxAge: 3600
+    }
 });
 
 await server.start();
@@ -41,16 +81,6 @@ const startApp = () => {
     server.applyMiddleware({app});
     app.listen(port, () => console.log(`Server is running on port ${port}`));
 }
-
-//this method should allow us to avoid the cors error 
-app.use((req,res,next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type', 'Authorization');
-    next();
-});
-
-app.get('https://api.meetup.com/events');
 
 startApp();
 
