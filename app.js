@@ -1,6 +1,6 @@
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
-import morgan  from 'morgan';
+import morgan from 'morgan';
 import fetch from 'node-fetch';
 
 const app = express();
@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
-//app.use(express.urlencoded({ extende:true })); // parses all of the information from the web page as an object
+app.use(express.urlencoded({ extende:true })); // parses all of the information from the web page as an object
 app.use(morgan('dev')); //enables logging information regarding the server
 
 
@@ -26,8 +26,8 @@ type SelfInfo {
 // A map of functions which return data for the schema.
 //these resolvers queries will be used to load and display the events that are happening the in the website
 const resolvers = {
-  Query:{
-    self: async (_,__, {token}) => {
+  Query: {
+    self: async (_, __, { token }) => {
       const query = `
       query{self{id, name}}`;
 
@@ -41,53 +41,53 @@ const resolvers = {
           'Content-Type': 'application/json',
           'Authorization': token
         },
-        body: JSON.stringify({query, variables})
+        body: JSON.stringify({ query, variables })
       });
 
-      const {data, errors} = await response.json();
+      const { data, errors } = await response.json();
 
-      if(errors)
-      {
+      if (errors) {
         throw new Error(`failed to fetch from api: ${errors[0].message}`);
       }
-      console.log('data fetched: '+data);
+      console.log('data fetched: ' + data);
 
-        return data.self;
-      }
+      return data.self;
     }
-  };
+  }
+};
 
 
 
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: ({req}) => {
-      const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
+  typeDefs,
+  resolvers,
+  persistedQueries: false,
+  context: ({ req }) => {
+    const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
 
-      return {token};
-    },
-    cacheControl: {
-      defaultMaxAge: 3600
-    }
+    return { token };
+  },
+  cacheControl: {
+    defaultMaxAge: 3600
+  }
 });
 
 await server.start();
 
 const startApp = () => {
-    //inject apollo server on express app
-    
-    server.applyMiddleware({app});
-    app.listen(port, () => console.log(`Server is running on port ${port}`));
+  //inject apollo server on express app
+
+  server.applyMiddleware({ app });
+  app.listen(port, () => console.log(`Server is running on port ${port}`));
 }
 
 startApp();
 
 app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
-    res.render('index', {title: 'Home'}); // tells the code to render the index file
+  res.render('index', { title: 'Home' }); // tells the code to render the index file
 });
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
-    res.status(404).render('404', {title: '404 Page'});
+  res.status(404).render('404', { title: '404 Page' });
 });
