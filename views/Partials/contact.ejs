@@ -18,3 +18,27 @@
       }
     } //end of function
     //end of davids code</script>
+<script>
+    //Davids Code
+    function messageSent()
+    {
+      var emptyName = document.forms["contactForm"]["name"].value; //grabbing the value from the input field
+      var emptyMessage = document.forms["contactForm"]["message"].value;
+      if(emptyName == "")
+      { //if the name field is empty than it will let the user know to fill in that field inorder for the submit to work
+        alert('You need to fill the name field!');
+        return false;
+      } 
+      else if(emptyMessage == "") //if the message field is empty than it will let the user know to fill in that field inorder for the submit to work
+      {
+          alert("You need to fill the message field!");
+          return false;
+      } 
+      else //if both fields are full then the message will be sent through succesfully
+      {
+          alert("You message has successfully been sent to our contact services!");
+          return true;
+      }
+    } //end of function
+    //end of davids code
+</script>
