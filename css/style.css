@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 :root {
     /* set variables as colours, will save time when the colours in the page has to change*/
     --clr-blue: #bee1ff;
@@ -38,270 +40,6 @@
     position: sticky;
     display: flex;
     justify-content: space-evenly;
-}
-
-.item {
-    width: 8vw;
-    height: 8vh;
-    background-color: var(--clr-blue);
-    border: solid var(--clr-white) 5px;
-    text-align: center;
-    font-size: min(max(1.5vw, 16px), 32px);
-    /* Font size range between 12px and 24px */
-    border-radius: 20px;
-    font-family: "Itim", cursive;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--clr-white);
-    cursor: pointer;
-    min-width: 80px;
-    /* Adjust as needed */
-    min-height: 50px;
-    /* Adjust as needed */
-}
-
-
-.nav-bar {
-    position: sticky;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.home-logo {
-    width: 100%;
-    height: auto;
-}
-
-.item.homeBTN {
-    background: transparent;
-    border: none;
-}
-
-/* The Modal (background) */
-.modal {
-    border: solid var(--clr-white) 5px;
-    display: none;
-    /* Hidden by default */
-    position: absolute;
-    /* Positioned relative to the button */
-    z-index: 1;
-    /* Sit on top */
-    width: 150%;
-    /* Adjust width as needed */
-    background-color: var(--clr-blue);
-    /* Background color */
-    overflow: none;
-    /* no scroll */
-    margin: 0;
-    /* Remove any margins */
-    border-radius: 20px;
-    transform: translateX(-50%);
-}
-
-
-/* Position the modal below the button */
-.modal:before {
-    content: "";
-    height: 0;
-    width: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid var(--clr-white);
-    /* Same color as the modal background */
-    position: absolute;
-    top: -10px;
-    left: calc(50% - 10px);
-}
-
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: var(--clr-white);
-    margin: 5% auto;
-    /* 10% from the top and centered */
-    padding: 5px;
-    width: 90%;
-    /* Could be more or less, depending on screen size */
-    padding: 20px;
-    text-align: center;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Centers the content vertically */
-    justify-content: center;
-    /* Centers the content horizontally */
-}
-
-.button-modal-container {
-    position: relative;
-    /* Establish a new positioning context */
-    display: inline-block;
-    /* Allow multiple containers to sit side-by-side */
-}
-
-.modal-content form {
-    /* Center the text in the form */
-    text-align: center;
-    width: 80%;
-    /* Adjust as needed */
-    margin: 0 auto;
-    /* Centers the form horizontally */
-}
-
-.modal-content label {
-    /* Change the font size and color of the labels */
-    font-size: 1.2em;
-    color: var(--clr-black)
-}
-
-.modal-content input[type="email"],
-.modal-content input[type="password"],
-.modal-content input[type="text"] {
-    /* Style the email and password fields and name in contact */
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid var(--clr-dark);
-}
-
-.modal-content input[type="submit"] {
-    /* Style the submit button */
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.modal-content input[type="submit"]:hover {
-    /* Change the background color when hovering over the submit button */
-    background-color: #45a049;
-}
-
-.modal-content button {
-    /* Style the switch mode button */
-    background-color: #f44336;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
-}
-
-.modal-content button:hover {
-    /* Change the background color when hovering over the switch mode button */
-    background-color: #e60000;
-}
-
-textarea {
-    resize: vertical;
-    /* Allows vertical resize only */
-    max-height: 750px;
-    /* Maximum height */
-    min-height: 200px;
-    /* Minimum height */
-    width: 100%;
-    /* Makes the input fields take up the full width of the form */
-    border: 1px solid var(--clr-dark);
-}
-
-.crosshair {
-    position: absolute;
-    visibility: hidden;
-    /* Make the crosshair initially invisible */
-}
-
-.crosshair img {
-
-    height: 30px;
-    /* Adjust as needed */
-    width: auto;
-
-}
-
-.legend-content img {
-    height: 30px;
-    width: auto;
-    vertical-align: middle;
-}
-
-.legend-modal {
-    width: 555%;
-    /* Adjust as needed */
-}
-
-.legend-content h2 {
-    font-size: 2em;
-    /* Make the title larger */
-    margin-bottom: 20px;
-    /* Add some space below the title */
-}
-
-.legend-content ul {
-    list-style-type: none;
-    /* Remove the default bullet points */
-    padding-left: 0;
-    /* Align the list items with the rest of the content */
-}
-
-.legend-content ul li {
-    margin-bottom: 10px;
-    /* Add some space between list items */
-}
-
-.legend-content ul li img {
-    height: 26px;
-    width: auto;
-    vertical-align: middle;
-    margin-right: 10px;
-    /* Add some space between the icon and the text */
-}
-
-.legend-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-    /* Enables vertical scrolling */
-    max-height: 85vh;
-    /* Prevents the modal from taking up the whole screen */
-}
-
-
-
-.section {
-    width: 100%;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-    /* Increase the font size */
-    color: var(--clr-white);
-    /* Change the text color */
-    background-color: var(--clr-blue);
-    /* Change the background color */
-    padding: 10px;
-    /* Add some padding */
-    border-radius: 20px;
-    /* Round the corners */
-}
-
-.event-types-status {
-    display: flex;
-    justify-content: space-around;
-}
-
-.event-types,
-.event-status {
-    width: 45%;
-    /* Adjust as needed */
-}
-
-.examples {
-    margin-top: auto;
-    /* Pushes the section to the bottom */
 }
 
 /* Styles for larger screens */
@@ -348,12 +86,81 @@ textarea {
     }
 
     .item {
-        width: 7vw;
+        width: 14vw;
         font-size: 14px;
         height: 7vh;
     }
+}
 
+.item {
+    width: 16vh;
+    height: 8vh;
+    background-color: var(--clr-blue);
+    border: solid var(--clr-white) 5px;
+    text-align: center;
+    font-size: min(max(1.5vw, 16px), 32px);
+    /* Font size range between 12px and 24px */
+    border-radius: 20px;
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--clr-white);
+    cursor: pointer;
+    min-width: 80px;
+    max-width: 160px;
+    /* Adjust as needed */
+    min-height: 50px;
+    max-height: 80px;
+    /* Adjust as needed */
+}
 
+@media screen and (max-height: 1080px) {
+    .item {
+        width: 8vw;
+        height: 4vw;
+    }
+}
+
+.nav-bar {
+    position: sticky;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.home-logo {
+    width: 100%;
+    height: auto;
+}
+
+.item.homeBTN {
+    background: transparent;
+    border: none;
+}
+
+/* The Modal (background) */
+.modal {
+    border: solid var(--clr-white) 5px;
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    /* Positioned relative to the button */
+    z-index: 1;
+    /* Sit on top */
+    width: 150%;
+    /* Adjust width as needed */
+    background-color: var(--clr-blue);
+    /* Background color */
+    overflow: none;
+    /* no scroll */
+    margin: 0;
+    /* Remove any margins */
+    border-radius: 20px;
+    transform: translateX(-50%);
+}
+
+.legend-modal {
+    width: 555%;
+    /* Adjust as needed */
 }
 
 @media screen and (max-width: 750px) {
@@ -361,19 +168,202 @@ textarea {
         position: fixed;
         /* Positioned relative to the viewport */
         width: 80%;
-        /* Take full width */
         height: 80%;
-        /* Take full height */
         top: 0;
         /* Align to the top */
         left: 0;
         /* Align to the left */
         transform: none;
         /* Remove the transform */
+        overflow: hidden;
     }
 
     .legend-modal {
         width: 80%;
     }
 
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: var(--clr-white);
+    margin: 5% auto;
+    padding: 5px;
+    width: 90%;
+    padding: 5%;
+    text-align: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers the content vertically */
+    justify-content: center;
+    /* Centers the content horizontally */
+}
+
+.button-modal-container {
+    position: relative;
+    /* Establish a new positioning context */
+    display: inline-block;
+    /* Allow multiple containers to sit side-by-side */
+}
+
+.modal-content form {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10%;
+}
+
+.modal-content label {
+    font-size: 1.2em;
+    color: var(--clr-black);
+}
+
+.modal-content input[type="email"],
+.modal-content input[type="password"],
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 1px 0;
+    border-radius: 5px;
+    border: 1px solid var(--clr-dark);
+}
+
+.modal-content input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.modal-content button {
+    background-color: #f44336;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.modal-content button:hover {
+    background-color: #e60000;
+}
+
+
+textarea {
+    resize: vertical;
+    /* Allows vertical resize only */
+    max-height: 500px;
+    /* Maximum height */
+    min-height: 200px;
+    /* Minimum height */
+    width: 100%;
+    /* Makes the input fields take up the full width of the form */
+    border: 1px solid var(--clr-dark);
+    border-radius: 5px;
+}
+
+.crosshair {
+    position: absolute;
+    visibility: hidden;
+    /* Make the crosshair initially invisible */
+}
+
+.crosshair img {
+
+    height: 30px;
+    /* Adjust as needed */
+    width: auto;
+
+}
+
+.legend-content img {
+    height: 30px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.legend-content h2 {
+    font-size: 2em;
+    /* Make the title larger */
+    margin-bottom: 20px;
+    /* Add some space below the title */
+}
+
+.legend-content ul {
+    list-style-type: none;
+    /* Remove the default bullet points */
+    padding-left: 0;
+    /* Align the list items with the rest of the content */
+}
+
+.legend-content ul li {
+    margin-bottom: 10px;
+    /* Add some space between list items */
+}
+
+.legend-content ul li img {
+    height: 26px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 10px;
+    /* Add some space between the icon and the text */
+}
+
+.legend-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    /* Enables vertical scrolling */
+    max-height: 85vh;
+    /* Prevents the modal from taking up the whole screen */
+}
+
+.section {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    /* Increase the font size */
+    color: var(--clr-white);
+    /* Change the text color */
+    background-color: var(--clr-blue);
+    /* Change the background color */
+    padding: 10px;
+    /* Add some padding */
+    border-radius: 20px;
+    /* Round the corners */
+}
+
+.event-types-status {
+    display: flex;
+    justify-content: space-around;
+}
+
+.event-types,
+.event-status {
+    width: 45%;
+    /* Adjust as needed */
+}
+
+.examples {
+    margin-top: auto;
+    /* Pushes the section to the bottom */
 }

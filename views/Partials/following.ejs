@@ -1,50 +1,64 @@
-<script> 
-    var isSignupMode = true;
+<script>
+var isSignupMode = true;
+var isLoggedIn = false;
+var users = {};
 
-    function switchMode() {
-      var form = document.getElementById('authForm');
-      var submitButton = document.getElementById('submit');
-      var switchButton = document.getElementById('switchMode');
+function followingButtonClicked() {
+    if (isLoggedIn) {
+        // User is logged in, perform the new function
+        highlightFollowedEvents();
+    } else {
+        // User is not logged in, show the modal
+        toggleModal('followingModal', event);
+    }
+}
 
-      if (isSignupMode) {
-        // Switch to login mode
+function switchMode() {
+    var form = document.getElementById('authForm');
+    var submitButton = document.getElementById('submit');
+    var switchButton = document.getElementById('switchMode');
+
+    if (isSignupMode) {
         form.action = "/submit-login";
         submitButton.value = "Login";
         switchButton.textContent = "Switch to Sign Up";
-      } else {
-        // Switch to signup mode
+    } else {
         form.action = "/submit-signup";
         submitButton.value = "Sign Up";
         switchButton.textContent = "Switch to Login";
-      }
-
-      isSignupMode = !isSignupMode;
     }
 
-    function moveCrosshair() {
-      // Get the crosshair div
-      var crosshair = document.querySelector('.crosshair');
+    isSignupMode = !isSignupMode;
+}
 
-      // Get the size of .map-div
-      var mapDiv = document.querySelector('.map-div');
-      var mapDivWidth = mapDiv.offsetWidth;
-      var mapDivHeight = mapDiv.offsetHeight;
+function handleFormSubmit() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
 
-      // Get the height of the navbar
-      var navbarHeight = document.querySelector('.nav-bar').offsetHeight;
-
-      // Generate random coordinates within .map-div, below the navbar
-      var randomX = Math.floor(Math.random() * mapDivWidth);
-      var randomY = Math.floor(Math.random() * (mapDivHeight - navbarHeight) + navbarHeight);
-
-      // Position the crosshair at the random coordinates
-      crosshair.style.left = randomX + 'px';
-      crosshair.style.top = randomY + 'px';
-
-      // Make the crosshair visible
-      crosshair.style.visibility = 'visible';
+    if (isSignupMode) {
+        // Sign up
+        users[email] = password;
+        alert('Sign up successful!');
+        isLoggedIn = true;
+    } else {
+        // Log in
+        if (users[email] && users[email] === password) {
+            alert('Login successful!');
+            isLoggedIn = true;
+            closeAllModals();
+        } else {
+            alert('Invalid email or password.');
+        }
     }
-    //end of Eoins code 
+}
 
+function highlightFollowedEvents() {
+    // For testing, show an alert or log a message to the console
+    alert('highlightFollowedEvents function called!');
+    console.log('highlightFollowedEvents function called!');
     
+    // Add the API interaction code here
+}
+
+
 </script>

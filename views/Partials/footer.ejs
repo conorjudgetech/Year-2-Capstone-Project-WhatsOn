@@ -3,8 +3,6 @@
     // Variable to store the currently open modal
     var currentModal = null;
 
-
-    //Eoins code 
     function toggleModal(modalId, event) {
       // If a modal is currently open, close it
       if (currentModal) {
@@ -14,8 +12,8 @@
       // Open the new modal
       currentModal = document.getElementById(modalId);
       currentModal.style.display = "block";
-      // Check if the screen width is 600px or less
-      if (window.innerWidth <= 600) {
+      // Check if the screen width is 750px or less
+      if (window.innerWidth <= 750) {
         currentModal.style.display = "block";
         currentModal.style.position = "fixed"; // Set position to fixed
         // Center the modal vertically and horizontally
@@ -30,38 +28,31 @@
         // Account for the border
         var border = parseInt(getComputedStyle(button).borderWidth);
 
-        // Calculate the bottom of the button, accounting for the border
-        var buttonBottom = rect.bottom - border;
-
-        // Position the modal below the button
-        currentModal.style.top = (buttonBottom + window.scrollY) + "px";
+        // Position the modal above the viewport
+        currentModal.style.top = -(currentModal.offsetHeight) + "px";
 
         // Center the modal horizontally
         currentModal.style.left = '50%';
         currentModal.style.transform = 'translateX(-50%)';
+
         // If the modal extends off the right edge of the screen, move it back
         var modalRight = currentModal.offsetLeft + currentModal.offsetWidth;
         if (modalRight > window.innerWidth) {
           currentModal.style.left = (window.innerWidth - currentModal.offsetWidth) + "px";
         }
 
-        // Calculate the bottom of the button, accounting for the border
-        var buttonBottom = rect.bottom - border;
-
-        // Position the modal below the button
-        currentModal.style.top = (buttonBottom + window.scrollY) + "px";
-
         // Slide the modal down to its final position below the button
-        var finalTop = buttonBottom + window.scrollY;
-        var currentTop = rect.top + window.scrollY;
+        var finalTop = (rect.bottom + window.scrollY) - 15;
+        var currentTop = parseInt(currentModal.style.top);
         var intervalId = setInterval(function () {
           if (currentTop < finalTop) {
-            currentTop++;
+            currentTop += 2;
             currentModal.style.top = currentTop + "px";
           } else {
             clearInterval(intervalId);
           }
-        }, 5); // Adjust this value to change the speed of the animation
+        }, 3); // Adjust this value to change the speed of the animation
+
       }
     }
     function closeAllModals() {
@@ -72,13 +63,9 @@
       // Reset the currently open modal
       currentModal = null;
     }
-
-    
-    
   </script>
-    
-  <%- include('api.ejs')%>
-  <%- include('contact.ejs') %>
-  <%- include('following.ejs') %>
+  <%- include('following') %>
+  <%- include('contact') %>
+  <%- include('random') %>
 
 </footer>
