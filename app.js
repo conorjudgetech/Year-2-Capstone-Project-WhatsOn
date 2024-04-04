@@ -60,8 +60,6 @@ const resolvers = {
 
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
   persistedQueries: false,
   context: ({ req }) => {
     const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
@@ -70,7 +68,9 @@ const server = new ApolloServer({
   },
   cacheControl: {
     defaultMaxAge: 3600
-  }
+  },
+  typeDefs,
+  resolvers
 });
 
 await server.start();
