@@ -31,7 +31,7 @@
     overflow: hidden;
     z-index: 0;
 }
-
+/* Styles for larger screens */
 .nav-bar {
     margin-top: 20px;
     width: 100%;
@@ -42,14 +42,13 @@
     justify-content: space-evenly;
 }
 
-/* Styles for larger screens */
 .nav-bar {
     display: flex;
     justify-content: space-evenly;
 }
 
 /* Styles for smaller screens */
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
     .nav-bar {
         display: grid;
         grid-template-areas:
@@ -114,7 +113,7 @@
     /* Adjust as needed */
 }
 
-@media screen and (max-height: 1080px) {
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
     .item {
         width: 8vw;
         height: 4vw;
@@ -163,7 +162,7 @@
     /* Adjust as needed */
 }
 
-@media screen and (max-width: 750px) {
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
     .modal {
         position: fixed;
         /* Positioned relative to the viewport */
