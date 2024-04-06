@@ -16,18 +16,19 @@
             </div>
         </div>
     </div>
-    
+
 
 
 
     <button class="item random" onclick="moveCrosshair()">Random</button>
 
 
-    <button class="item homeBTN"onclick="closeAllModals()">
-
+    <div class="parent">
+        <button class="item homeBTN" onclick="closeAllModals(); closeCrosshair();">
             <img src="logo.png" alt="Home" class="home-logo">
+        </button>
+    </div>
 
-    </button>
     <div class="button-modal-container">
         <button class="item legBTN" onclick="toggleModal('legendModal', event)">Legend</button>
         <div id="legendModal" class="modal legend-modal">
