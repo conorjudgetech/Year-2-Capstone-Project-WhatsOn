@@ -41,10 +41,25 @@
           zoom: 14,
           // CJ- mapId is the id of the map created in Google Cloud Platform
           mapId: "13185b1ffbbba3af",
-          //CJ- remove default map controls from bottom right corner of map
+          //CJ- remove default map controls from bottom map
           mapTypeControl: false,
           fullscreenControl: false,
           streetViewControl: false,
+        });
+
+          // CJ- creates new constant named marker to attach to event listener to open info window
+          const marker = new google.maps.Marker({
+          // CJ- sets the location of marker
+          position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
+          map,
+          //CJ- title of marker
+          title: "Pin test!",
+          icon: {
+            // CJ- location of icon image
+            url: "logo.png",
+            // CJ- new Google maps object that defines the size of icon image
+            scaledSize: new google.maps.Size(48, 48),
+          },
         });
       }
     </script>
