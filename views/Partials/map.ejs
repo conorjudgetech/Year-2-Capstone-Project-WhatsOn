@@ -63,6 +63,18 @@
             //CJ- animation that drops pin from top of the map
             animation: google.maps.Animation.DROP,
         });
+
+          //CJ- new info window object set to open when marker is clicked
+          const infowindow = new google.maps.InfoWindow({
+          // CJ- content of info window
+          content: "Info window test",
+        });
+
+          // CJ- event listener that opens info window when clicked click to open event window
+          marker.addListener("click", () => {
+          // CJ- open info window on map at marker location
+          infowindow.open(map, marker);
+        });
       }
     </script>
 
