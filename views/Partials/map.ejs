@@ -1,21 +1,31 @@
-<style>
-  html {
-    box-sizing: border-box      /* CJ- So that padding won't effect the final width/height of elements */;
-    font-size: 100%; /* CJ- for better accessibility */
-  }
-  /* CJ- wildcard to select all elements and pseudo elements, before and after, to inherit that box sizing property  */
-  *, *::before, *::after {
-    box-sizing: inherit;
-  }
+<html>
 
-  body {
-    margin: 0;
-    padding: 0;
-  }
+    <style>
+      html {
+        /* CJ- So that padding won't effect the final width/height of elements */
+        box-sizing: border-box;
+        /* CJ- for better accessibility */
+        font-size: 100%; 
+      }
+      /* CJ- wildcard to select all elements and pseudo elements, before and after, to inherit that box sizing property  */
+      *, *::before, *::after {
+        box-sizing: inherit;
+      }
 
-  }
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-  
-<body>
-    <h1>H1</h1><!-- CJ- to ensure page is loading -->
+    </style>
+
+  <body>
+    <!-- CJ- to ensure page is loading -->
+    <h1>H1</h1>
+
+    <!-- CJ- div tag with ID of "map" to load map -->
+    <div id="map"></div> 
+
+
   </body>
+</html>
