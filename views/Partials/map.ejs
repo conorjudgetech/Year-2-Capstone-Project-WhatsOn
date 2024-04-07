@@ -65,6 +65,26 @@
             infowindow1.open(map, marker1);
           });
 
+          const marker2 = new google.maps.Marker({
+            position: { lat: 53.36013894903569, lng: -6.260932804848787 },
+            map,
+            title: "Social: Starting",
+            icon: {
+              url: "Social Starting.png",
+              scaledSize: new google.maps.Size(48, 48),
+            },
+            animation: google.maps.Animation.DROP,
+          });
+
+          const infowindow2 = new google.maps.InfoWindow({
+            content:
+              "Social<br>Status: Starting<br>Location: Dorset Street Lower<br>Dublin, DO1A2Y5<br>Join us for a fun-filled evening of laughter and entertainment<br>Let's create unforgettable memories together!",
+          });
+
+          marker2.addListener("click", () => {
+            infowindow2.open(map, marker2);
+          });
+
           
       }
     </script>
