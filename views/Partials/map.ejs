@@ -30,7 +30,7 @@
           zoom: 14,
           // CJ- mapId is the id of the map created in Google Cloud Platform
           mapId: "13185b1ffbbba3af",
-          //CJ- remove default map controls from bottom map
+          //CJ- remove default map controls from map
           mapTypeControl: false,
           fullscreenControl: false,
           streetViewControl: false,
@@ -122,6 +122,42 @@
           marker4.addListener("click", () => {
             infowindow4.open(map, marker4);
           });
+
+        // CJ- Check if geolocation is available
+        if (navigator.geolocation) {
+          // CJ- Get user's location
+          navigator.geolocation.getCurrentPosition(
+            // CJ- Success callback
+            (position) => {
+              // CJ- Create an object to store user's location
+              const userLocation = {
+                // CJ- Get user's latitude and longitude
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+
+              // CJ- Center the map to user's location
+              loadMap(userLocation);
+
+              // CJ- Add a marker for user's location
+              const userMarker = new google.maps.Marker({
+                // CJ- Set the position of the marker to user's location
+                position: userLocation,
+                // CJ- Set the map to the map object
+                map,
+                // CJ- Set the title of the marker
+                title: "Your Location",
+              });
+            },
+            // CJ- Error handling
+            (error) => {
+              // CJ- Log error to console
+              console.error("Error getting user's location:", error);
+            }
+          );
+        } else {
+          console.error("Geolocation is not supported by this browser.");
+        }
 
       
       }
