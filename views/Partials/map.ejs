@@ -1,0 +1,73 @@
+<html>
+
+    <style>
+      html {
+        /* CJ- So that padding won't effect the final width/height of elements */
+        box-sizing: border-box;
+        /* CJ- for better accessibility */
+        font-size: 100%; 
+      }
+      /* CJ- wildcard to select all elements and pseudo elements, before and after, to inherit that box sizing property  */
+      *, *::before, *::after {
+        box-sizing: inherit;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+  <body>
+    <script>
+      //  CJ- using callback function “initMap” from Google Map Script API URL.  This ensures the javascript will only run once the API has finished loading, otherwise it would run before map exists.
+       function initMap() {
+        // <!-- CJ- targeting "map-div" to load map -->
+        map = new google.maps.Map(document.getElementById("map-div"), {
+          // CJ- loads map at specific lattitude and longitude
+          center: { lat: 53.349076911151386, lng: -6.242441879918039 },
+          // CJ- defines the zoom level
+          zoom: 14,
+          // CJ- mapId is the id of the map created in Google Cloud Platform
+          mapId: "13185b1ffbbba3af",
+          //CJ- remove default map controls from bottom map
+          mapTypeControl: false,
+          fullscreenControl: false,
+          streetViewControl: false,
+        });
+
+          // CJ- creates new constant named marker to attach to event listener to open info window
+          const marker = new google.maps.Marker({
+          // CJ- sets the location of marker
+          position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
+          map,
+          //CJ- title of marker
+          title: "Pin test!",
+          icon: {
+            // CJ- location of icon image
+            url: "logo.png",
+            // CJ- new Google maps object that defines the size of icon image
+            scaledSize: new google.maps.Size(48, 48),
+          },
+            //CJ- animation that drops pin from top of the map
+            animation: google.maps.Animation.DROP,
+        });
+
+          //CJ- new info window object set to open when marker is clicked
+          const infowindow = new google.maps.InfoWindow({
+          // CJ- content of info window
+          content: "Info window test",
+        });
+
+          // CJ- event listener that opens info window when clicked click to open event window
+          marker.addListener("click", () => {
+          // CJ- open info window on map at marker location
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
+
+    <!-- CJ- loading map API & Map ID, after script because of callback function in URL that connects to initMap function -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo9c5JnECXrfMnYkVA2TSyStdrbZ3TO-w&map_ids=13185b1ffbbba3af&callback=initMap"></script>
+  </body>
+</html>
