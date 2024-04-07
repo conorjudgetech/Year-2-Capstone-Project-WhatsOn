@@ -16,25 +16,14 @@
         margin: 0;
         padding: 0;
       }
-
-      /* CJ- height/width setting for map to display on page */
-      #map { 
-        height: 60vh;
-        width: 100%;
-      }
     </style>
 
   <body>
-    <!-- CJ- to ensure page is loading -->
-    <h1>H1</h1>
-
-    <!-- CJ- div tag with ID of "map" to load map -->
-    <div id="map"></div> 
-
     <script>
       //  CJ- using callback function “initMap” from Google Map Script API URL.  This ensures the javascript will only run once the API has finished loading, otherwise it would run before map exists.
        function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
+        // <!-- CJ- targeting "map-div" to load map -->
+        map = new google.maps.Map(document.getElementById("map-div"), {
           // CJ- loads map at specific lattitude and longitude
           center: { lat: 53.349076911151386, lng: -6.242441879918039 },
           // CJ- defines the zoom level
