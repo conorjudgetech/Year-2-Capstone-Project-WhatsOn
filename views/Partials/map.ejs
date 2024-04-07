@@ -42,7 +42,7 @@
             position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
             map,
             //CJ- title of marker
-            title: "Education Starting",
+            title: "Education: Starting",
             icon: {
               // CJ- location of icon image
               url: "Education Starting.png",
@@ -83,6 +83,27 @@
 
           marker2.addListener("click", () => {
             infowindow2.open(map, marker2);
+          });
+
+          const marker3 = new google.maps.Marker({
+            position: { lat: 53.355, lng: -6.26 },
+            map,
+            title: "Charity: Ending",
+            icon: {
+              url: "Charity Ending.png",
+              scaledSize: new google.maps.Size(48, 48),
+            },
+            animation: google.maps.Animation.DROP,
+          });
+
+          //info window
+          const infowindow3 = new google.maps.InfoWindow({
+            content:
+              "Charity<br>Status: Ending<br>Location: O'Connell Street Upper<br>Dublin, DO1A2Y5<br>Join us for a noble cause and make a difference in the world!",
+          });
+
+          marker3.addListener("click", () => {
+            infowindow3.open(map, marker3);
           });
 
           
