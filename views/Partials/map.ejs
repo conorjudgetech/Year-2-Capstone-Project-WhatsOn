@@ -77,8 +77,7 @@
           });
 
           const infowindow2 = new google.maps.InfoWindow({
-            content:
-              "Social<br>Status: Starting<br>Location: Dorset Street Lower<br>Dublin, DO1A2Y5<br>Join us for a fun-filled evening of laughter and entertainment<br>Let's create unforgettable memories together!",
+            content: "Social<br>Status: Starting<br>Location: Dorset Street Lower<br>Dublin, DO1A2Y5<br>Join us for a fun-filled evening of laughter and entertainment<br>Let's create unforgettable memories together!",
           });
 
           marker2.addListener("click", () => {
@@ -98,15 +97,33 @@
 
           //info window
           const infowindow3 = new google.maps.InfoWindow({
-            content:
-              "Charity<br>Status: Ending<br>Location: O'Connell Street Upper<br>Dublin, DO1A2Y5<br>Join us for a noble cause and make a difference in the world!",
+            content: "Charity<br>Status: Ending<br>Location: O'Connell Street Upper<br>Dublin, DO1A2Y5<br>Join us for a noble cause and make a difference in the world!",
           });
 
           marker3.addListener("click", () => {
             infowindow3.open(map, marker3);
           });
 
-          
+          const marker4 = new google.maps.Marker({
+            position: { lat: 53.35, lng: -6.265 },
+            map,
+            title: "Culture: Ending",
+            icon: {
+              url: "Culture Ending.png",
+              scaledSize: new google.maps.Size(48, 48),
+            },
+            animation: google.maps.Animation.DROP,
+          });
+
+          const infowindow4 = new google.maps.InfoWindow({
+            content: "Culture<br>Status: Ending<br>Location: Temple Bar<br>Dublin, DO1A2Y5<br>Experience the rich cultural heritage and immerse yourself in the arts!",
+          });
+
+          marker4.addListener("click", () => {
+            infowindow4.open(map, marker4);
+          });
+
+      
       }
     </script>
 
