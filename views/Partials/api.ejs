@@ -38,4 +38,22 @@
      console.log(data.data.event);
    });
  }
+
+ async function fetchJSON(request){
+    try{
+      const response = await fetch(request);
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) 
+      {
+        throw new TypeError("There is no JSON to load");
+        
+      }
+      const jsonData = await response.json();
+    } catch(error){
+      console.log("Error: ", error);
+    }
+  }
+
+
+
 </script>

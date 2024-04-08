@@ -1,7 +1,8 @@
 import express from 'express';
-import { ApolloServer, gql } from 'apollo-server-express';
+import cors from 'cors';
+import axios from 'axios';
 import morgan from 'morgan';
-import fetch from 'node-fetch';
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,79 +11,41 @@ app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
 
 app.use(morgan('dev')); //enables logging information regarding the server
+const endpoint = 'https://api.meetup.com/gql'
+app.use(express.json());
+app.use(cors());
 
 
-const typeDefs = `
-type Query {
-  self: SelfInfo
-}
-
-type SelfInfo {
-  id: ID
-  name: String
-}
-`;
-
-// A map of functions which return data for the schema.
-//these resolvers queries will be used to load and display the events that are happening the in the website
-const resolvers = {
-  Query: {
-    self: async (_, __, { token }) => {
-      const query = `
-      query{self{id, name}}`;
-
-      const variables = {
-        "query": "query"
-      };
-
-      const response = await fetch('https://api.meetup.com/gql', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token
-        },
-        body: JSON.stringify({ query, variables })
-      });
-
-      const { data, errors } = await response.json();
-
-      if (errors) {
-        throw new Error(`failed to fetch from api: ${errors[0].message}`);
-      }
-      console.log('data fetched: ' + data);
-
-      return data.self;
+const query = `
+  query{
+    self{
+      id,
+      name
     }
   }
-};
+`;
 
+const body = JSON.stringify({query});
 
-
-
-const server = new ApolloServer({
-  persistedQueries: false,
-  context: ({ req }) => {
-    const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
-
-    return { token };
+const request = axios({
+  url:endpoint,
+  method: "GET",
+  mode: "cors",
+  headers: {
+    'Authorization': '{cvdgj137jq4nejecgnh6ce0chr}',
+    "Content-Type": "application/json"
   },
-  cacheControl: {
-    defaultMaxAge: 3600
-  },
-  typeDefs,
-  resolvers
+  data: body
 });
 
-await server.start();
+request.then(({data}) => console.log(data));
 
-const startApp = () => {
-  //inject apollo server on express app
 
-  server.applyMiddleware({ app });
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
-}
+app.listen(port, () =>{
+  console.log('port ready at '+port);
+});
 
-startApp();
+
 
 app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
   res.render('index', { title: 'Home' }); // tells the code to render the index file
