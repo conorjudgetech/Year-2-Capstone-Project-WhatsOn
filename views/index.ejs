@@ -3,8 +3,8 @@
 <%- include('./Partials/head.ejs') %>
 
     <body>
-
         <div class="map-div" id="map-div"> <!--This is our main body for the website-->
+            <%- include('./Partials/map.ejs') %> <!--CJ- Google Map Partial-->
             <%- include('./Partials/nav.ejs') %> <!--This is our nav bar-->
                 <!-- The crosshair element -->
                 <div class="crosshair" style="position: absolute; top: 10%; left: 50%;"><img src="Crosshair.png" alt="x"></div>
@@ -12,7 +12,6 @@
         <div id="loadAPI"></div>
 
         <%- include('./Partials/footer.ejs') %>
-
     </body>
 
 </html>
