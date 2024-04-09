@@ -1,9 +1,8 @@
 import express from 'express';
-import cors from 'cors';
+
 import axios from 'axios';
 import morgan from 'morgan';
-import {config} from 'dotenv';
-import querystring from 'querystring'
+import cheerio from 'cheerio'
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,73 +12,49 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 
 app.use(morgan('dev')); //enables logging information regarding the server
 
-config();
 
 
-// Redirect URI for handling authorization code response
-const redirectUri = 'https://whatson-kbt9.onrender.com/';
 
-// OAuth configuration
-const clientId = 'cvdgj137jq4nejecgnh6ce0chr';
-const clientSecret = 'gqp5aml1e6fii1b9hpmmesnsff';
-const authorizationEndpoint = 'https://secure.meetup.com/oauth2/authorize';
-const tokenEndpoint = 'https://secure.meetup.com/oauth2/access';
 
-// Step 1: Redirect user to authorization endpoint
-app.get('/', (req, res) => {
-  // Rendering the 'index' template
-  res.render('index', { title: 'Home' }, () => {
-    // Callback after rendering the template
-    const params = querystring.stringify({
-      client_id: clientId,
-      response_type: 'code',
-      redirect_uri: redirectUri,
-      scope: 'openid profile', // Example scopes
+
+
+
+ 
+// The URL of the main page
+const main_url = 'https://www.meetup.com/find/?source=EVENTS&dateRange=tomorrow&distance=twoMiles';
+ 
+axios.get(main_url)
+  .then(response => {
+    // Parse the HTML of the main page
+    const $ = cheerio.load(response.data);
+ 
+    // Find the event cards on the main page
+    const eventCards = $('a.w-full.cursor-pointer.hover:no-underline');
+ 
+    // Iterate over each event card
+    eventCards.each((i, card) => {
+      // Extract the group name and time
+      const groupName = $(card).find('span.s1uol3r6').text().split(':')[1].trim();
+      const eventTime = $(card).find('time').attr('datetime');
+ 
+      console.log(`Group Name: ${groupName}, Time: ${eventTime}`);
     });
-
-    // Redirecting the user after rendering the template
-    res.redirect(`${authorizationEndpoint}?${params}`);
+ 
+    // Find the event details
+    const eventDetails = $('#event-details p.mb-4').map((i, el) => $(el).text()).get().join('\n');
+ 
+    console.log(`Event Details: ${eventDetails}`);
+ 
+    // Find the location info
+    const locationInfo = $('[data-testid="location-info"]').text();
+    const locationLink = $('[data-testid="venue-name-link"]').attr('href');
+    const [_, lat, lon] = locationLink.match(/query=(.*?),(.*?)$/);
+ 
+    console.log(`Location Info: ${locationInfo}, Latitude: ${lat}, Longitude: ${lon}`);
+  })
+  .catch(error => {
+    console.error(`Error: ${error}`);
   });
-});
-
-
-// Step 2: Handle callback with authorization code
-app.get('/callback', async (req, res) => {
-  const code = req.query.code;
-
-  // Step 3: Exchange authorization code for access token
-  const tokenParams = querystring.stringify({
-    grant_type: 'authorization_code',
-    code: code,
-    redirect_uri: redirectUri,
-    client_id: clientId,
-    client_secret: clientSecret,
-  }, res.render('index', { title: 'Home' })
-  );
-
-  try {
-    const tokenResponse = await axios.post(tokenEndpoint, tokenParams);
-    const accessToken = tokenResponse.data.access_token;
-
-    // Use the access token to make API requests
-    // Example: Fetch user data from Meetup API
-    const userDataResponse = await axios.get('https://api.meetup.com/gql', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    // Display user data
-    res.send(userDataResponse.data);
-  } catch (error) {
-    console.error('Error:', error.response.data);
-    res.status(500).send('Error occurred while exchanging authorization code for access token');
-  }
-});
-
-
-
-
 
 
 
@@ -87,7 +62,9 @@ app.listen(port, () =>{
   console.log('port ready at '+port);
 });
 
-
+app.get("/", (req,res) => {
+  res.render('index');
+});
 
 
 
