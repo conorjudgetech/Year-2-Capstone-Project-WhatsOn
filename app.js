@@ -48,8 +48,7 @@ app.get('/callback', async (req, res) => {
     redirect_uri: redirectUri,
     client_id: clientId,
     client_secret: clientSecret,
-  }, res.render('index', { title: 'Home' })
-  );
+  });
 
   try {
     const tokenResponse = await axios.post(tokenEndpoint, tokenParams);
@@ -63,13 +62,14 @@ app.get('/callback', async (req, res) => {
       },
     });
 
-    // Display user data
-    res.send(userDataResponse.data);
+    // Render the 'index' template with the retrieved user data
+    res.render('index', { title: 'Home', userData: userDataResponse.data });
   } catch (error) {
     console.error('Error:', error.response.data);
     res.status(500).send('Error occurred while exchanging authorization code for access token');
   }
 });
+
 
 
 app.listen(port, () => {
