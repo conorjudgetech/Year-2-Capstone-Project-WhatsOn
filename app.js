@@ -57,7 +57,7 @@ app.get('/callback', async (req, res) => {
 
     // Use the access token to make API requests
     // Example: Fetch user data from Meetup API
-    const userDataResponse = await axios.get('https://api.meetup.com/gql', {
+    const userDataResponse = await axios.post('https://api.meetup.com/gql', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
