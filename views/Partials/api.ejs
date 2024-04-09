@@ -17,8 +17,10 @@ function getAccessTokenFromFragment() {
   
     // Example: Fetch user data from API using the access token
     fetch('https://api.meetup.com/gql', {
+      method: 'POST',  
       headers: {
         Authorization: 'Bearer ' + accessToken,
+        ContentType: 'application/json',
       },
     })
       .then(response => response.json())
@@ -33,6 +35,7 @@ function getAccessTokenFromFragment() {
     const authorizationEndpoint = '	https://secure.meetup.com/oauth2/authorize';
     const clientId = 'cvdgj137jq4nejecgnh6ce0chr';
     const redirectUri = encodeURIComponent(window.location.href);
+    const responseType = 'token'; //implicit flow response type
    
     
   
