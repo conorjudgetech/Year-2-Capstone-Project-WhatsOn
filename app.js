@@ -11,7 +11,7 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 
 app.use(morgan('dev')); //enables logging information regarding the server
 
-const redirectUri = 'https://whatson-kbt9.onrender.com/';
+const redirectUri = 'https://whatson-kbt9.onrender.com';
 
 // OAuth configuration
 const clientId = 'cvdgj137jq4nejecgnh6ce0chr';
