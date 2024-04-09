@@ -3,6 +3,8 @@ import cors from 'cors';
 import axios from 'axios';
 import morgan from 'morgan';
 import {config} from 'dotenv';
+import jwt from 'jsonwebtoken'
+import fs from 'fs'
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,47 +15,12 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 app.use(morgan('dev')); //enables logging information regarding the server
 
 config();
-const {CLIENT_ID, APP_SECRET} = process.env;
-
-const base ="https://api.meetup.com/gql";
 
 
 
-//test route 
-app.get("/test", async (req,res) => {
-  const data = await generateAccessToken();
-  console.log(data);
-
-  res.json(data);
-});
 
 
-function testQuery(test) {
-  return queryFetch(`
-      query {
-          self {
-              id,
-              name
-          }
-      }
-  `, {self: test}).then(data => {
-      console.log(data.data.event);
-    });
-  }
 
-async function generateAccessToken()
-{
-  const reposne = await axios({
-    url:"https://secure.meetup.com/oauth2/authorize",
-    method: "post",
-    data:"grant_type=client_credentials",
-    auth: {
-      username: CLIENT_ID,
-      password: APP_SECRET,
-    },
-  });
-  reposne.data;
-}
 
 
 

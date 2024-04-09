@@ -1,40 +1,44 @@
 <script>
      //start of davids code
 
-     const test = document.getElementById('loadAPI');
-
-     function queryFetch(query, variables) {
-     const token = "cvdgj137jq4nejecgnh6ce0chr"; // Your Meetup API token
-     
-     return fetch('https://api.meetup.com/gql', {
-         method: 'POST',
-         headers: {
-             'Content-Type': 'application/json',
-             'Authorization': 'Bearer {cvdgj137jq4nejecgnh6ce0chr}' // Authorization header format
-         },
-         body: JSON.stringify({
-             query: query,
-             variables: variables
-         })
-     })
-     .then(res => {
-        console.log("request was a success!");
-        return res.json();
-     })
-     .catch(error => {
-         console.error('Request has failed: :'+ error);
-     });
- }
- function testQuery(test) {
- return queryFetch(`
-     query {
-         self {
-             id,
-             name
-         }
-     }
- `, {event: test}).then(data => {
-     console.log(data.data.event);
-   });
- }
+     // Function to extract access token from URL fragment
+function getAccessTokenFromFragment() {
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    return params.get('access_token');
+  }
+  
+  // Check if there's an access token in the URL fragment
+  const accessToken = getAccessTokenFromFragment();
+  
+  if (accessToken) {
+    // Access token is present, use it to make API requests
+    console.log('Access token:', accessToken);
+  
+    // Example: Fetch user data from API using the access token
+    fetch('https://api.meetup.com/gql', {
+      headers: {
+        Authorization: 'Bearer ' + accessToken,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('User data:', data);
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+  } else {
+    // No access token found, redirect the user to the authorization endpoint
+    const authorizationEndpoint = '	https://secure.meetup.com/oauth2/authorize';
+    const clientId = 'cvdgj137jq4nejecgnh6ce0chr';
+    const redirectUri = encodeURIComponent(window.location.href);
+   
+    
+  
+    const authorizationUrl = `${authorizationEndpoint}?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}`;
+  
+  
+    window.location.href = authorizationUrl;
+  }
 </script>
