@@ -1,7 +1,7 @@
 import express from 'express';
-import { ApolloServer, gql } from 'apollo-server-express';
 import morgan from 'morgan';
-import fetch from 'node-fetch';
+import querystring from 'querystring'
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,82 +11,67 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 
 app.use(morgan('dev')); //enables logging information regarding the server
 
+const redirectUri = 'https://whatson-kbt9.onrender.com/';
 
-const typeDefs = `
-type Query {
-  self: SelfInfo
-}
+// OAuth configuration
+const clientId = 'cvdgj137jq4nejecgnh6ce0chr';
+const clientSecret = 'gqp5aml1e6fii1b9hpmmesnsff';
+const authorizationEndpoint = 'https://secure.meetup.com/oauth2/authorize';
+const tokenEndpoint = 'https://secure.meetup.com/oauth2/access';
 
-type SelfInfo {
-  id: ID
-  name: String
-}
-`;
+// Step 1: Redirect user to authorization endpoint
+app.get('/', (req, res) => {
+  // Rendering the 'index' template
+  res.render('index', { title: 'Home' }, () => {
+    // Callback after rendering the template
+    const params = querystring.stringify({
+      client_id: clientId,
+      response_type: 'code',
+      redirect_uri: redirectUri,
+      scope: 'openid profile', // Example scopes
+    });
 
-// A map of functions which return data for the schema.
-//these resolvers queries will be used to load and display the events that are happening the in the website
-const resolvers = {
-  Query: {
-    self: async (_, __, { token }) => {
-      const query = `
-      query{self{id, name}}`;
+    // Redirecting the user after rendering the template
+    res.redirect(`${authorizationEndpoint}?${params}`);
+  });
+});
 
-      const variables = {
-        "query": "query"
-      };
 
-      const response = await fetch('https://api.meetup.com/gql', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token
-        },
-        body: JSON.stringify({ query, variables })
-      });
+// Step 2: Handle callback with authorization code
+app.get('/callback', async (req, res) => {
+  const code = req.query.code;
 
-      const { data, errors } = await response.json();
+  // Step 3: Exchange authorization code for access token
+  const tokenParams = querystring.stringify({
+    grant_type: 'authorization_code',
+    code: code,
+    redirect_uri: redirectUri,
+    client_id: clientId,
+    client_secret: clientSecret,
+  }, res.render('index', { title: 'Home' })
+  );
 
-      if (errors) {
-        throw new Error(`failed to fetch from api: ${errors[0].message}`);
-      }
-      console.log('data fetched: ' + data);
+  try {
+    const tokenResponse = await axios.post(tokenEndpoint, tokenParams);
+    const accessToken = tokenResponse.data.access_token;
 
-      return data.self;
-    }
+    // Use the access token to make API requests
+    // Example: Fetch user data from Meetup API
+    const userDataResponse = await axios.get('https://api.meetup.com/gql', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    // Display user data
+    res.send(userDataResponse.data);
+  } catch (error) {
+    console.error('Error:', error.response.data);
+    res.status(500).send('Error occurred while exchanging authorization code for access token');
   }
-};
-
-
-
-
-const server = new ApolloServer({
-  persistedQueries: false,
-  context: ({ req }) => {
-    const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
-
-    return { token };
-  },
-  cacheControl: {
-    defaultMaxAge: 3600
-  },
-  typeDefs,
-  resolvers
 });
 
-await server.start();
 
-const startApp = () => {
-  //inject apollo server on express app
-
-  server.applyMiddleware({ app });
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
-}
-
-startApp();
-
-app.get('/', (req, res) => { //this gets the request from the navigation from the webpage and loads that page
-  res.render('index', { title: 'Home' }); // tells the code to render the index file
-});
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
   res.status(404).render('404', { title: '404 Page' });
