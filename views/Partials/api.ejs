@@ -1,47 +1,27 @@
 <script>
      //start of davids code
 
-          // Function to extract access token from URL fragment
-function getAccessTokenFromFragment() {
-    const hash = window.location.hash.substring(1);
-    const params = new URLSearchParams(hash);
-    return params.get('access_token');
-  }
-  
-  // Check if there's an access token in the URL fragment
-  const accessToken = getAccessTokenFromFragment();
-  
-  if (accessToken) {
-    // Access token is present, use it to make API requests
-    console.log('Access token:', accessToken);
-  
-    // Example: Fetch user data from API using the access token
-    fetch('https://api.meetup.com/gql', {
-      method: 'POST',  
-      headers: {
-        Authorization: 'Bearer ' + accessToken,
-        ContentType: 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('User data:', data);
-      })
-      .catch(error => {
-        console.error('Error fetching user data:', error);
-      });
-  } else {
-    // No access token found, redirect the user to the authorization endpoint
-    const authorizationEndpoint = '	https://secure.meetup.com/oauth2/authorize';
-    const clientId = 'cvdgj137jq4nejecgnh6ce0chr';
-    const redirectUri = encodeURIComponent(window.location.href);
-    const responseType = 'token'; //implicit flow response type
-   
-    
-  
-    const authorizationUrl = `${authorizationEndpoint}?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}`;
-  
-  
-    window.location.href = authorizationUrl;
-  }
+// Client-side code to handle redirection back to your website
+window.onload = function() {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (code) {
+        // Handle authorization code
+        // Example: send the code to the server to exchange for an access token
+        fetch('/exchangeCodeForToken', {
+            method: 'POST',
+            body: JSON.stringify({ code: code }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Access token:', data.access_token);
+            // Handle access token
+        })
+        .catch(error => console.error('Error:', error));
+    }
+};
+
 </script>
