@@ -72,6 +72,10 @@ app.get('/callback', async (req, res) => {
 });
 
 
+app.listen(port, () => {
+  console.log('Loading on port ', port);
+});
+
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
   res.status(404).render('404', { title: '404 Page' });
