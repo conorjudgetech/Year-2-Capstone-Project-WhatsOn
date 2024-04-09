@@ -57,11 +57,16 @@ app.get('/callback', async (req, res) => {
 
     // Use the access token to make API requests
     // Example: Fetch user data from Meetup API
-    const userDataResponse = await axios.post('https://api.meetup.com/gql', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const userDataResponse = await axios.post(
+      'https://api.meetup.com/gql',
+      {}, // Empty object for the request body
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json', // Correctly set content type header
+        },
+      }
+    );
 
     // Render the 'index' template with the retrieved user data
     res.render('index', { title: 'Home', userData: userDataResponse.data });
@@ -70,6 +75,7 @@ app.get('/callback', async (req, res) => {
     res.status(500).send('Error occurred while exchanging authorization code for access token');
   }
 });
+
 
 
 
