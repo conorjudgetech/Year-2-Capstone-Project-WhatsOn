@@ -5,22 +5,12 @@
     </button>
     <div id="followingModal" class="modal">
       <div class="modal-content">
-        <form
-          id="authForm"
-          action="/"
-          method="post"
-          onsubmit="event.preventDefault(); handleFormSubmit();"
-        >
+        <form id="authForm" action="/" method="post" onsubmit="event.preventDefault(); handleFormSubmit();">
           <div class="input-group">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required /><br />
             <label for="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-            /><br />
+            <input type="password" id="password" name="password" required /><br />
           </div>
           <input id="submit" type="submit" value="Sign Up" />
         </form>
@@ -39,7 +29,6 @@
       Legend
     </button>
     <div id="legendModal" class="modal legend-modal">
-      <!-- Modal content goes here -->
       <div class="legend-content">
         <div class="section button-description">
           <ul>
@@ -151,11 +140,7 @@
     </div>
   </div>
   <div class="button-modal-container">
-    <button
-      class="item contactBTN"
-      id="contactusBTN"
-      onclick="toggleModal('contactModal', event)"
-    >
+    <button class="item contactBTN" id="contactusBTN" onclick="toggleModal('contactModal', event)">
       Contact
     </button>
     <div id="contactModal" class="modal contact-modal">

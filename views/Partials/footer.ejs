@@ -13,7 +13,7 @@
       currentModal = document.getElementById(modalId);
       currentModal.style.display = "block";
       // Check if the screen width is 750px or less
-      if (window.innerWidth <= 750) {
+      if (window.innerWidth <= 1500) {
         currentModal.style.display = "block";
         currentModal.style.position = "fixed"; // Set position to fixed
         // Center the modal vertically and horizontally
@@ -65,8 +65,8 @@
     }
   </script>
   <%- include('following') %>
-  <%- include('contact') %>
-  <%- include('random') %>
-  <%- include('api')%>
+    <%- include('contact') %>
+      <%- include('random') %>
+        <%- include('api')%>
 
 </footer>
