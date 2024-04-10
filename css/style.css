@@ -7,7 +7,6 @@
   --clr-black: #202020;
   --clr-dark: #454545;
   --clr-white: #ffffff;
-  --clr-bg: #1d8b4b;
 }
 
 *,
@@ -25,42 +24,13 @@
   height: 100vh;
   width: 100vw;
   border: solid var(--clr-blue) 5px;
-  background-color: var(--clr-bg);
   margin: 0 auto;
   overflow: hidden;
   z-index: 0;
 }
 
-/* Styles for larger screens */
-.nav-bar {
-  margin-top: 20px;
-  width: 100%;
-  height: 100px;
-  z-index: 10;
-  position: sticky;
-  display: flex;
-  justify-content: space-evenly;
-}
 
-.item {
-  width: 16vw;
-  height: 8vw;
-  background-color: var(--clr-blue);
-  border: solid var(--clr-white) 5px;
-  text-align: center;
-  font-size: min(max(3vw, 16px), 32px);
-  border-radius: 20px;
-  font-family: "Itim", cursive;
-  font-weight: 400;
-  font-style: normal;
-  color: var(--clr-white);
-  cursor: pointer;
-  min-width: 80px;
-  max-width: 160px;
-  min-height: 50px;
-  max-height: 80px;
-}
-
+/* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
 @media only screen and (orientation: portrait) {
   .nav-bar {
     display: grid;
@@ -104,16 +74,10 @@
     background: none;
   }
 
-  .home-logo {
-    width: 100%;
-    height: auto;
-  }
-
   .modal {
     position: fixed;
     /* Positioned relative to the viewport */
     width: 80%;
-    height: 80%;
     top: 0;
     /* Align to the top */
     left: 0;
@@ -121,13 +85,24 @@
     transform: none;
     /* Remove the transform */
     overflow: hidden;
+    background-color: var(--clr-blue);
+    border: solid var(--clr-white) 5px;
+    overflow: none;
+    /* no scroll */
+    margin: 0;
+    /* Remove any margins */
+    border-radius: 20px;
+    display: none;
+    /* Hidden by default */
   }
 
   .legend-modal {
-    width: 80%;
+    height: 80%;
+    overflow: none;
   }
 }
 
+/* Landscape Mode Landscape Mode Landscape Mode  Landscape Mode Landscape Mode Landscape Mode Landscape Mode Landscape Mode Landscape Mode Landscape Mode (So I can see better)) */
 @media only screen and (orientation: landscape) {
   .nav-bar {
     margin-top: 20px;
@@ -141,11 +116,6 @@
 
   .parent {
     position: relative;
-  }
-
-  .home-logo {
-    width: 100%;
-    height: auto;
   }
 
   /* The Modal (background) */
@@ -175,42 +145,50 @@
   }
 }
 
+/* Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles */
+.nav-bar {
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+  z-index: 10;
+  position: sticky;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.item {
+  width: 16vw;
+  height: 8vw;
+  background-color: var(--clr-blue);
+  border: solid var(--clr-white) 5px;
+  text-align: center;
+  font-size: min(max(3vw, 16px), 32px);
+  border-radius: 20px;
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--clr-white);
+  cursor: pointer;
+  min-width: 80px;
+  max-width: 160px;
+  min-height: 50px;
+  max-height: 80px;
+}
+
 .item.homeBTN {
   background: transparent;
   border: none;
 }
 
-/* The Modal (background) */
-.modal {
-  border: solid var(--clr-white) 5px;
-  display: none;
-  /* Hidden by default */
-  position: absolute;
-  /* Positioned relative to the button */
-  z-index: 1;
-  /* Sit on top */
-  width: 150%;
-  /* Adjust width as needed */
-  background-color: var(--clr-blue);
-  /* Background color */
-  overflow: none;
-  /* no scroll */
-  margin: 0;
-  /* Remove any margins */
-  border-radius: 20px;
-  transform: translateX(-50%);
-}
-
-.legend-modal {
-  width: 555%;
-  /* Adjust as needed */
+.home-logo {
+  width: 100%;
+  height: auto;
 }
 
 /* Modal Content/Box */
 .modal-content {
   background-color: var(--clr-white);
   margin: 5% auto;
-  padding: 5px;
   width: 90%;
   padding: 5%;
   text-align: center;
@@ -352,7 +330,7 @@ textarea {
   align-items: center;
   overflow-y: auto;
   /* Enables vertical scrolling */
-  max-height: 85vh;
+  max-height: 85%;
   /* Prevents the modal from taking up the whole screen */
 }
 
