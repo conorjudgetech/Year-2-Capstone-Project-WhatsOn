@@ -14,15 +14,19 @@
     "npm",
     "init"
   ],
-  "author": "David O Connor",
+  "author": "Eoin Fitzsimons & David O Connor",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.13.0",
+    "axios": "^0.26.1",
+    "cheerio": "^1.0.0-rc.10",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "fs": "0.0.1-security",
     "graphql": "^16.8.1",
     "morgan": "^1.10.0",
     "node-fetch": "^3.3.2",
     "nodemon": "^3.0.3"
   }
+  
 }

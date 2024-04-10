@@ -3,6 +3,9 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import morgan from 'morgan';
 import fetch from 'node-fetch';
 
+import fetchData from './Data Fetching/fetchData.js';
+
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -57,6 +60,14 @@ const resolvers = {
 };
 
 
+
+
+// Call fetchData when your server starts
+fetchData().then(() => {
+  console.log('Data fetched successfully');
+}).catch((error) => {
+  console.error(`Error fetching data: ${error}`);
+});
 
 
 const server = new ApolloServer({
