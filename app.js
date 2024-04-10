@@ -15,8 +15,8 @@ app.use(morgan('dev')); //enables logging information regarding the server
 const redirectUri = 'https://whatson-kbt9.onrender.com/callback';
 
 // OAuth configuration
-const clientId = 'cvdgj137jq4nejecgnh6ce0chr';
-const clientSecret = 'gqp5aml1e6fii1b9hpmmesnsff';
+const clientId = 'API_KEY';
+const clientSecret = 'SECRET_KEY';
 const authorizationEndpoint = 'https://secure.meetup.com/oauth2/authorize';
 const tokenEndpoint = 'https://secure.meetup.com/oauth2/access';
 
