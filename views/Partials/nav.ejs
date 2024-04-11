@@ -160,22 +160,14 @@
     </button>
     <div id="contactModal" class="modal contact-modal">
       <div class="modal-content">
-        <form id="contactForm" method="POST" action="http://formsubmit.co/appwhatsonapp@gmail.com">
+        <form id="contactForm">
           <label for="name">Name:</label><br />
           <input type="text" id="name" name="name" /><br />
           <label for="message">Message:</label><br />
           <textarea id="message" name="message"></textarea><br />
-          <input type="submit" value="Submit" onclick="messageSent()" />
+          <input type="submit" value="Submit" onclick="loadMessage()" />
         </form>
-=======
-        <form id="contactForm" method="POST" action="http://localhost:3000/send">
-          <label for="email">Email:</label><br />
-          <input type="text" id="email" name="email" required /><br />
-          <label for="message">Message:</label><br />
-          <textarea id="message" name="message" required></textarea><br />
-          <input type="submit" value="Submit" />
-      </form>
->>>>>>> bb8cd36fe1e8bdd8a755d2eec5ab59db21fb1d80
+
       </div>
     </div>
   </div>

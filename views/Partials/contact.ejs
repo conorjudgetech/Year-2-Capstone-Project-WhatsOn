@@ -27,5 +27,73 @@
   }
 
 
+  function loadMessage(){
+    const name = document.getElementById("name").value;
+    const message = document.getElementById("message").value;
+
+    // You can perform validation here before submitting the form
+    if (name.trim() === "" || message.trim() === "") {
+      alert("Please fill in all fields.");
+      return false; // Prevent form submission if fields are empty
+    }
+
+    // Assuming you want to use AJAX to submit the form data
+    const formData = new FormData(document.getElementById("contactForm"));
+    fetch("/send-email", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to send email");
+        }
+        return response.text();
+      })
+      .then((data) => {
+        alert(data); // Display success message
+        document.getElementById("contactForm").reset(); // Reset the form
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("An error occurred while sending the email");
+      });
+
+    return false; // Prevent default form submission
+  }
+
+
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData(e.target);
+    const responseData = {};
+  
+    formData.forEach((value, key) => {
+      responseData[key] = value;
+    });
+  
+    try {
+      const response = await fetch('/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(responseData)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+  
+      const result = await response.text();
+      alert(result);
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while sending the email');
+    }
+  });
+
+
+
     //end of davids code
 </script>
