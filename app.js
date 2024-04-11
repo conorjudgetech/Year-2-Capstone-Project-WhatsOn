@@ -15,12 +15,76 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 app.use(morgan('dev')); //enables logging information regarding the server
 
 
+// const typeDefs = `
+// type Query {
+//   self: SelfInfo
+// }
+
+// type SelfInfo {
+//   id: ID
+//   name: String
+// }
+// `;
+
+// A map of functions which return data for the schema.
+//these resolvers queries will be used to load and display the events that are happening the in the website
+// const resolvers = {
+//   Query: {
+//     self: async (_, __, { token }) => {
+//       const query = `
+//       query{self{id, name}}`;
+
+//       const variables = {
+//         "query": "query"
+//       };
+
+//       const response = await fetch('https://api.meetup.com/gql', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': token
+//         },
+//         body: JSON.stringify({ query, variables })
+//       });
+
+//       const { data, errors } = await response.json();
+
+//       if (errors) {
+//         throw new Error(`failed to fetch from api: ${errors[0].message}`);
+//       }
+//       console.log('data fetched: ' + data);
+
+//       return data.self;
+//     }
+//   }
+// };
+
+
+
+
 // Call fetchData when your server starts fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 fetchData().then(() => {
   console.log('Data fetched successfully');
 }).catch((error) => {
   console.error(`Error fetching data: ${error}`);
 });
+
+
+// const server = new ApolloServer({
+//   persistedQueries: false,
+//   context: ({ req }) => {
+//     const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
+
+//     return { token };
+//   },
+//   cacheControl: {
+//     defaultMaxAge: 3600
+//   },
+//   typeDefs,
+//   resolvers
+// });
+
+await server.start();
 
 const startApp = () => {
   //inject apollo server on express app
