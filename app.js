@@ -1,7 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import fetchData from './Data_Fetching/fetchData.js';
-
+import nodemailer from 'nodemailer';
+import bodyParser from 'body-parser';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -34,6 +35,41 @@ app.get('/', async (req, res) => {
   }
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// POST route to handle form submissions
+app.post('/send-email', (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  // Create a Nodemailer transporter
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'appwhatsonapp@gmail.com', // Your Gmail address
+      pass: 'RyanSpades' // Your Gmail password
+    }
+  });
+
+  // Email message options
+  let mailOptions = {
+    from: 'appwhatsonapp@gmail.com', // Sender's name and your email address
+    to: 'appwhatsonapp@gmail.com', // Recipient's email address
+    subject: subject,
+    text: `From: ${name} <${email}>\n\n${message}`
+  };
+
+  // Send email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.send('Email sent successfully');
+    }
+  });
+});
 
   
 
