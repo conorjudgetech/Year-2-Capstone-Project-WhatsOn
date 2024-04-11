@@ -60,6 +60,7 @@
           const infowindow1 = new google.maps.InfoWindow({
             // CJ- content of info window
             content: `
+          // CJ- div class to style info window content
           <div class="info-window-content">
             <h3>Education</h3>
             <p>Status: Starting</p>
@@ -89,7 +90,16 @@
           });
 
           const infowindow2 = new google.maps.InfoWindow({
-            content: "Social<br>Status: Starting<br>Location: Dorset Street Lower<br>Dublin, DO1A2Y5<br>Join us for a fun-filled evening of laughter and entertainment<br>Let's create unforgettable memories together!",
+            content: `
+          <div class="info-window-content">
+            <h3>Social</h3>
+            <p>Status: Starting</p>
+            <p>Location: Dorset Street Lower</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Join us for a fun-filled evening of laughter and entertainment. </p>
+            <p>Let's create unforgettable memories together!</p>
+            </div>
+          `
           });
 
           marker2.addListener("click", () => {
