@@ -126,6 +126,25 @@
             infowindow4.open(map, marker4);
           });
 
+          const marker5 = new google.maps.Marker({
+          position: { lat: 53.355, lng: -6.255 },  
+          map,
+          title: "Sports: Ongoing",
+          icon: {
+            url: "Sports Ongoing.png",
+            scaledSize: new google.maps.Size(48, 48),
+          },
+          animation: google.maps.Animation.DROP,
+          });
+
+          const infowindow5 = new google.maps.InfoWindow({
+          content: "Sports<br>Status: Ongoing<br>Location: Croke Park<br>Dublin, DO1A2Y5<br>Come and witness the excitement of a thrilling sporting event!",
+          });
+
+          marker5.addListener("click", () => {
+          infowindow5.open(map, marker5);
+          });
+
         // CJ- Check if geolocation is available
         if (navigator.geolocation) {
           // CJ- Get user's location
