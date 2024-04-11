@@ -59,7 +59,16 @@
           //CJ- new info window object set to open when marker is clicked
           const infowindow1 = new google.maps.InfoWindow({
             // CJ- content of info window
-            content: "Education<br>Status: Starting<br>Location: National College Of Ireland<br>Mayor Street Lower<br> Join us for an enlightening evening of knowledge and camaraderie<br>Let's expand our horizons and make lasting memories together!",
+            content: `
+          <div class="info-window-content">
+            <h3>Education</h3>
+            <p>Status: Starting</p>
+            <p>Location: National College Of Ireland</p>
+            <p>Mayor Street Lower</p>
+            <p>Join us for an enlightening evening of knowledge and camaraderie.</p>
+            <p>Let's expand our horizons and make lasting memories together!</p>
+            </div>
+          `
           });
 
           // CJ- event listener that opens info window when clicked click to open event window
