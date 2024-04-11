@@ -4,7 +4,7 @@ import fs from 'fs';
 import express from 'express';
 
 const app = express();
-const port = process.env.PORT || 4000;
+
 
 async function fetchData() {
 // The URL of the main page
@@ -25,7 +25,7 @@ axios.get(main_url)
 
     // Loop over each event link and create a promise for each request
     const eventPromises = eventLinks.map((eventLink) => {
-      return axios.get(eventLink)
+       axios.get(eventLink)
         .then(response => {
           // Parse the HTML of the event page
           const $ = cheerio.load(response.data);
@@ -88,8 +88,5 @@ axios.get(main_url)
   });
 }
 
-fetchData();
 
-app.listen(port, () => {
-  console.log('FetchData on port ', port);
-});
+export default fetchData;
