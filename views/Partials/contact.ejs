@@ -1,29 +1,30 @@
-
 <script>
-    //Davids Code
-    function messageSent()
+  function messageSent() {
+    // Clear the form fields
+    document.getElementById("Contact-Email").value = "";
+    document.getElementById("Contact-Message").value = "";
+
     {
       var emptyName = document.forms["contactForm"]["name"].value; //grabbing the value from the input field
       var emptyMessage = document.forms["contactForm"]["message"].value;
-      if(emptyName == "")
-      { //if the name field is empty than it will let the user know to fill in that field inorder for the submit to work
-        alert('You need to fill the name field!');
+      if (emptyName == "") {
+        //if the name field is empty than it will let the user know to fill in that field inorder for the submit to work
+        alert("You need to fill the name field!");
         return false;
-      } 
-      else if(emptyMessage == "") //if the message field is empty than it will let the user know to fill in that field inorder for the submit to work
-      {
-          alert("You need to fill the message field!");
-          return false;
-      } 
-      else //if both fields are full then the message will be sent through succesfully
-      {
-          alert("You message has successfully been sent to our contact services!");
-          return true;
+      } else if (emptyMessage == "") {
+        //if the message field is empty than it will let the user know to fill in that field inorder for the submit to work
+        alert("You need to fill the message field!");
+        return false;
+      } //if both fields are full then the message will be sent through succesfully
+      else {
+        alert(
+          "Your message has successfully been sent to our contact services!"
+        );
+        return true;
       }
     } //end of function
 
-    
-
-
-    //end of davids code
+    // Prevent the form from actually submitting (since we're using mailto)
+    return false;
+  }
 </script>
