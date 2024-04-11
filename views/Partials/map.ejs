@@ -172,7 +172,15 @@
           });
 
           const infowindow5 = new google.maps.InfoWindow({
-          content: "Sports<br>Status: Ongoing<br>Location: Croke Park<br>Dublin, DO1A2Y5<br>Come and witness the excitement of a thrilling sporting event!",
+            content: `
+          <div class="info-window-content">
+            <h3>Sports</h3>
+            <p>Status: Ongoing</p>
+            <p>Location: Croke Park</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Come and witness the excitement of a thrilling sporting event!</p>
+            </div>
+          `
           });
 
           marker5.addListener("click", () => {
