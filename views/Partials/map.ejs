@@ -168,7 +168,15 @@
       }
     </script>
      <!-- CJ- using env variable to store API key, must be implemented on render website-->
-    <!-- <script> const key = env.mapApiKey; console.log(key); </script> -->
+      <!-- <script> const key = env.mapApiKey; console.log(key); </script> -->
+
+     <!-- CJ- Solution to hiding key -->
+      <!-- <script>
+      const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&map_ids=13185b1ffbbba3af&callback=initMap`;
+      document.body.appendChild(script);
+    </script> -->
 
     <!-- CJ- loading map API & Map ID, after script because of callback function in URL that connects to initMap function -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo9c5JnECXrfMnYkVA2TSyStdrbZ3TO-w&map_ids=13185b1ffbbba3af&callback=initMap"></script>
