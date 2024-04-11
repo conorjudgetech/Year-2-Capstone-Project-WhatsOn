@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import fetchData from './Data_Fetching/fetchData';
+import fetchData from './Data_Fetching/fetchData.js';
 
 
 const app = express();
