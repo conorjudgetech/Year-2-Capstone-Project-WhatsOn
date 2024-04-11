@@ -98,7 +98,6 @@
             animation: google.maps.Animation.DROP,
           });
 
-          //info window
           const infowindow3 = new google.maps.InfoWindow({
             content: "Charity<br>Status: Ending<br>Location: O'Connell Street Upper<br>Dublin, DO1A2Y5<br>Join us for a noble cause and make a difference in the world!",
           });
@@ -143,6 +142,25 @@
 
           marker5.addListener("click", () => {
           infowindow5.open(map, marker5);
+          });
+
+          const marker6 = new google.maps.Marker({
+          position: { lat: 53.360, lng: -6.255 },  
+          map,
+          title: "Entertainment: Ongoing",
+          icon: {
+            url: "Entertainment Ongoing.png",
+            scaledSize: new google.maps.Size(48, 48),
+          },
+          animation: google.maps.Animation.DROP,
+          });
+
+          const infowindow6 = new google.maps.InfoWindow({
+          content: "Music<br>Status: Ongoing<br>Location: Concert Hall<br>Dublin, DO1A2Y5<br>Experience the magic of live music and let the melodies transport you to another world!",
+          });
+
+          marker6.addListener("click", () => {
+          infowindow6.open(map, marker6);
           });
 
         // CJ- Check if geolocation is available
