@@ -36,7 +36,10 @@
           streetViewControl: false,
         });
 
-          // CJ- creates new constant named marker to attach to event listener to open info window
+//CJ- TO-DO- array list storing "Dublin Events" 
+//CJ- TO-DO- inside FOR loop to iterate through array list and create markers/windows fro each event
+
+        // CJ- creates new constant named marker to attach to event listener to open info window
           const marker1 = new google.maps.Marker({
             // CJ- sets the location of marker
             position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
@@ -136,6 +139,8 @@
                 lng: position.coords.longitude,
               };
 
+//CJ- TO-DO- get city from userLocation (lat/long) and store as global variable
+
               // CJ- Center the map to user's location
               loadMap(userLocation);
 
@@ -162,7 +167,6 @@
       
       }
     </script>
-
     <!-- CJ- loading map API & Map ID, after script because of callback function in URL that connects to initMap function -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo9c5JnECXrfMnYkVA2TSyStdrbZ3TO-w&map_ids=13185b1ffbbba3af&callback=initMap"></script>
   </body>
