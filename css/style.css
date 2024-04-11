@@ -29,7 +29,6 @@
   z-index: 0;
 }
 
-
 /* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
 @media only screen and (orientation: portrait) {
   .nav-bar {
@@ -102,7 +101,7 @@
 }
 
 /* Landscape Mode Landscape Mode Landscape Mode  Landscape Mode Landscape Mode Landscape Mode Landscape Mode Landscape Mode Landscape Mode Landscape Mode (So I can see better)) */
-@media only screen and (orientation: landscape) and (min-device-width: 1500px) {
+@media only screen and (orientation: landscape) {
   .nav-bar {
     margin-top: 20px;
     width: 100%;
@@ -139,98 +138,19 @@
   }
 
   .legend-modal {
-    width: 555%;
+    width: 450%;
     /* Adjust as needed */
   }
 }
-
-@media only screen and (max-device-width: 1500px) and (orientation: landscape) {
-
-  .nav-bar {
-    display: grid;
-    grid-template-areas:
-      "top-left . top-right"
-      "bottom-left . bottom-right";
-
-    height: 100px;
-    align-items: baseline;
-    justify-items: center;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-  }
-
-  .item:nth-child(1) {
-    grid-area: top-left;
-  }
-
-  .item:nth-child(4) {
-    grid-area: top-right;
-  }
-
-  .item:nth-child(5) {
-    grid-area: bottom-left;
-  }
-
-  .item:nth-child(3) {
-    grid-area: bottom-right;
-  }
-
-  /* This groups the button and image together so that I can force it to the bottom. */
-  .parent {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20vw;
-    height: auto;
-    border: none;
-    padding: 0%;
-    background: none;
-  }
-
-  .modal {
-    position: fixed;
-    /* Positioned relative to the viewport */
-    width: 80%;
-    top: 0;
-    /* Align to the top */
-    left: 0;
-    /* Align to the left */
-    transform: none;
-    /* Remove the transform */
-    background-color: var(--clr-blue);
-    border: solid var(--clr-white) 5px;
-    overflow: none;
-    /* no scroll */
-    margin: 0;
-    /* Remove any margins */
-    border-radius: 20px;
-    display: none;
-    /* Hidden by default */
-  }
-
+@media only screen and (max-width: 1500px) and (orientation: landscape) {
   .legend-modal {
-    height: 60%;
-    overflow: none;
-  }
-
-
-  .item.homeBTN {
-    transform: translateX(+40%);
-  }
-
-  .item.homeBTN {
-    background: transparent;
-    border: none;
-    margin: auto;
-  }
-  
-  .home-logo {
-    width: 100%;
-    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Adjust as needed */
   }
 }
-
 /* Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles Common Styles */
 .nav-bar {
   margin-top: 20px;
@@ -366,18 +286,6 @@ textarea {
   border-radius: 5px;
 }
 
-.crosshair {
-  position: absolute;
-  visibility: hidden;
-  /* Make the crosshair initially invisible */
-}
-
-.crosshair img {
-  height: 30px;
-  /* Adjust as needed */
-  width: auto;
-}
-
 .legend-content img {
   height: 30px;
   width: auto;
@@ -450,4 +358,16 @@ textarea {
 .examples {
   margin-top: auto;
   /* Pushes the section to the bottom */
+}
+
+.crosshair {
+  position: absolute;
+  visibility: hidden;
+  /* Make the crosshair initially invisible */
+}
+
+.crosshair img {
+  height: 30px;
+  /* Adjust as needed */
+  width: auto;
 }
