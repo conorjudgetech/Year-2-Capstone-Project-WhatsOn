@@ -118,8 +118,16 @@
           });
 
           const infowindow3 = new google.maps.InfoWindow({
-            content: "Charity<br>Status: Ending<br>Location: O'Connell Street Upper<br>Dublin, DO1A2Y5<br>Join us for a noble cause and make a difference in the world!",
-          });
+            content: `
+          <div class="info-window-content">
+            <h3>Charity</h3>
+            <p>Status: Ending</p>
+            <p>Location: O'Connell Street Upper</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Join us for a noble cause and make a difference in the world!</p>
+            </div>
+          `
+          });   
 
           marker3.addListener("click", () => {
             infowindow3.open(map, marker3);
