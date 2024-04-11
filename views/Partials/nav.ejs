@@ -160,12 +160,12 @@
     </button>
     <div id="contactModal" class="modal contact-modal">
       <div class="modal-content">
-        <form id="contactForm">
+        <form id="contactForm"  action="https://formspree.io/f/mayrlpzk" method="POST">
           <label for="name">Name:</label><br />
           <input type="text" id="name" name="name" /><br />
           <label for="message">Message:</label><br />
           <textarea id="message" name="message"></textarea><br />
-          <input type="submit" value="Submit" onclick="loadMessage()" />
+          <input type="submit" value="Submit" onclick="messageSent()" />
         </form>
 
       </div>
