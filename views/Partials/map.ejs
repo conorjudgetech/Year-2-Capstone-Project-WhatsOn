@@ -199,7 +199,15 @@
           });
 
           const infowindow6 = new google.maps.InfoWindow({
-          content: "Music<br>Status: Ongoing<br>Location: Concert Hall<br>Dublin, DO1A2Y5<br>Experience the magic of live music and let the melodies transport you to another world!",
+            content: `
+          <div class="info-window-content">
+            <h3>Sports</h3>
+            <p>Status: Ongoing</p>
+            <p>Location: Concert Hall</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Experience the magic of live music and let the melodies transport you to another world!</p>
+            </div>
+          `
           });
 
           marker6.addListener("click", () => {
