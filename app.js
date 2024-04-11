@@ -1,7 +1,7 @@
 import express from 'express';
-import { ApolloServer, gql } from 'apollo-server-express';
+// import { ApolloServer, gql } from 'apollo-server-express';
 import morgan from 'morgan';
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 import fetchData from './Data Fetching/fetchData.js';
 
@@ -15,54 +15,54 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 app.use(morgan('dev')); //enables logging information regarding the server
 
 
-const typeDefs = `
-type Query {
-  self: SelfInfo
-}
+// const typeDefs = `
+// type Query {
+//   self: SelfInfo
+// }
 
-type SelfInfo {
-  id: ID
-  name: String
-}
-`;
+// type SelfInfo {
+//   id: ID
+//   name: String
+// }
+// `;
 
 // A map of functions which return data for the schema.
 //these resolvers queries will be used to load and display the events that are happening the in the website
-const resolvers = {
-  Query: {
-    self: async (_, __, { token }) => {
-      const query = `
-      query{self{id, name}}`;
+// const resolvers = {
+//   Query: {
+//     self: async (_, __, { token }) => {
+//       const query = `
+//       query{self{id, name}}`;
 
-      const variables = {
-        "query": "query"
-      };
+//       const variables = {
+//         "query": "query"
+//       };
 
-      const response = await fetch('https://api.meetup.com/gql', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token
-        },
-        body: JSON.stringify({ query, variables })
-      });
+//       const response = await fetch('https://api.meetup.com/gql', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': token
+//         },
+//         body: JSON.stringify({ query, variables })
+//       });
 
-      const { data, errors } = await response.json();
+//       const { data, errors } = await response.json();
 
-      if (errors) {
-        throw new Error(`failed to fetch from api: ${errors[0].message}`);
-      }
-      console.log('data fetched: ' + data);
+//       if (errors) {
+//         throw new Error(`failed to fetch from api: ${errors[0].message}`);
+//       }
+//       console.log('data fetched: ' + data);
 
-      return data.self;
-    }
-  }
-};
-
-
+//       return data.self;
+//     }
+//   }
+// };
 
 
-// Call fetchData when your server starts
+
+
+// Call fetchData when your server starts fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 fetchData().then(() => {
   console.log('Data fetched successfully');
 }).catch((error) => {
@@ -89,7 +89,7 @@ await server.start();
 const startApp = () => {
   //inject apollo server on express app
 
-  server.applyMiddleware({ app });
+  // server.applyMiddleware({ app });
   app.listen(port, () => console.log(`Server is running on port ${port}`));
 }
 
