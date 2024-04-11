@@ -24,37 +24,8 @@
       }
     } //end of function
 
-    document.getElementById('contactForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
     
-      const formData = new FormData(e.target);
-      const responseData = {};
-    
-      formData.forEach((value, key) => {
-        responseData[key] = value;
-      });
-    
-      try {
-        const response = await fetch('/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(responseData)
-        });
-    
-        if (!response.ok) {
-          throw new Error('Failed to send email');
-        }
-    
-        const result = await response.text();
-        alert(result); // Display success message
-        // Optionally clear the form fields after successful submission
-        e.target.reset();
-      } catch (error) {
-        console.error(error);
-        alert('An error occurred while sending the email');
-      }
-    });
 
-  </script>
+
+    //end of davids code
+</script>
