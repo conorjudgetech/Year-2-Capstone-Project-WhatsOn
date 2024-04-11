@@ -5,7 +5,7 @@
     document.getElementById("Contact-Message").value = "";
 
     {
-      var emptyName = document.forms["contactForm"]["name"].value; //grabbing the value from the input field
+      var emptyName = document.forms["contactForm"]["email"].value; //grabbing the value from the input field
       var emptyMessage = document.forms["contactForm"]["message"].value;
       if (emptyName == "") {
         //if the name field is empty than it will let the user know to fill in that field inorder for the submit to work
@@ -20,6 +20,8 @@
         alert(
           "Your message has successfully been sent to our contact services!"
         );
+        document.getElementById("email").innerHTML = ' ';
+        document.getElementById("message").innerHTML = ' ';
         return true;
       }
     } //end of function
