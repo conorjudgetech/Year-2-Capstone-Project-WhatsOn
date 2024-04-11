@@ -70,19 +70,19 @@ fetchData().then(() => {
 });
 
 
-const server = new ApolloServer({
-  persistedQueries: false,
-  context: ({ req }) => {
-    const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
+// const server = new ApolloServer({
+//   persistedQueries: false,
+//   context: ({ req }) => {
+//     const token = req.headers.authorization || 'cvdgj137jq4nejecgnh6ce0chr';
 
-    return { token };
-  },
-  cacheControl: {
-    defaultMaxAge: 3600
-  },
-  typeDefs,
-  resolvers
-});
+//     return { token };
+//   },
+//   cacheControl: {
+//     defaultMaxAge: 3600
+//   },
+//   typeDefs,
+//   resolvers
+// });
 
 await server.start();
 
