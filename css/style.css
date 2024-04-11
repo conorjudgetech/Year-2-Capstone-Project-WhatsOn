@@ -18,9 +18,16 @@
     padding: 0;
 }
 
+/* CJ- map.ejs styling */
+/* info window content */
+.info-window-content {
+    background-color: lightblue;
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+}
 
-/*Home Page styling*/
-
+/*CJ- index.ejs styling*/
 .map-div {
     position: relative;
     height: 100vh;
@@ -32,6 +39,7 @@
     z-index: 0;
 }
 
+/*CJ- nav.ejs styling */
 .nav-bar {
     margin-top: 20px;
     width: 100%;
