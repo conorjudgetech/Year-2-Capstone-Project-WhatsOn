@@ -145,8 +145,16 @@
           });
 
           const infowindow4 = new google.maps.InfoWindow({
-            content: "Culture<br>Status: Ending<br>Location: Temple Bar<br>Dublin, DO1A2Y5<br>Experience the rich cultural heritage and immerse yourself in the arts!",
-          });
+            content: `
+          <div class="info-window-content">
+            <h3>Culture</h3>
+            <p>Status: Ending</p>
+            <p>Location: Temple Bar</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Experience the rich cultural heritage and immerse yourself in the arts!</p>
+            </div>
+          `
+          });  
 
           marker4.addListener("click", () => {
             infowindow4.open(map, marker4);
