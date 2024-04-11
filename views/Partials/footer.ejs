@@ -17,9 +17,9 @@
         currentModal.style.display = "block";
         currentModal.style.position = "fixed"; // Set position to fixed
         // Center the modal vertically and horizontally
-        currentModal.style.top = '50%';
-        currentModal.style.left = '50%';
-        currentModal.style.transform = 'translate(-50%, -50%)';
+        currentModal.style.top = "50%";
+        currentModal.style.left = "50%";
+        currentModal.style.transform = "translate(-50%, -50%)";
       } else {
         // Get the position of the button
         var button = event.target;
@@ -29,20 +29,21 @@
         var border = parseInt(getComputedStyle(button).borderWidth);
 
         // Position the modal above the viewport
-        currentModal.style.top = -(currentModal.offsetHeight) + "px";
+        currentModal.style.top = -currentModal.offsetHeight + "px";
 
         // Center the modal horizontally
-        currentModal.style.left = '50%';
-        currentModal.style.transform = 'translateX(-50%)';
+        currentModal.style.left = "50%";
+        currentModal.style.transform = "translateX(-50%)";
 
         // If the modal extends off the right edge of the screen, move it back
         var modalRight = currentModal.offsetLeft + currentModal.offsetWidth;
         if (modalRight > window.innerWidth) {
-          currentModal.style.left = (window.innerWidth - currentModal.offsetWidth) + "px";
+          currentModal.style.left =
+            window.innerWidth - currentModal.offsetWidth + "px";
         }
 
         // Slide the modal down to its final position below the button
-        var finalTop = (rect.bottom + window.scrollY) - 15;
+        var finalTop = rect.bottom + window.scrollY - 15;
         var currentTop = parseInt(currentModal.style.top);
         var intervalId = setInterval(function () {
           if (currentTop < finalTop) {
@@ -52,21 +53,17 @@
             clearInterval(intervalId);
           }
         }, 3); // Adjust this value to change the speed of the animation
-
       }
     }
     function closeAllModals() {
-      var modals = document.getElementsByClassName('modal');
+      var modals = document.getElementsByClassName("modal");
       for (var i = 0; i < modals.length; i++) {
-        modals[i].style.display = 'none';
+        modals[i].style.display = "none";
       }
       // Reset the currently open modal
       currentModal = null;
     }
   </script>
-  <%- include('following') %>
-    <%- include('contact') %>
-      <%- include('random') %>
-        <%- include('api')%>
-
+  <%- include('following') %> <%- include('contact') %> <%- include('random') %>
+  <%- include('api')%>
 </footer>

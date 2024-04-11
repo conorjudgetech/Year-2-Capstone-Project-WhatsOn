@@ -1,64 +1,62 @@
 <script>
-var isSignupMode = true;
-var isLoggedIn = false;
-var users = {};
+  var isSignupMode = true;
+  var isLoggedIn = false;
+  var users = {};
 
-function followingButtonClicked() {
+  function followingButtonClicked() {
     if (isLoggedIn) {
-        // User is logged in, perform the new function
-        highlightFollowedEvents();
+      // User is logged in, perform the new function
+      highlightFollowedEvents();
     } else {
-        // User is not logged in, show the modal
-        toggleModal('followingModal', event);
+      // User is not logged in, show the modal
+      toggleModal("followingModal", event);
     }
-}
+  }
 
-function switchMode() {
-    var form = document.getElementById('authForm');
-    var submitButton = document.getElementById('submit');
-    var switchButton = document.getElementById('switchMode');
+  function switchMode() {
+    var form = document.getElementById("authForm");
+    var submitButton = document.getElementById("submit");
+    var switchButton = document.getElementById("switchMode");
 
     if (isSignupMode) {
-        form.action = "/submit-login";
-        submitButton.value = "Login";
-        switchButton.textContent = "Switch to Sign Up";
+      form.action = "/submit-login";
+      submitButton.value = "Login";
+      switchButton.textContent = "Switch to Sign Up";
     } else {
-        form.action = "/submit-signup";
-        submitButton.value = "Sign Up";
-        switchButton.textContent = "Switch to Login";
+      form.action = "/submit-signup";
+      submitButton.value = "Sign Up";
+      switchButton.textContent = "Switch to Login";
     }
 
     isSignupMode = !isSignupMode;
-}
+  }
 
-function handleFormSubmit() {
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
+  function handleFormSubmit() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
 
     if (isSignupMode) {
-        // Sign up
-        users[email] = password;
-        alert('Sign up successful!');
-        isLoggedIn = true;
+      // Sign up
+      users[email] = password;
+      alert("Sign up successful!");
+      isLoggedIn = true;
     } else {
-        // Log in
-        if (users[email] && users[email] === password) {
-            alert('Login successful!');
-            isLoggedIn = true;
-            closeAllModals();
-        } else {
-            alert('Invalid email or password.');
-        }
+      // Log in
+      if (users[email] && users[email] === password) {
+        alert("Login successful!");
+        isLoggedIn = true;
+        closeAllModals();
+      } else {
+        alert("Invalid email or password.");
+      }
     }
-}
+  }
 
-function highlightFollowedEvents() {
+  function highlightFollowedEvents() {
     // For testing, show an alert or log a message to the console
-    alert('highlightFollowedEvents function called!');
-    console.log('highlightFollowedEvents function called!');
-    
+    alert("highlightFollowedEvents function called!");
+    console.log("highlightFollowedEvents function called!");
+
     // Add the API interaction code here
-}
-
-
+  }
 </script>

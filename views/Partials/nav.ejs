@@ -5,12 +5,22 @@
     </button>
     <div id="followingModal" class="modal">
       <div class="modal-content">
-        <form id="authForm" action="/" method="post" onsubmit="event.preventDefault(); handleFormSubmit();">
+        <form
+          id="authForm"
+          action="/"
+          method="post"
+          onsubmit="event.preventDefault(); handleFormSubmit();"
+        >
           <div class="input-group">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required /><br />
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required /><br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+            /><br />
           </div>
           <input id="submit" type="submit" value="Sign Up" />
         </form>
@@ -140,17 +150,24 @@
     </div>
   </div>
   <div class="button-modal-container">
-    <button class="item contactBTN" id="contactusBTN" onclick="toggleModal('contactModal', event)">
+    <button
+      class="item contactBTN"
+      id="contactusBTN"
+      onclick="toggleModal('contactModal', event)"
+    >
       Contact
     </button>
     <div id="contactModal" class="modal contact-modal">
       <div class="modal-content">
-        <form id="contactForm">
-          <label for="name">Name:</label><br />
-          <input type="text" id="name" name="name" /><br />
+        <form
+          id="contactForm"
+          onsubmit="event.preventDefault(); messageSent();"
+        >
+          <label for="email">Email:</label><br />
+          <input type="text" id="email" name="email" /><br />
           <label for="message">Message:</label><br />
           <textarea id="message" name="message"></textarea><br />
-          <input type="submit" value="Submit" onclick="messageSent()" />
+          <input type="submit" value="Submit" />
         </form>
       </div>
     </div>
