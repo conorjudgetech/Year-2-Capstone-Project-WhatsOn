@@ -21,11 +21,12 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Home' }); 
     });
 
- 
-
-
-
-
+    // Call fetchData when your server starts
+fetchData().then(() => {
+  console.log('Data fetched successfully');
+}).catch((error) => {
+  console.error(`Error fetching data: ${error}`);
+});
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
   res.status(404).render('404', { title: '404 Page' });
