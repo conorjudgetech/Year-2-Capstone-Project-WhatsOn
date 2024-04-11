@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import fetchData from './Data_Fetching/fetchData.js';
+//import fetchData from './Data_Fetching/fetchData.js';
 
 
 const app = express();
@@ -21,12 +21,8 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Home' }); 
     });
 
-    // Call fetchData when your server starts
-fetchData().then(() => {
-  console.log('Data fetched successfully');
-}).catch((error) => {
-  console.error(`Error fetching data: ${error}`);
-});
+   
+
 
 app.use((req, res) => { //this is used to direct the user to the 404 page if the page they are looking for does not exist 
   res.status(404).render('404', { title: '404 Page' });
