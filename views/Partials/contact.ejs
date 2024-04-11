@@ -61,6 +61,7 @@
     return false; // Prevent default form submission
   }
 
+  function sendMessage(){
 
   document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -92,7 +93,7 @@
       alert('An error occurred while sending the email');
     }
   });
-
+  }
 
 
     //end of davids code
