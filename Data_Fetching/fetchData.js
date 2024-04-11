@@ -25,7 +25,7 @@ axios.get(main_url)
 
     // Loop over each event link and create a promise for each request
     const eventPromises = eventLinks.map((eventLink) => {
-       axios.get(eventLink)
+      return axios.get(eventLink)
         .then(response => {
           // Parse the HTML of the event page
           const $ = cheerio.load(response.data);

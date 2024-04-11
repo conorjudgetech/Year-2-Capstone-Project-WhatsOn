@@ -16,19 +16,26 @@ app.listen(port, () => {
   console.log('Running on port ', port);
 });
 
-/*
-// Call fetchData when your server starts
-fetchData().then(() => {
-  console.log('Data fetched successfully');
-}).catch((error) => {
-  console.error(`Error fetching data: ${error}`);
-});
-*/
 
-app.get('/', (req, res) => {
-  // Rendering the 'index' template
-  res.render('index', { title: 'Home' }); 
-    });
+// Call fetchData when your server starts
+
+
+
+app.get('/', async (req, res) => {
+  try {
+    // Call fetchData() and wait for it to finish
+    await fetchData();
+    console.log('Data fetched successfully');
+    // Rendering the 'index' template
+    res.render('index', { title: 'Home' }); 
+  } catch (error) {
+    console.error(`Error fetching data: ${error}`);
+    res.status(500).send('Error fetching data');
+  }
+});
+
+
+  
 
    
 
