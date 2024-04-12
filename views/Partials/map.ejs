@@ -194,6 +194,16 @@
 
 
 
+                  //CJ- fetch data from JSON file
+          fetch('/eventsData.json')
+          //CJ- convert data to JSON
+          .then((response) => response.json())
+          //CJ- log data to console
+          .then((data) => {
+              //CJ- store first event in array
+              const eventData = data[0];
+
+
 
 
         // CJ- Check if geolocation is available
