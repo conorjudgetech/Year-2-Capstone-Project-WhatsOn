@@ -203,6 +203,20 @@
               //CJ- store first event in array
               const eventData = data[0];
 
+              //CJ- create new marker for event
+              const marker0 = new google.maps.Marker({
+              //CJ- set position of marker to event location
+              position: { lat: eventData.lat, lng: eventData.lon },
+              map,
+              //CJ- set title of marker to event name
+              title: eventData.eventName,
+              icon: {
+                  url: "Crosshair.png",
+                  scaledSize: new google.maps.Size(48, 48),
+              },
+              animation: google.maps.Animation.DROP,
+              });
+
 
 
 
