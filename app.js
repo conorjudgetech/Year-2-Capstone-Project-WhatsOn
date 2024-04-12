@@ -1,32 +1,33 @@
-import express from "express";
-import morgan from "morgan";
-import fetchData from "./Data Fetching/fetchData.js";
+import express from 'express';
+import morgan from 'morgan';
+import fetchData from './Data_Fetching/fetchData.js';
+
+
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.set("view engine", "ejs");
-app.use(express.static("css"));
-app.use(morgan("dev"));
+app.set('view engine', 'ejs'); // this calls for the ejs libary
+app.use(express.static('css')); //loads all of the static files from the css folder
 
-const startApp = () => {
-  // Call fetchData when your server starts
-  fetchData()
-    .then(() => {
-      console.log("Data fetched successfully");
-    })
-    .catch((error) => {
-      console.error(`Error fetching data: ${error}`);
-    });
+app.use(morgan('dev')); //enables logging information regarding the server
 
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
-};
 
-startApp();
+app.listen(port, () => {
+  console.log('Running on port ', port);
+});
 
-app.get("/", (req, res) => {
-  //this gets the request from the navigation from the webpage and loads that page
-  res.render("index", { title: "Home" }); // tells the code to render the index file
+app.get('/', async (req, res) => {
+  try {
+    // Call fetchData() and wait for it to finish
+    await fetchData();
+    console.log('Data fetched successfully');
+    // Rendering the 'index' template
+    res.render('index', { title: 'Home' }); 
+  } catch (error) {
+    console.error(`Error fetching data: ${error}`);
+    res.status(500).send('Error fetching data');
+  }
 });
 
 app.use((req, res) => {
