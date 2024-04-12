@@ -68,7 +68,7 @@ app.post('/users/register', async (req, res) => {
           // If file does not exist, ignore the error
           if (error.code !== 'ENOENT') {
               console.error(error);
-              res.status(500).send();
+              res.status(500).json({ success: false, message: 'An error occurred while reading the users file.' });
               return;
           }
       }
@@ -81,14 +81,15 @@ app.post('/users/register', async (req, res) => {
           fs.writeFileSync('users.json', JSON.stringify(users), 'utf8');
       } catch (error) {
           console.error(error);
-          res.status(500).send();
+          res.status(500).json({ success: false, message: 'An error occurred while writing to the users file.' });
           return;
       }
   } catch(error){
-      res.status(500).send();
+      res.status(500).json({ success: false, message: 'An error occurred during registration.' });
       console.log(error);
+      return;
   }
-  res.redirect('/');
+  res.json({ success: true, message: 'Account created successfully.' });
 });
 
 app.post('/users/login', async (req, res) => {
