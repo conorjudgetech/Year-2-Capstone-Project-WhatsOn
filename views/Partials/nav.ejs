@@ -7,9 +7,9 @@
       <div class="modal-content">
         <form
           id="authForm"
-          action="/"
-          method="post"
-          onsubmit="event.preventDefault(); handleFormSubmit();"
+          action="http://localhost:3000/users/register"
+          method="POST"
+          onsubmit="handleFormSubmit(event);"
         >
           <div class="input-group">
             <label for="email">Email:</label>

@@ -1,62 +1,99 @@
 <script>
-  var isSignupMode = true;
-  var isLoggedIn = false;
-  var users = {};
+var isSignupMode = true;
+var isLoggedIn = false;
+var users = {};
 
-  function followingButtonClicked() {
+function followingButtonClicked() {
     if (isLoggedIn) {
-      // User is logged in, perform the new function
-      highlightFollowedEvents();
+        // User is logged in, perform the new function
+        highlightFollowedEvents();
     } else {
-      // User is not logged in, show the modal
-      toggleModal("followingModal", event);
+        // User is not logged in, show the modal
+        toggleModal('followingModal', event);
     }
-  }
-
-  function switchMode() {
-    var form = document.getElementById("authForm");
-    var submitButton = document.getElementById("submit");
-    var switchButton = document.getElementById("switchMode");
+}
+function switchMode() {
+    var form = document.getElementById('authForm');
+    var submitButton = document.getElementById('submit');
+    var switchButton = document.getElementById('switchMode');
 
     if (isSignupMode) {
-      form.action = "/submit-login";
-      submitButton.value = "Login";
-      switchButton.textContent = "Switch to Sign Up";
+        form.setAttribute('action', "/users/login");
+        submitButton.setAttribute('value', "Login");
+        switchButton.textContent = "Switch to Sign Up";
     } else {
-      form.action = "/submit-signup";
-      submitButton.value = "Sign Up";
-      switchButton.textContent = "Switch to Login";
+        form.setAttribute('action', "/users/register");
+        submitButton.setAttribute('value', "Sign Up");
+        switchButton.textContent = "Switch to Login";
     }
 
     isSignupMode = !isSignupMode;
-  }
+}
 
-  function handleFormSubmit() {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+//will work along side with backend code to check if the users log in details are correct and will take the message from the backend and display it to the user onb 
+function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
 
-    if (isSignupMode) {
-      // Sign up
-      users[email] = password;
-      alert("Sign up successful!");
-      isLoggedIn = true;
+    if (!isSignupMode) {
+        var url = '/users/login';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Login successful!');
+                isLoggedIn = true;
+                closeAllModals();
+                
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     } else {
-      // Log in
-      if (users[email] && users[email] === password) {
-        alert("Login successful!");
-        isLoggedIn = true;
-        closeAllModals();
-      } else {
-        alert("Invalid email or password.");
-      }
+        var url = '/users/register';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Account created successfully!');
+                isLoggedIn = true;
+                closeAllModals();
+                window.location.href = '/'; // Redirect to home page
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
-  }
+}
 
-  function highlightFollowedEvents() {
+function highlightFollowedEvents() {
     // For testing, show an alert or log a message to the console
-    alert("highlightFollowedEvents function called!");
-    console.log("highlightFollowedEvents function called!");
-
+    alert('highlightFollowedEvents function called!');
+    console.log('highlightFollowedEvents function called!');
+    
     // Add the API interaction code here
-  }
+}
+
+
 </script>
