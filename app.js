@@ -1,6 +1,8 @@
-import express from "express";
-import morgan from "morgan";
-import fetchData from "./Data Fetching/fetchData.js";
+import express from 'express';
+import morgan from 'morgan';
+import fetchData from './Data_Fetching/fetchData.js';
+
+
 
 const app = express();
 const port = process.env.PORT || 3000;
