@@ -159,7 +159,7 @@
     </button>
     <div id="contactModal" class="modal contact-modal">
       <div class="modal-content">
-        <form id="contactForm"  action="https://formspree.io/f/mayrlpzk" method="POST">
+        <form id="contactForm"  action="https://formspree.io/f/mayrlpzk" method="POST" onsubmit="event.preventDefault();">
           <label for="name">Email:</label><br />
           <input type="text" id="email" name="email" /><br />
           <label for="message">Message:</label><br />
