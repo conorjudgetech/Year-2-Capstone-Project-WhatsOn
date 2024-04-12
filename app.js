@@ -4,14 +4,18 @@ import fetchData from './Data Fetching/fetchData.js';
 import fs from 'fs';
 import bcrypt from 'bcrypt';
 import bodyParser from 'body-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
+app.use('/images', express.static(path.join(__dirname, 'Images'))); //shoukl be able to load images from the images folder
 app.use(express.urlencoded({ extended: true })); //takes values from the front end and brings the
 app.use(morgan('dev')); //enables logging information regarding the server
 app.use(bodyParser.json());
@@ -37,7 +41,8 @@ app.get('/', async (req, res) => {
 app.get('/users', (req, res) => {
   let users = []
   try {
-      users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+      const fileContent = fs.readFileSync(path.join(__dirname, 'User Details', 'users.json'), 'utf8');
+      users = JSON.parse(fileContent);
   } catch (error) {
       console.error(error);
       res.status(500).send();
@@ -59,7 +64,7 @@ app.post('/users/register', async (req, res) => {
 
       // Read users from the file
       try {
-          const fileContent = fs.readFileSync('users.json', 'utf8');
+        const fileContent = fs.readFileSync(path.join(__dirname, 'User Details', 'users.json'), 'utf8');
           users = JSON.parse(fileContent);
           if (!Array.isArray(users)) {
               users = [];
@@ -78,7 +83,7 @@ app.post('/users/register', async (req, res) => {
 
       // Write the updated users back to the file
       try {
-          fs.writeFileSync('users.json', JSON.stringify(users), 'utf8');
+          fs.writeFileSync('./User Details/users.json', JSON.stringify(users), 'utf8');
       } catch (error) {
           console.error(error);
           res.status(500).json({ success: false, message: 'An error occurred while writing to the users file.' });
@@ -95,7 +100,8 @@ app.post('/users/register', async (req, res) => {
 app.post('/users/login', async (req, res) => {
  let users;
   try {
-      users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+    const fileContent = fs.readFileSync(path.join(__dirname, 'User Details', 'users.json'), 'utf8');
+    users = JSON.parse(fileContent);
   } catch (error) {
       console.error(error);
       res.status(500).send('Cannot find users file');
