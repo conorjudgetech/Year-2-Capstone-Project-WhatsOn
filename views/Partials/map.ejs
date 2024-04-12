@@ -194,7 +194,6 @@
 
 
 
-          //CJ- fetch data from JSON file
           fetch('/eventsData.json')
           //CJ- convert data to JSON
           .then((response) => response.json())
@@ -225,16 +224,29 @@
               <p><strong>Group Name:</strong> ${eventData.groupName}</p> 
               <p><strong>Event Time:</strong> ${new Date(eventData.eventTime).toLocaleString()}</p> 
               <p><strong>Event End Time:</strong> ${new Date(eventData.eventEndTime).toLocaleString()}</p>
-              <p><strong>Location:</strong> ${eventData.locationInfo}</p>
-              <p>${eventData.eventDetails.substring(0, 100)} <!-- Display the first 100 characters -->
-                  <span id="extra-text-${eventData.eventId}" class="extra-text">${eventData.eventDetails.substring(100)}</span> <!-- Hide the rest of the text -->
+              <p><strong>Location:</strong> ${eventData.locationInfo}</p> <!-- Location info -->
+              <p>${eventData.eventDetails.substring(0, 100)} <!-- Displays the first 100 characters -->
+                  <span id="extra-text-${eventData.eventId}" class="extra-text">${eventData.eventDetails.substring(100)}</span> 
                   <button id="btn-extra-text-${eventData.eventId}" class="expand-collapse-btn" onclick="window.expandText('extra-text-${eventData.eventId}');">Read more</button>
                   <button id="collapse-btn-extra-text-${eventData.eventId}" class="expand-collapse-btn" style="display: none;" onclick="window.collapseText('extra-text-${eventData.eventId}');">Collapse</button>
               </p>
-              <img src="${eventData.eventImage}" alt="Event Image"> <!-- Event image -->
+              <img src="${eventData.eventImage}" alt="Event Image"> 
               </div>
           `,
           });
+
+              // CJ- Add an event listener to the marker to open the info window
+              marker0.addListener("click", () => {
+              //CJ- open the info window on the map at the marker location
+              infowindow0.open(map, marker0);
+              });
+          })
+          //CJ- log error to console
+          .catch((error) => {
+              //CJ- log error to console
+              console.error("Error fetching JSON data:", error);
+          });
+
 
 
 
