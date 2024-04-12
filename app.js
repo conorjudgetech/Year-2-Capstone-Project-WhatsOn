@@ -12,6 +12,7 @@ app.use(express.static('css')); //loads all of the static files from the css fol
 
 app.use(morgan('dev')); //enables logging information regarding the server
 
+app.use(express.json()); //this is used to parse the json data
 
 app.listen(port, () => {
   console.log('Running on port ', port);
