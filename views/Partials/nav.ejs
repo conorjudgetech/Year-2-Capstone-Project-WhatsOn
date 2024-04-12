@@ -1,108 +1,174 @@
 <div class="nav-bar">
-    <div class="button-modal-container">
-        <button class="item following" onclick="followingButtonClicked()">Following</button>
-        <div id="followingModal" class="modal">
-            <div class="modal-content">
-                <form id="authForm" action="/" method="post" onsubmit="event.preventDefault(); handleFormSubmit();">
-                    <div class="input-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required><br>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required><br>
-                    </div>
-                    <input id="submit" type="submit" value="Sign Up">
-                </form>
-                <button id="switchMode" onclick="switchMode()">Switch to Login</button>
-            </div>
-        </div>
-    </div>
-    
-
-
-
-    <button class="item random" onclick="moveCrosshair()">Random</button>
-
-
-    <button class="item homeBTN">
-        <a href="/">
-            <img src="logo.png" alt="Home" class="home-logo">
-        </a>
+  <div class="button-modal-container">
+    <button class="item following" onclick="followingButtonClicked()">
+      Following
     </button>
-    <div class="button-modal-container">
-        <button class="item legBTN" onclick="toggleModal('legendModal', event)">Legend</button>
-        <div id="legendModal" class="modal legend-modal">
-            <!-- Modal content goes here -->
-            <div class="legend-content">
-                <div class="section button-description">
-
-                    <ul>
-                        <li><strong>Following:</strong> Brings up events you are following and has you log in if you are
-                            not already.</li>
-                        <li><strong>Random:</strong> Takes you to a random event in your area.</li>
-                        <li><strong>Home:</strong> Returns you to map with no pop ups visible.</li>
-                        <li><strong>Legend:</strong> This guide provides explanations for the various icons, colors, and
-                            terms used.</li>
-                        <li><strong>Contact:</strong> Opens a form to send a message to the site administrators.</li>
-                    </ul>
-                </div>
-                <div class="section event-types-status">
-                    <div class="event-status">
-                        <li><strong>Event Status:</strong> The
-                            outline of the pin indicates the status of the event:
-                            <ul>
-                                <li><span style="color:#bebeff;">&#11044;</span> Waiting to start</li>
-                                <li><span style="color:#beffbe;">&#11044;</span> Ongoing with much time left</li>
-                                <li><span style="color:#ffbebe;">&#11044;</span> Ongoing but nearly finished</li>
-                            </ul>
-                        </li>
-                    </div>
-                    <br>
-                    <div class="event-types">
-                        <li><strong>Event Types:</strong> The inner fill of the pin indicates the type of the event:
-                            <ul>
-                                <li><span style="color:#6496ff;">&#11044;</span> Entertainment (Music Note)</li>
-                                <li><span style="color:#64ff96;">&#11044;</span> Educational (Book)</li>
-                                <li><span style="color:#ff96ff;">&#11044;</span> Social (Speech Bubble)</li>
-                                <li><span style="color:#ff9664;">&#11044;</span> Sports (Basketball)</li>
-                                <li><span style="color:#9664ff;">&#11044;</span> Cultural (Theatre Mask)</li>
-                                <li><span style="color:#ff6464;">&#11044;</span> Charity (Heart)</li>
-                            </ul>
-                        </li>
-                    </div>
-                </div>
-                <div class="section examples">
-                    <li>
-                        <strong>Examples</strong> Below are some examples:
-                        <ul>
-                            <li><img src="Entertainment Ongoing.png" alt="Entertainment Icon"> Entertainment Event
-                                Ongoing</li>
-                            <li><img src="Education Starting.png" alt="Educational Icon"> Educational Event Starting
-                            </li>
-                            <li><img src="Social Starting.png" alt="Social Icon"> Social Event Starting</li>
-                            <li><img src="Sports Ongoing.png" alt="Sports Icon"> Sports Event Ongoing</li>
-                            <li><img src="Culture Ending.png" alt="Cultural Icon"> Cultural Event Ending</li>
-                            <li><img src="Charity Ending.png" alt="Charity Icon"> Charity Event Ending</li>
-                        </ul>
-                    </li>
-                </div>
-
-            </div>
-        </div>
+    <div id="followingModal" class="modal">
+      <div class="modal-content">
+        <form
+          id="authForm"
+          action="/"
+          method="post"
+          onsubmit="event.preventDefault(); handleFormSubmit();"
+        >
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required /><br />
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+            /><br />
+          </div>
+          <input id="submit" type="submit" value="Sign Up" />
+        </form>
+        <button id="switchMode" onclick="switchMode()">Switch to Login</button>
+      </div>
     </div>
-
-    <div class="button-modal-container">
-        <button class="item contactBTN" id="contactusBTN" onclick="toggleModal('contactModal', event)">Contact</button>
-        <div id="contactModal" class="modal contact-modal">
-            <div class="modal-content">
-                <form id="contactForm">
-                    <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name"><br>
-                    <label for="message">Message:</label><br>
-                    <textarea id="message" name="message"></textarea><br>
-                    <input type="submit" value="Submit" onclick="messageSent()">
-                </form>
-            </div>
+  </div>
+  <button class="item random" onclick="moveCrosshair()">Random</button>
+  <div class="parent">
+    <button class="item homeBTN" onclick="closeAllModals(); closeCrosshair();">
+      <img src="logo.png" alt="Home" class="home-logo" />
+    </button>
+  </div>
+  <div class="button-modal-container">
+    <button class="item legBTN" onclick="toggleModal('legendModal', event)">
+      Legend
+    </button>
+    <div id="legendModal" class="modal legend-modal">
+      <!-- Modal content goes here -->
+      <div class="legend-content">
+        <div class="section button-description">
+          <ul>
+            <li>
+              <strong>Following:</strong> Brings up events you are following and
+              has you log in if you are not already.
+            </li>
+            <li>
+              <strong>Random:</strong> Takes you to a random event in your area.
+            </li>
+            <li>
+              <strong>Home:</strong> Returns you to map with no pop ups visible.
+            </li>
+            <li>
+              <strong>Legend:</strong> This guide provides explanations for the
+              various icons, colors, and terms used.
+            </li>
+            <li>
+              <strong>Contact:</strong> Opens a form to send a message to the
+              site administrators.
+            </li>
+          </ul>
         </div>
+        <div class="section event-types-status">
+          <div class="event-status">
+            <li>
+              <strong>Event Status:</strong> The outline of the pin indicates
+              the status of the event:
+              <ul>
+                <li>
+                  <span style="color: #bebeff">&#11044;</span> Waiting to start
+                </li>
+                <li>
+                  <span style="color: #beffbe">&#11044;</span> Ongoing with much
+                  time left
+                </li>
+                <li>
+                  <span style="color: #ffbebe">&#11044;</span> Ongoing but
+                  nearly finished
+                </li>
+              </ul>
+            </li>
+          </div>
+          <br />
+          <div class="event-types">
+            <li>
+              <strong>Event Types:</strong> The inner fill of the pin indicates
+              the type of the event:
+              <ul>
+                <li>
+                  <span style="color: #6496ff">&#11044;</span> Entertainment
+                  (Music Note)
+                </li>
+                <li>
+                  <span style="color: #64ff96">&#11044;</span> Educational
+                  (Book)
+                </li>
+                <li>
+                  <span style="color: #ff96ff">&#11044;</span> Social (Speech
+                  Bubble)
+                </li>
+                <li>
+                  <span style="color: #ff9664">&#11044;</span> Sports
+                  (Basketball)
+                </li>
+                <li>
+                  <span style="color: #9664ff">&#11044;</span> Cultural (Theatre
+                  Mask)
+                </li>
+                <li>
+                  <span style="color: #ff6464">&#11044;</span> Charity (Heart)
+                </li>
+              </ul>
+            </li>
+          </div>
+        </div>
+        <div class="section examples">
+          <li>
+            <strong>Examples</strong> Below are some examples:
+            <ul>
+              <li>
+                <img src="Entertainment Ongoing.png" alt="Entertainment Icon" />
+                Entertainment Event Ongoing
+              </li>
+              <li>
+                <img src="Education Starting.png" alt="Educational Icon" />
+                Educational Event Starting
+              </li>
+              <li>
+                <img src="Social Starting.png" alt="Social Icon" /> Social Event
+                Starting
+              </li>
+              <li>
+                <img src="Sports Ongoing.png" alt="Sports Icon" /> Sports Event
+                Ongoing
+              </li>
+              <li>
+                <img src="Culture Ending.png" alt="Cultural Icon" /> Cultural
+                Event Ending
+              </li>
+              <li>
+                <img src="Charity Ending.png" alt="Charity Icon" /> Charity
+                Event Ending
+              </li>
+            </ul>
+          </li>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="button-modal-container">
+    <button
+      class="item contactBTN"
+      id="contactusBTN"
+      onclick="toggleModal('contactModal', event)"
+    >
+      Contact
+    </button>
+    <div id="contactModal" class="modal contact-modal">
+      <div class="modal-content">
+        <form id="contactForm"  action="https://formspree.io/f/mayrlpzk" method="POST">
+          <label for="name">Email:</label><br />
+          <input type="text" id="email" name="email" /><br />
+          <label for="message">Message:</label><br />
+          <textarea id="message" name="message"></textarea><br />
+          <input type="submit" value="Submit" onclick="messageSent()" />
+        </form>
 
+      </div>
+    </div>
+  </div>
 </div>

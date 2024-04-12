@@ -1,38 +1,135 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
 :root {
-    /* set variables as colours, will save time when the colours in the page has to change*/
-    --clr-blue: #bee1ff;
-    /*this is how a variable in css must be set up*/
-    --clr-black: #202020;
-    --clr-dark: #454545;
-    --clr-white: #ffffff;
-    --clr-bg: #1d8b4b;
+  /* set variables as colours, will save time when the colours in the page has to change*/
+  --clr-blue: #bee1ff;
+  /*this is how a variable in css must be set up*/
+  --clr-black: #202020;
+  --clr-dark: #454545;
+  --clr-white: #ffffff;
+  --clr-bg: #1d8b4b;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-
 
 /*Home Page styling*/
 
 .map-div {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    border: solid var(--clr-blue) 5px;
-    background-color: var(--clr-bg);
-    margin: 0 auto;
-    overflow: hidden;
-    z-index: 0;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  border: solid var(--clr-blue) 5px;
+  background-color: var(--clr-bg);
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 0;
 }
 
+/* Styles for larger screens */
 .nav-bar {
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+  z-index: 10;
+  position: sticky;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.item {
+  width: 16vw;
+  height: 8vw;
+  background-color: var(--clr-blue);
+  border: solid var(--clr-white) 5px;
+  text-align: center;
+  font-size: min(max(3vw, 16px), 32px);
+  border-radius: 20px;
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--clr-white);
+  cursor: pointer;
+  min-width: 80px;
+  max-width: 160px;
+  min-height: 50px;
+  max-height: 80px;
+}
+
+@media only screen and (orientation: portrait) {
+  .nav-bar {
+    display: grid;
+    grid-template-areas:
+      "top-left . top-right"
+      "bottom-left . bottom-right";
+
+    height: 100px;
+    align-items: baseline;
+    justify-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .item:nth-child(1) {
+    grid-area: top-left;
+  }
+
+  .item:nth-child(4) {
+    grid-area: top-right;
+  }
+
+  .item:nth-child(5) {
+    grid-area: bottom-left;
+  }
+
+  .item:nth-child(3) {
+    grid-area: bottom-right;
+  }
+
+  /* This groups the button and image together so that I can force it to the bottom. */
+  .parent {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20vw;
+    height: auto;
+    border: none;
+    padding: 0%;
+    background: none;
+  }
+
+  .home-logo {
+    width: 100%;
+    height: auto;
+  }
+
+  .modal {
+    position: fixed;
+    /* Positioned relative to the viewport */
+    width: 80%;
+    height: 80%;
+    top: 0;
+    /* Align to the top */
+    left: 0;
+    /* Align to the left */
+    transform: none;
+    /* Remove the transform */
+    overflow: hidden;
+  }
+
+  .legend-modal {
+    width: 80%;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .nav-bar {
     margin-top: 20px;
     width: 100%;
     height: 100px;
@@ -40,105 +137,19 @@
     position: sticky;
     display: flex;
     justify-content: space-evenly;
-}
+  }
 
-/* Styles for larger screens */
-.nav-bar {
-    display: flex;
-    justify-content: space-evenly;
-}
+  .parent {
+    position: relative;
+  }
 
-/* Styles for smaller screens */
-@media only screen and (max-width: 750px) {
-    .nav-bar {
-        display: grid;
-        grid-template-areas:
-            "top-left . . top-right"
-            "bottom-left home home bottom-right";
-
-        height: 100vh;
-        align-items: baseline;
-        justify-items: center;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        grid-template-rows: repeat(2, minmax(0, 1fr));
-    }
-
-    .item:nth-child(1) {
-        grid-area: top-left;
-    }
-
-    .item:nth-child(2) {
-        grid-area: top-right;
-    }
-
-    .item:nth-child(3) {
-        grid-area: bottom-left;
-    }
-
-    .item:nth-child(4) {
-        grid-area: bottom-right;
-    }
-
-    .item.homeBTN {
-        grid-area: home;
-        position: absolute;
-        bottom: 105px;
-    }
-
-    .item {
-        width: 14vw;
-        font-size: 14px;
-        height: 7vh;
-    }
-}
-
-.item {
-    width: 16vh;
-    height: 8vh;
-    background-color: var(--clr-blue);
-    border: solid var(--clr-white) 5px;
-    text-align: center;
-    font-size: min(max(1.5vw, 16px), 32px);
-    /* Font size range between 12px and 24px */
-    border-radius: 20px;
-    font-family: "Itim", cursive;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--clr-white);
-    cursor: pointer;
-    min-width: 80px;
-    max-width: 160px;
-    /* Adjust as needed */
-    min-height: 50px;
-    max-height: 80px;
-    /* Adjust as needed */
-}
-
-@media screen and (max-height: 1080px) {
-    .item {
-        width: 8vw;
-        height: 4vw;
-    }
-}
-
-.nav-bar {
-    position: sticky;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.home-logo {
+  .home-logo {
     width: 100%;
     height: auto;
-}
+  }
 
-.item.homeBTN {
-    background: transparent;
-    border: none;
-}
-
-/* The Modal (background) */
-.modal {
+  /* The Modal (background) */
+  .modal {
     border: solid var(--clr-white) 5px;
     display: none;
     /* Hidden by default */
@@ -156,214 +167,222 @@
     /* Remove any margins */
     border-radius: 20px;
     transform: translateX(-50%);
+  }
+
+  .legend-modal {
+    width: 555%;
+    /* Adjust as needed */
+  }
+}
+
+.item.homeBTN {
+  background: transparent;
+  border: none;
+}
+
+/* The Modal (background) */
+.modal {
+  border: solid var(--clr-white) 5px;
+  display: none;
+  /* Hidden by default */
+  position: absolute;
+  /* Positioned relative to the button */
+  z-index: 1;
+  /* Sit on top */
+  width: 150%;
+  /* Adjust width as needed */
+  background-color: var(--clr-blue);
+  /* Background color */
+  overflow: none;
+  /* no scroll */
+  margin: 0;
+  /* Remove any margins */
+  border-radius: 20px;
+  transform: translateX(-50%);
 }
 
 .legend-modal {
-    width: 555%;
-    /* Adjust as needed */
-}
-
-@media screen and (max-width: 750px) {
-    .modal {
-        position: fixed;
-        /* Positioned relative to the viewport */
-        width: 80%;
-        height: 80%;
-        top: 0;
-        /* Align to the top */
-        left: 0;
-        /* Align to the left */
-        transform: none;
-        /* Remove the transform */
-        overflow: hidden;
-    }
-
-    .legend-modal {
-        width: 80%;
-    }
-
+  width: 555%;
+  /* Adjust as needed */
 }
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: var(--clr-white);
-    margin: 5% auto;
-    padding: 5px;
-    width: 90%;
-    padding: 5%;
-    text-align: center;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Centers the content vertically */
-    justify-content: center;
-    /* Centers the content horizontally */
+  background-color: var(--clr-white);
+  margin: 5% auto;
+  padding: 5px;
+  width: 90%;
+  padding: 5%;
+  text-align: center;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centers the content vertically */
+  justify-content: center;
+  /* Centers the content horizontally */
 }
 
 .button-modal-container {
-    position: relative;
-    /* Establish a new positioning context */
-    display: inline-block;
-    /* Allow multiple containers to sit side-by-side */
+  position: relative;
+  /* Establish a new positioning context */
+  display: inline-block;
+  /* Allow multiple containers to sit side-by-side */
 }
 
 .modal-content form {
-    text-align: center;
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10%;
 }
 
 .modal-content label {
-    font-size: 1.2em;
-    color: var(--clr-black);
+  font-size: 1.2em;
+  color: var(--clr-black);
 }
 
 .modal-content input[type="email"],
 .modal-content input[type="password"],
 .modal-content input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin: 1px 0;
-    border-radius: 5px;
-    border: 1px solid var(--clr-dark);
+  width: 100%;
+  padding: 10px;
+  margin: 1px 0;
+  border-radius: 5px;
+  border: 1px solid var(--clr-dark);
 }
 
 .modal-content input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal-content input[type="submit"]:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 .modal-content button {
-    background-color: #f44336;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
+  background-color: #f44336;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .modal-content button:hover {
-    background-color: #e60000;
+  background-color: #e60000;
 }
 
-
 textarea {
-    resize: vertical;
-    /* Allows vertical resize only */
-    max-height: 500px;
-    /* Maximum height */
-    min-height: 200px;
-    /* Minimum height */
-    width: 100%;
-    /* Makes the input fields take up the full width of the form */
-    border: 1px solid var(--clr-dark);
-    border-radius: 5px;
+  resize: vertical;
+  /* Allows vertical resize only */
+  max-height: 500px;
+  /* Maximum height */
+  min-height: 200px;
+  /* Minimum height */
+  width: 100%;
+  /* Makes the input fields take up the full width of the form */
+  border: 1px solid var(--clr-dark);
+  border-radius: 5px;
 }
 
 .crosshair {
-    position: absolute;
-    visibility: hidden;
-    /* Make the crosshair initially invisible */
+  position: absolute;
+  visibility: hidden;
+  /* Make the crosshair initially invisible */
 }
 
 .crosshair img {
-
-    height: 30px;
-    /* Adjust as needed */
-    width: auto;
-
+  height: 30px;
+  /* Adjust as needed */
+  width: auto;
 }
 
 .legend-content img {
-    height: 30px;
-    width: auto;
-    vertical-align: middle;
+  height: 30px;
+  width: auto;
+  vertical-align: middle;
 }
 
 .legend-content h2 {
-    font-size: 2em;
-    /* Make the title larger */
-    margin-bottom: 20px;
-    /* Add some space below the title */
+  font-size: 2em;
+  /* Make the title larger */
+  margin-bottom: 20px;
+  /* Add some space below the title */
 }
 
 .legend-content ul {
-    list-style-type: none;
-    /* Remove the default bullet points */
-    padding-left: 0;
-    /* Align the list items with the rest of the content */
+  list-style-type: none;
+  /* Remove the default bullet points */
+  padding-left: 0;
+  /* Align the list items with the rest of the content */
 }
 
 .legend-content ul li {
-    margin-bottom: 10px;
-    /* Add some space between list items */
+  margin-bottom: 10px;
+  /* Add some space between list items */
 }
 
 .legend-content ul li img {
-    height: 26px;
-    width: auto;
-    vertical-align: middle;
-    margin-right: 10px;
-    /* Add some space between the icon and the text */
+  height: 26px;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 10px;
+  /* Add some space between the icon and the text */
 }
 
 .legend-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-    /* Enables vertical scrolling */
-    max-height: 85vh;
-    /* Prevents the modal from taking up the whole screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  /* Enables vertical scrolling */
+  max-height: 85vh;
+  /* Prevents the modal from taking up the whole screen */
 }
 
 .section {
-    width: 100%;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-    /* Increase the font size */
-    color: var(--clr-white);
-    /* Change the text color */
-    background-color: var(--clr-blue);
-    /* Change the background color */
-    padding: 10px;
-    /* Add some padding */
-    border-radius: 20px;
-    /* Round the corners */
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  /* Increase the font size */
+  color: var(--clr-white);
+  /* Change the text color */
+  background-color: var(--clr-blue);
+  /* Change the background color */
+  padding: 10px;
+  /* Add some padding */
+  border-radius: 20px;
+  /* Round the corners */
 }
 
 .event-types-status {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .event-types,
 .event-status {
-    width: 45%;
-    /* Adjust as needed */
+  width: 45%;
+  /* Adjust as needed */
 }
 
 .examples {
-    margin-top: auto;
-    /* Pushes the section to the bottom */
+  margin-top: auto;
+  /* Pushes the section to the bottom */
 }
