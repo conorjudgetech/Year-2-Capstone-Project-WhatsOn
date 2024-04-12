@@ -50,7 +50,7 @@
     border: 2px solid white;
   }
 
-  /* CJ- info0window expand/collapse button */
+  /* CJ- infowindow expand/collapse button */
   .expand-collapse-btn {
     background-color: white;
     color: var(--clr-blue);
@@ -58,6 +58,11 @@
     cursor: pointer;
     outline: none;
   }
+
+    /* CJ- Hides the extra text by default */
+    .extra-text {
+      display: none;
+    }
 
 /*CJ- nav.ejs styling*/
 /* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
