@@ -194,7 +194,7 @@
 
 
 
-                  //CJ- fetch data from JSON file
+          //CJ- fetch data from JSON file
           fetch('/eventsData.json')
           //CJ- convert data to JSON
           .then((response) => response.json())
@@ -217,6 +217,14 @@
               animation: google.maps.Animation.DROP,
               });
 
+          // CJ- Create an info window for the event
+          const infowindow0 = new google.maps.InfoWindow({
+          content: `
+              <div class="info-window-content">
+
+              </div>
+          `,
+          });
 
 
 
