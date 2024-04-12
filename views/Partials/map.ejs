@@ -236,9 +236,6 @@
               document.getElementById('collapse-btn-' + id).style.display = 'none';
           }
 
-
-
-
           // CJ- Create an info window for the event
           const infowindow0 = new google.maps.InfoWindow({
           content: `
@@ -257,7 +254,6 @@
               </div>
           `,
           });
-
               // CJ- Add an event listener to the marker to open the info window
               marker0.addListener("click", () => {
               //CJ- open the info window on the map at the marker location
@@ -269,8 +265,6 @@
               //CJ- log error to console
               console.error("Error fetching JSON data:", error);
           });
-
-
 
 
         // CJ- Check if geolocation is available

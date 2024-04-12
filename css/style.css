@@ -31,13 +31,15 @@
 /* CJ- map.ejs styling */
 /* info window content */
 .info-window-content {
-    background-color: var(--clr-blue);
-    color: white;
-    border: solid var(--clr-white) 5px;
-    overflow: none;
-    border-radius: 20px;
-    padding: 10px;
-    }
+  position: relative;
+  background-color: var(--clr-blue);
+  color: white;
+  border: solid var(--clr-white) 5px;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 10px;
+  padding-right: 120px;
+}
 
 /*CJ- nav.ejs styling*/
 /* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
