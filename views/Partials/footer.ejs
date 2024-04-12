@@ -20,8 +20,7 @@
         currentModal.style.top = "50%";
         currentModal.style.left = "50%";
         currentModal.style.transform = "translate(-50%, -50%)";
-      }
-       else {
+      } else {
         // Get the position of the button
         var button = event.target;
         var rect = button.getBoundingClientRect();
@@ -36,14 +35,20 @@
         currentModal.style.left = "50%";
         currentModal.style.transform = "translateX(-50%)";
 
+        // Slide the modal down to its final position below the button
+        var finalTop = rect.bottom + window.scrollY - 15; // default value
+
         // If the modal extends off the right edge of the screen, move it back
         var modalRight = currentModal.offsetLeft + currentModal.offsetWidth;
         if (modalRight > window.innerWidth) {
           currentModal.style.right = "0px";
+
+          // If it's the legend modal, adjust the finalTop
+          if (modalId === "legendModal") {
+            finalTop = rect.bottom + window.scrollY + 12;
+          }
         }
 
-        // Slide the modal down to its final position below the button
-        var finalTop = rect.bottom + window.scrollY - 15;
         var currentTop = parseInt(currentModal.style.top);
         var intervalId = setInterval(function () {
           if (currentTop < finalTop) {
