@@ -226,7 +226,15 @@
               document.getElementById('collapse-btn-' + id).style.display = 'inline';
           }
 
-
+          // CJ- Function to handle the click event of the Collapse button
+          window.collapseText = function(id) {
+          //CJ- hide the extra text
+              document.getElementById(id).style.display = 'none';
+              //CJ- display the read more button
+              document.getElementById('btn-' + id).style.display = 'inline';
+              //CJ- hide the collapse button
+              document.getElementById('collapse-btn-' + id).style.display = 'none';
+          }
 
 
 
