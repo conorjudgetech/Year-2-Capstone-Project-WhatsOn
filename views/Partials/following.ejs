@@ -18,11 +18,11 @@ function switchMode() {
     var switchButton = document.getElementById('switchMode');
 
     if (isSignupMode) {
-        form.setAttribute('action', "http://localhost:3000/users/login");
+        form.setAttribute('action', "/users/login");
         submitButton.setAttribute('value', "Login");
         switchButton.textContent = "Switch to Sign Up";
     } else {
-        form.setAttribute('action', "http://localhost:3000/users/register");
+        form.setAttribute('action', "/users/register");
         submitButton.setAttribute('value', "Sign Up");
         switchButton.textContent = "Switch to Login";
     }
