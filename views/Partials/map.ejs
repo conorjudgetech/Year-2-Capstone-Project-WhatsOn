@@ -19,28 +19,47 @@
 //CJ- TO-DO- inside FOR loop to iterate through array list and create markers/windows fro each event
 
 //CJ- Hardcoded markers and info windows for events
-        // CJ- creates new constant named marker to attach to event listener to open info window
-          const marker1 = new google.maps.Marker({
-            // CJ- sets the location of marker
-            position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
-            map,
-            //CJ- title of marker
-            title: "Education: Starting",
-            icon: {
-              // CJ- location of icon image
-              url: "EdS.png",
-              // CJ- new Google maps object that defines the size of icon image
-              scaledSize: new google.maps.Size(48, 48),
-            },
-              //CJ- animation that drops pin from top of the map
-              animation: google.maps.Animation.DROP,
-          });
+        //CJ- Variable to keep track of the open info window
+        let currentInfoWindow = null;
 
-          //CJ- new info window object set to open when marker is clicked
-          const infowindow1 = new google.maps.InfoWindow({
-            // CJ- div class to style info window content
-            content: `
-          <div class="info-window-content">
+        //CJ- Function to handle marker click events
+        function handleMarkerClick(marker, infowindow) {
+        return function() {
+            // Close the current info window if it's open
+            if (currentInfoWindow) {
+            currentInfoWindow.close();
+            }
+
+            // CJ- open info window on map at marker location
+            infowindow.open(map, marker);
+
+            // Set the current info window to the newly opened one
+            currentInfoWindow = infowindow;
+        };
+        }
+
+        // CJ- creates new constant named marker to attach to event listener to open info window
+        const marker1 = new google.maps.Marker({
+        // CJ- sets the location of marker
+        position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
+        map,
+        //CJ- title of marker
+        title: "Education: Starting",
+        icon: {
+            // CJ- location of icon image
+            url: "EdS.png",
+            // CJ- new Google maps object that defines the size of icon image
+            scaledSize: new google.maps.Size(48, 48),
+        },
+        //CJ- animation that drops pin from top of the map
+        animation: google.maps.Animation.DROP,
+        });
+
+        //CJ- new info window object set to open when marker is clicked
+        const infowindow1 = new google.maps.InfoWindow({
+        // CJ- div class to style info window content
+        content: `
+            <div class="info-window-content">
             <h3>Education</h3>
             <p>Status: Starting</p>
             <p>Location: National College Of Ireland</p>
@@ -48,29 +67,26 @@
             <p>Join us for an enlightening evening of knowledge and camaraderie.</p>
             <p>Let's expand our horizons and make lasting memories together!</p>
             </div>
-          `
-          });
+        `
+        });
 
-          // CJ- event listener that opens info window when clicked click to open event window
-          marker1.addListener("click", () => {
-            // CJ- open info window on map at marker location
-            infowindow1.open(map, marker1);
-          });
+        // CJ- event listener that opens info window when clicked click to open event window
+        marker1.addListener("click", handleMarkerClick(marker1, infowindow1));
 
-          const marker2 = new google.maps.Marker({
-            position: { lat: 53.36013894903569, lng: -6.260932804848787 },
-            map,
-            title: "Social: Starting",
-            icon: {
-              url: "SoS.png",
-              scaledSize: new google.maps.Size(48, 48),
-            },
-            animation: google.maps.Animation.DROP,
-          });
+        const marker2 = new google.maps.Marker({
+        position: { lat: 53.36013894903569, lng: -6.260932804848787 },
+        map,
+        title: "Social: Starting",
+        icon: {
+            url: "SoS.png",
+            scaledSize: new google.maps.Size(48, 48),
+        },
+        animation: google.maps.Animation.DROP,
+        });
 
-          const infowindow2 = new google.maps.InfoWindow({
-            content: `
-          <div class="info-window-content">
+        const infowindow2 = new google.maps.InfoWindow({
+        content: `
+            <div class="info-window-content">
             <h3>Social</h3>
             <p>Status: Starting</p>
             <p>Location: Dorset Street Lower</p>
@@ -78,12 +94,11 @@
             <p>Join us for a fun-filled evening of laughter and entertainment. </p>
             <p>Let's create unforgettable memories together!</p>
             </div>
-          `
-          });
+        `
+        });
 
-          marker2.addListener("click", () => {
-            infowindow2.open(map, marker2);
-          });
+        // CJ- event listener that opens info window when clicked click to open event window
+        marker2.addListener("click", handleMarkerClick(marker2, infowindow2));
 
           const marker3 = new google.maps.Marker({
             position: { lat: 53.355, lng: -6.26 },
@@ -108,9 +123,8 @@
           `
           });   
 
-          marker3.addListener("click", () => {
-            infowindow3.open(map, marker3);
-          });
+        // CJ- event listener that opens info window when clicked click to open event window
+        marker3.addListener("click", handleMarkerClick(marker3, infowindow3));
 
           const marker4 = new google.maps.Marker({
             position: { lat: 53.35, lng: -6.265 },
@@ -135,9 +149,8 @@
           `
           });  
 
-          marker4.addListener("click", () => {
-            infowindow4.open(map, marker4);
-          });
+        // CJ- event listener that opens info window when clicked click to open event window
+        marker4.addListener("click", handleMarkerClick(marker4, infowindow4));
 
           const marker5 = new google.maps.Marker({
           position: { lat: 53.355, lng: -6.255 },  
@@ -162,9 +175,8 @@
           `
           });
 
-          marker5.addListener("click", () => {
-          infowindow5.open(map, marker5);
-          });
+        // CJ- event listener that opens info window when clicked click to open event window
+        marker5.addListener("click", handleMarkerClick(marker5, infowindow5));
 
           const marker6 = new google.maps.Marker({
           position: { lat: 53.360, lng: -6.255 },  
@@ -189,9 +201,15 @@
           `
           });
 
-          marker6.addListener("click", () => {
-          infowindow6.open(map, marker6);
-          });
+        // CJ- event listener that opens info window when clicked click to open event window
+        marker6.addListener("click", handleMarkerClick(marker6, infowindow6));
+
+        //CJ- click event listener added to the map to close the info window when the map is clicked
+        map.addListener('click', function() {
+        if (currentInfoWindow) {
+            currentInfoWindow.close();
+        }
+        });
 
 //CJ- Dynamic JSON data for markers and info windows
           //CJ- Multiple Markers with Info Windows from JSON Data
