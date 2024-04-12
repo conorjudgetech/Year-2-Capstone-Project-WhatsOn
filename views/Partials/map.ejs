@@ -193,34 +193,8 @@
           });
 
 
-          const markerLive = new google.maps.Marker({
-          position: { lat: 53.306843, lng: -6.346642 },
-          map,
-          title: "Live Data",
-          icon: {
-            url: "Crosshair.png",
-            scaledSize: new google.maps.Size(48, 48),
-          },
-          animation: google.maps.Animation.DROP,
-          });
 
-          const infowindowLive = new google.maps.InfoWindow();
 
-          markerLive.addListener("click", () => {
-          fetch('/eventsData.json')
-            .then((response) => response.json())
-            .then((data) => {
-            infowindowLive.setContent(`
-              <div class="info-window-content">
-              <h3>${data.eventName}</h3>
-              </div>
-            `);
-            infowindowLive.open(map, markerLive);
-            })
-            .catch((error) => {
-            console.error("Error fetching JSON data:", error);
-            });
-          });
 
         // CJ- Check if geolocation is available
         if (navigator.geolocation) {
