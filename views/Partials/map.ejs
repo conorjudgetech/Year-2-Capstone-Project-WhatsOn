@@ -226,8 +226,8 @@
               <p><strong>Event Time:</strong> ${new Date(eventData.eventTime).toLocaleString()}</p> 
               <p><strong>Event End Time:</strong> ${new Date(eventData.eventEndTime).toLocaleString()}</p>
               <p><strong>Location:</strong> ${eventData.locationInfo}</p>
-              <p>${eventData.eventDetails.substring(0, 100)} <!-- Displays the first 100 characters -->
-
+              <p>${eventData.eventDetails.substring(0, 100)}
+              <img src="${eventData.eventImage}" alt="Event Image">
               </div>
           `,
           });
