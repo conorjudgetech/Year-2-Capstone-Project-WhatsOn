@@ -1,24 +1,3 @@
-<html>
-
-    <style>
-      html {
-        /* CJ- So that padding won't effect the final width/height of elements */
-        box-sizing: border-box;
-        /* CJ- for better accessibility */
-        font-size: 100%; 
-      }
-      /* CJ- wildcard to select all elements and pseudo elements, before and after, to inherit that box sizing property  */
-      *, *::before, *::after {
-        box-sizing: inherit;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-
-  <body>
     <script>
       //  CJ- using callback function “initMap” from Google Map Script API URL.  This ensures the javascript will only run once the API has finished loading, otherwise it would run before map exists.
        function initMap() {
@@ -36,7 +15,10 @@
           streetViewControl: false,
         });
 
-          // CJ- creates new constant named marker to attach to event listener to open info window
+//CJ- TO-DO- array list storing "Dublin Events" 
+//CJ- TO-DO- inside FOR loop to iterate through array list and create markers/windows fro each event
+
+        // CJ- creates new constant named marker to attach to event listener to open info window
           const marker1 = new google.maps.Marker({
             // CJ- sets the location of marker
             position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
@@ -55,8 +37,17 @@
 
           //CJ- new info window object set to open when marker is clicked
           const infowindow1 = new google.maps.InfoWindow({
-            // CJ- content of info window
-            content: "Education<br>Status: Starting<br>Location: National College Of Ireland<br>Mayor Street Lower<br> Join us for an enlightening evening of knowledge and camaraderie<br>Let's expand our horizons and make lasting memories together!",
+            // CJ- div class to style info window content
+            content: `
+          <div class="info-window-content">
+            <h3>Education</h3>
+            <p>Status: Starting</p>
+            <p>Location: National College Of Ireland</p>
+            <p>Mayor Street Lower</p>
+            <p>Join us for an enlightening evening of knowledge and camaraderie.</p>
+            <p>Let's expand our horizons and make lasting memories together!</p>
+            </div>
+          `
           });
 
           // CJ- event listener that opens info window when clicked click to open event window
@@ -77,7 +68,16 @@
           });
 
           const infowindow2 = new google.maps.InfoWindow({
-            content: "Social<br>Status: Starting<br>Location: Dorset Street Lower<br>Dublin, DO1A2Y5<br>Join us for a fun-filled evening of laughter and entertainment<br>Let's create unforgettable memories together!",
+            content: `
+          <div class="info-window-content">
+            <h3>Social</h3>
+            <p>Status: Starting</p>
+            <p>Location: Dorset Street Lower</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Join us for a fun-filled evening of laughter and entertainment. </p>
+            <p>Let's create unforgettable memories together!</p>
+            </div>
+          `
           });
 
           marker2.addListener("click", () => {
@@ -95,10 +95,17 @@
             animation: google.maps.Animation.DROP,
           });
 
-          //info window
           const infowindow3 = new google.maps.InfoWindow({
-            content: "Charity<br>Status: Ending<br>Location: O'Connell Street Upper<br>Dublin, DO1A2Y5<br>Join us for a noble cause and make a difference in the world!",
-          });
+            content: `
+          <div class="info-window-content">
+            <h3>Charity</h3>
+            <p>Status: Ending</p>
+            <p>Location: O'Connell Street Upper</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Join us for a noble cause and make a difference in the world!</p>
+            </div>
+          `
+          });   
 
           marker3.addListener("click", () => {
             infowindow3.open(map, marker3);
@@ -116,11 +123,73 @@
           });
 
           const infowindow4 = new google.maps.InfoWindow({
-            content: "Culture<br>Status: Ending<br>Location: Temple Bar<br>Dublin, DO1A2Y5<br>Experience the rich cultural heritage and immerse yourself in the arts!",
-          });
+            content: `
+          <div class="info-window-content">
+            <h3>Culture</h3>
+            <p>Status: Ending</p>
+            <p>Location: Temple Bar</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Experience the rich cultural heritage and immerse yourself in the arts!</p>
+            </div>
+          `
+          });  
 
           marker4.addListener("click", () => {
             infowindow4.open(map, marker4);
+          });
+
+          const marker5 = new google.maps.Marker({
+          position: { lat: 53.355, lng: -6.255 },  
+          map,
+          title: "Sports: Ongoing",
+          icon: {
+            url: "Sports Ongoing.png",
+            scaledSize: new google.maps.Size(48, 48),
+          },
+          animation: google.maps.Animation.DROP,
+          });
+
+          const infowindow5 = new google.maps.InfoWindow({
+            content: `
+          <div class="info-window-content">
+            <h3>Sports</h3>
+            <p>Status: Ongoing</p>
+            <p>Location: Croke Park</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Come and witness the excitement of a thrilling sporting event!</p>
+            </div>
+          `
+          });
+
+          marker5.addListener("click", () => {
+          infowindow5.open(map, marker5);
+          });
+
+          const marker6 = new google.maps.Marker({
+          position: { lat: 53.360, lng: -6.255 },  
+          map,
+          title: "Entertainment: Ongoing",
+          icon: {
+            url: "Entertainment Ongoing.png",
+            scaledSize: new google.maps.Size(48, 48),
+          },
+          animation: google.maps.Animation.DROP,
+          });
+
+          const infowindow6 = new google.maps.InfoWindow({
+            content: `
+          <div class="info-window-content">
+            <h3>Sports</h3>
+            <p>Status: Ongoing</p>
+            <p>Location: Concert Hall</p>
+            <p>Dublin, DO1A2Y5</p>
+            <p>Experience the magic of live music and let the melodies transport you to another world!</p>
+            </div>
+          `
+          });
+
+          marker6.addListener("click", () => {
+          infowindow6.open(map, marker6);
           });
 
         // CJ- Check if geolocation is available
@@ -135,6 +204,8 @@
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
               };
+
+//CJ- TO-DO- get city from userLocation (lat/long) and store as global variable
 
               // CJ- Center the map to user's location
               loadMap(userLocation);
@@ -162,8 +233,16 @@
       
       }
     </script>
+     <!-- CJ- using env variable to store API key, must be implemented on render website-->
+      <!-- <script> const key = env.mapApiKey; console.log(key); </script> -->
+
+     <!-- CJ- Solution to hiding key -->
+      <!-- <script>
+      const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&map_ids=13185b1ffbbba3af&callback=initMap`;
+      document.body.appendChild(script);
+    </script> -->
 
     <!-- CJ- loading map API & Map ID, after script because of callback function in URL that connects to initMap function -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo9c5JnECXrfMnYkVA2TSyStdrbZ3TO-w&map_ids=13185b1ffbbba3af&callback=initMap"></script>
-  </body>
-</html>

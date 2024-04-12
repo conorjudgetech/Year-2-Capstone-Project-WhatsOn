@@ -17,8 +17,18 @@
   padding: 0;
 }
 
-/*Home Page styling*/
+/* CJ- map.ejs styling */
+/* info window content */
+.info-window-content {
+    background-color: var(--clr-blue);
+    color: white;
+    border: solid var(--clr-white) 5px;
+    overflow: none;
+    border-radius: 20px;
+    padding: 10px;
+    }
 
+/*CJ- index.ejs styling*/
 .map-div {
   position: relative;
   height: 100vh;
