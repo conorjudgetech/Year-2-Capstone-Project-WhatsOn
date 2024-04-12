@@ -319,7 +319,7 @@
 //CJ- TO-DO- get city from userLocation (lat/long) and store as global variable
 
               // CJ- Center the map to user's location
-              loadMap(userLocation);
+               map.setCenter(userLocation);
 
               // CJ- Add a marker for user's location
               const userMarker = new google.maps.Marker({
