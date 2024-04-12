@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import fetchData from './Data_Fetching/fetchData.js';
+import fetchData from './Data Fetching/fetchData.js';
 import fs from 'fs';
 import bcrypt from 'bcrypt';
 import bodyParser from 'body-parser';
