@@ -226,8 +226,12 @@
               <p><strong>Event Time:</strong> ${new Date(eventData.eventTime).toLocaleString()}</p> 
               <p><strong>Event End Time:</strong> ${new Date(eventData.eventEndTime).toLocaleString()}</p>
               <p><strong>Location:</strong> ${eventData.locationInfo}</p>
-              <p>${eventData.eventDetails.substring(0, 100)}
-              <img src="${eventData.eventImage}" alt="Event Image">
+              <p>${eventData.eventDetails.substring(0, 100)} <!-- Display the first 100 characters -->
+                  <span id="extra-text-${eventData.eventId}" class="extra-text">${eventData.eventDetails.substring(100)}</span> <!-- Hide the rest of the text -->
+                  <button id="btn-extra-text-${eventData.eventId}" class="expand-collapse-btn" onclick="window.expandText('extra-text-${eventData.eventId}');">Read more</button>
+                  <button id="collapse-btn-extra-text-${eventData.eventId}" class="expand-collapse-btn" style="display: none;" onclick="window.collapseText('extra-text-${eventData.eventId}');">Collapse</button>
+              </p>
+              <img src="${eventData.eventImage}" alt="Event Image"> <!-- Event image -->
               </div>
           `,
           });
