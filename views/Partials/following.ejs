@@ -12,44 +12,55 @@ function followingButtonClicked() {
         toggleModal('followingModal', event);
     }
 }
-
 function switchMode() {
     var form = document.getElementById('authForm');
     var submitButton = document.getElementById('submit');
     var switchButton = document.getElementById('switchMode');
 
     if (isSignupMode) {
-        form.action = "/submit-login";
-        submitButton.value = "Login";
+        form.setAttribute('action', "http://localhost:3000/users/login");
+        submitButton.setAttribute('value', "Login");
         switchButton.textContent = "Switch to Sign Up";
     } else {
-        form.action = "/submit-signup";
-        submitButton.value = "Sign Up";
+        form.setAttribute('action', "http://localhost:3000/users/register");
+        submitButton.setAttribute('value', "Sign Up");
         switchButton.textContent = "Switch to Login";
     }
 
     isSignupMode = !isSignupMode;
 }
 
-function handleFormSubmit() {
+//will work along side with backend code to check if the users log in details are correct and will take the message from the backend and display it to the user onb 
+function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
-    if (isSignupMode) {
-        // Sign up
-        users[email] = password;
-        alert('Sign up successful!');
-        isLoggedIn = true;
-    } else {
-        // Log in
-        if (users[email] && users[email] === password) {
-            alert('Login successful!');
-            isLoggedIn = true;
-            closeAllModals();
-        } else {
-            alert('Invalid email or password.');
-        }
-    }
+    if (!isSignupMode) {
+        var url = '/users/login';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Login successful!');
+                isLoggedIn = true;
+                closeAllModals();
+                window.location.href = '/'; // Redirect to home page
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    } 
 }
 
 function highlightFollowedEvents() {
