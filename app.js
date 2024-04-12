@@ -11,7 +11,7 @@ app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
 app.use(express.static('Images')); //loads all of the static files from the css folder
 app.use(morgan('dev')); //enables logging information regarding the server
-
+app.use(express.static('Data Fetching')); //CJ- loads all of the static files from the Data Fetching folder
 
 app.listen(port, () => {
   console.log('Running on port ', port);
