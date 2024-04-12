@@ -18,10 +18,10 @@
 //CJ- TO-DO- array list storing "Dublin Events" 
 //CJ- TO-DO- inside FOR loop to iterate through array list and create markers/windows fro each event
 
-//CJ- Hardcoded markers and info windows for events
         //CJ- Variable to keep track of the open info window
         let currentInfoWindow = null;
 
+//CJ- Hardcoded markers and info windows for events
         //CJ- Function to handle marker click events
         function handleMarkerClick(marker, infowindow) {
         return function() {
@@ -274,11 +274,28 @@
             });
             // CJ- Add an event listener to the marker to open the info window
             marker.addListener("click", () => {
+            // Close the current info window if it's open
+            if (currentInfoWindow) {
+              currentInfoWindow.close();
+            }
               //CJ- open the info window on the map at the marker location
                 infowindow.open(map, marker);
+
+
+              // CJ- Set the current info window to the newly opened one
+               currentInfoWindow = infowindow;
             });
             });
           })
+
+
+          //CJ- click event listener added to the map to close the info window when the map is clicked
+          map.addListener('click', function() {
+            if (currentInfoWindow) {
+              currentInfoWindow.close();
+            }
+          })
+
           //CJ- log error to console
           .catch((error) => {
             //CJ- log error to console
