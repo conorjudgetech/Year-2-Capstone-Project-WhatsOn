@@ -216,6 +216,21 @@
               animation: google.maps.Animation.DROP,
               });
 
+          // CJ- Function to handle the click event of the Read more button
+          window.expandText = function(id) {
+          //CJ- display the hidden text
+              document.getElementById(id).style.display = 'inline';
+              //CJ- hide the read more button
+              document.getElementById('btn-' + id).style.display = 'none';
+              //CJ- display the collapse button
+              document.getElementById('collapse-btn-' + id).style.display = 'inline';
+          }
+
+
+
+
+
+
           // CJ- Create an info window for the event
           const infowindow0 = new google.maps.InfoWindow({
           content: `
