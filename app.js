@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import fetchData from './Data_Fetching/fetchData.js';//webcrawler json data
+import fetchData from './Data Fetching/fetchData.js';//webcrawler json data
 
 
 
@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
-
+app.use(express.static('Images')); //loads all of the static files from the css folder
 app.use(morgan('dev')); //enables logging information regarding the server
 
 

@@ -99,7 +99,7 @@ async function fetchData() {
       .then(() => {
         // Write the eventsData array to a JSON file
         fs.writeFile(
-          "eventsData.json",
+          "Data Fetching/eventsData.json",
           JSON.stringify(eventsData, null, 2),
           (err) => {
             if (err) throw err;
