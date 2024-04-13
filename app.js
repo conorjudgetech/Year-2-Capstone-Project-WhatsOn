@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: true })); //takes values from the front e
 app.use(morgan('dev')); //enables logging information regarding the server
 app.use(bodyParser.json());
 app.use(express.json()); //this is used to parse the json data
-app.use(express.static('Data Fetching')); //CJ- loads all of the static files from the Data Fetching folder
 
 app.listen(port, () => {
   console.log('Running on port ', port);
