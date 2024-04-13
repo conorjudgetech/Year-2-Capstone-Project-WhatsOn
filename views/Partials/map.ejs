@@ -212,9 +212,6 @@
         });
 
 //CJ- Dynamic JSON data for markers and info windows
-
-        //CJ- array to store events for random button
-
           //CJ- Multiple Markers with Info Windows from JSON Data
           fetch('/eventsData.json')
             //CJ- convert data to JSON
@@ -275,9 +272,6 @@
                     </div>
                 `,
             });
-
-        //CJ- moves marker and info window to events array
-
             // CJ- Add an event listener to the marker to open the info window
             marker.addListener("click", () => {
             // Close the current info window if it's open
@@ -306,11 +300,6 @@
             }
           })
 
-
-        //CJ- Adds a click event listener to the random button to display a random event info window
-        //CJ- SelectS the button inside the div with class 'randomTest'
-
-
         // CJ- Check if geolocation is available
         if (navigator.geolocation) {
           // CJ- Get user's location
@@ -327,8 +316,7 @@
 //CJ- TO-DO- get city from userLocation (lat/long) and store as global variable
 
               // CJ- Center the map to user's location
-              map.setCenter(userLocation);
-              // loadMap(userLocation);
+              loadMap(userLocation);
               //  map.setCenter(userLocation);
 
               // CJ- Add a marker for user's location
@@ -339,11 +327,6 @@
                 map,
                 // CJ- Set the title of the marker
                 title: "Your Location",
-                // icon: {
-                //     url: "Crosshair.png",
-                //     scaledSize: new google.maps.Size(48, 48),
-                // },
-                // animation: google.maps.Animation.DROP,
               });
             },
             // CJ- Error handling
