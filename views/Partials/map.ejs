@@ -322,7 +322,10 @@
             if (currentInfoWindow) {
                 currentInfoWindow.close();
             }
-
+            //CJ- Open the info window for the random event
+            events[index].infowindow.open(map, events[index].marker);
+            //CJ- Set the current info window to the newly opened one
+            currentInfoWindow = events[index].infowindow;
 
         // CJ- Check if geolocation is available
         if (navigator.geolocation) {
