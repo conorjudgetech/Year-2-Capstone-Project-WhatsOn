@@ -326,10 +326,6 @@
             events[index].infowindow.open(map, events[index].marker);
             //CJ- Set the current info window to the newly opened one
             currentInfoWindow = events[index].infowindow;
-            //CJ- Center the map on the location of the random event
-            map.setCenter(events[index].marker.getPosition());
-        });
-
 
         // CJ- Check if geolocation is available
         if (navigator.geolocation) {
