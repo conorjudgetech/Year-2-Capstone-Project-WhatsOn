@@ -54,7 +54,8 @@ async function fetchData() {
                   eventName: data.name ? data.name : "The name property does not exist.",
                   eventEndTime: data.endDate ? data.endDate : "The endDate property does not exist.",
                   eventImage: imgSrc ? imgSrc : "The img src does not exist.",
-                  eventType: eventType
+                  eventType: eventType,
+                  eventUrl: eventLink
                 });
               } else {
                 console.log("There are not enough scripts of type application/ld+json on the page.");
