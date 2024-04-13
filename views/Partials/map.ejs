@@ -287,7 +287,11 @@
             });
             });
           })
-
+            //CJ- log error to console
+              .catch((error) => {
+                //CJ- log error to console
+                console.error("Error fetching JSON data:", error);
+          });
 
           //CJ- click event listener added to the map to close the info window when the map is clicked
           map.addListener('click', function() {
@@ -295,13 +299,6 @@
               currentInfoWindow.close();
             }
           })
-
-          //CJ- log error to console
-          .catch((error) => {
-            //CJ- log error to console
-              console.error("Error fetching JSON data:", error);
-          });
-
 
         // CJ- Check if geolocation is available
         if (navigator.geolocation) {
