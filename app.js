@@ -16,8 +16,10 @@ const port = process.env.PORT || 3000;
 app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
 app.use('/images', express.static(path.join(__dirname, 'Images'))); //shoukl be able to load images from the images folder
+app.use(express.static('Images')); //loads all of the static files from the css folder
 app.use(express.urlencoded({ extended: true })); //takes values from the front end and brings the
 app.use(morgan('dev')); //enables logging information regarding the server
+app.use(express.static('Data Fetching')); //CJ- loads all of the static files from the Data Fetching folder
 app.use(bodyParser.json());
 app.use(express.json()); //this is used to parse the json data
 
