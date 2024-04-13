@@ -212,6 +212,10 @@
         });
 
 //CJ- Dynamic JSON data for markers and info windows
+
+        //CJ- array to store events for random button
+        let events = [];
+
           //CJ- Multiple Markers with Info Windows from JSON Data
           fetch('/eventsData.json')
             //CJ- convert data to JSON
@@ -272,6 +276,13 @@
                     </div>
                 `,
             });
+
+        //CJ- moves marker and info window to events array
+        events.push({
+        marker: marker,
+        infowindow: infowindow
+        });
+
             // CJ- Add an event listener to the marker to open the info window
             marker.addListener("click", () => {
             // Close the current info window if it's open
@@ -300,6 +311,30 @@
             }
           })
 
+        //CJ- Adds a click event listener to the random button to display a random event info window
+        //CJ- SelectS the button inside the div with class 'randomTest'
+        let btn = document.querySelector(".randomTest button"); 
+        //CJ- Add a click event listener to the button
+        btn.addEventListener("click", function() {
+            // CJ- Select a random index from the events array to display an event
+            let index = Math.floor(Math.random() * events.length);        
+            // CJ- Close the currently open info window if there is one
+            if (currentInfoWindow) {
+                currentInfoWindow.close();
+            }
+            //CJ- Open the info window for the random event
+            events[index].infowindow.open(map, events[index].marker);
+            //CJ- Set the current info window to the newly opened one
+            currentInfoWindow = events[index].infowindow;
+            //CJ- Center the map on the location of the random event
+            map.setCenter(events[index].marker.getPosition());
+        });
+        //CJ- click event listener added to the map to close the info window when the map is clicked
+        map.addListener('click', function() {
+            if (currentInfoWindow) {
+                currentInfoWindow.close();
+            }
+        });
         // CJ- Check if geolocation is available
         if (navigator.geolocation) {
           // CJ- Get user's location
@@ -316,8 +351,8 @@
 //CJ- TO-DO- get city from userLocation (lat/long) and store as global variable
 
               // CJ- Center the map to user's location
-              loadMap(userLocation);
-              //  map.setCenter(userLocation);
+              // loadMap(userLocation);
+               map.setCenter(userLocation);
 
               // CJ- Add a marker for user's location
               const userMarker = new google.maps.Marker({
@@ -327,6 +362,11 @@
                 map,
                 // CJ- Set the title of the marker
                 title: "Your Location",
+                // icon: {
+                //     url: "Crosshair.png",
+                //     scaledSize: new google.maps.Size(48, 48),
+                // },
+                // animation: google.maps.Animation.DROP,                
               });
             },
             // CJ- Error handling
