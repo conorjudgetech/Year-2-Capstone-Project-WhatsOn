@@ -89,4 +89,46 @@
     // For testing, show an alert or log a message to the console
     // Add the API interaction code here
   }
+  function followGroup(userEmail, eventName) {
+    // Assume getGroupName is a function that takes an event name and returns the associated group name and link
+    const { groupName, groupLink } = getGroupName(eventName);
+
+    // Read the existing data from the file
+    fs.readFile("followedGroups.json", "utf8", (err, data) => {
+      if (err) {
+        console.error(`Error reading file: ${err}`);
+        return;
+      }
+
+      // Parse the JSON data from the file, or start with an empty array if the file is empty
+      const followedGroups = data ? JSON.parse(data) : [];
+
+      // Check if the user is already following the group
+      const isFollowing = followedGroups.some(
+        (group) =>
+          group.userEmail === userEmail && group.groupName === groupName
+      );
+
+      if (isFollowing) {
+        console.log("The user is already following this group.");
+        return;
+      }
+
+      // Add the new group to the array
+      followedGroups.push({ userEmail, groupName, groupLink });
+
+      // Write the updated data back to the file
+      fs.writeFile(
+        "followedGroups.json",
+        JSON.stringify(followedGroups, null, 2),
+        (err) => {
+          if (err) {
+            console.error(`Error writing file: ${err}`);
+          } else {
+            console.log("The group has been followed!");
+          }
+        }
+      );
+    });
+  }
 </script>
