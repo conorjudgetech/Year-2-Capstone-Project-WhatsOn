@@ -30,14 +30,40 @@
 
 /* CJ- map.ejs styling */
 /* info window content */
-.info-window-content {
+  .info-window-content {
+    position: relative;
     background-color: var(--clr-blue);
     color: white;
     border: solid var(--clr-white) 5px;
-    overflow: none;
+    overflow: hidden;
     border-radius: 20px;
     padding: 10px;
+    padding-right: 120px;
+  }
+/* CJ- info window image styling */
+  .info-window-content img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 100px;
+    height: auto;
+    border: 2px solid white;
+  }
+
+  /* CJ- infowindow expand/collapse button */
+  .expand-collapse-btn {
+    background-color: white;
+    color: var(--clr-blue);
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+
+    /* CJ- Hides the extra text by default */
+    .extra-text {
+      display: none;
     }
+
 
 /*CJ- nav.ejs styling*/
 /* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
