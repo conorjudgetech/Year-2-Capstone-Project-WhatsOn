@@ -346,6 +346,7 @@
             animation: google.maps.Animation.DROP,
             //CJ- add eventType property to marker
             eventType: eventData.eventType,
+            groupLink: eventData.groupLink,
           });
 
           //CJ- Add the marker to the markers array
@@ -428,7 +429,11 @@
                     <a href="${
                       eventData.eventUrl
                     }" target="_blank" class="source-btn">Source</a>
-                  </div>
+                    <a href="#" id="follow-btn-${
+                      eventData.eventId
+                    }" onclick="event.preventDefault(); follow(${eventData});" class="follow-btn" style="${
+              isLoggedIn ? "display: inline;" : "display: none;"
+            }">Follow</a> </div>
                 </div>
             `,
           });
@@ -554,33 +559,6 @@
       console.error("Geolocation is not supported by this browser.");
     }
   }
-  window.onload = function () {
-  const encodedApiKey = window.prompt("Please enter your name:", "");
-  // Now you can decode the API key
-  fetch("http://localhost:3000/decrypt", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ encryptedApiKey: encodedApiKey }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const apiKey = data.decryptedApiKey;
-      // Now you can use the decoded API key in your application
-      loadGoogleMaps(apiKey);
-    })
-    .catch((error) => console.error("Error:", error));
-};
-
-function loadGoogleMaps(apiKey) {
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&map_ids=13185b1ffbbba3af&callback=initMap`;
-  script.async = true;
-  document.body.appendChild(script);
-}
-
-
 </script>
 <!-- CJ- using env variable to store API key, must be implemented on render website-->
 <!-- <script> const key = env.mapApiKey; console.log(key); </script> -->
@@ -612,5 +590,3 @@ function loadGoogleMaps(apiKey) {
       .catch(error => console.error('Error:', error));
 
 </script> -->
-
-

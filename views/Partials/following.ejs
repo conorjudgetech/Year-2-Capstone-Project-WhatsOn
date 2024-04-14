@@ -2,7 +2,7 @@
   var isSignupMode = true;
   var isLoggedIn = false;
   var users = {};
-
+  var userEmail = null;
   function followingButtonClicked() {
     if (isLoggedIn) {
       // User is logged in, show following
@@ -50,7 +50,9 @@
         .then((data) => {
           if (data.success) {
             alert("Login successful!");
+            userEmail = email;
             isLoggedIn = true;
+            onLogin();
             closeAllModals();
           } else {
             alert(data.message);
@@ -85,6 +87,16 @@
     }
   }
 
+  function onLogin() {
+  // Update the visibility of all follow buttons
+  for (let id in followButtons) {
+    const followButton = document.getElementById(`follow-btn-${id}`);
+    if (followButton) {
+      followButton.style.display = 'inline';
+    }
+  }
+}
+
   fetch("/isLoggedIn")
     .then((response) => response.json())
     .then((data) => {
@@ -98,51 +110,49 @@
         followButton.style.display = "none";
       }
     });
+  function follow(eventData) {
+    const email = userEmail;
+    const groupName = eventData.groupName;
+    const groupLink = eventData.groupLink;
 
-  // Inside the content for the InfoWindow:
-  // content: `
-  //   <div class="info-window-content">
-  //     // other elements
-  //     <button id="follow-btn-${eventData.eventId}" onclick="window.followGroup('${email}', '${eventData.groupName}', '${eventData.groupLink}');">Follow Group</button>
-  //   </div>
-  // `,
+    fetch("/followGroup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, groupName, groupLink }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("The group has been followed!");
 
-  fetch("/followGroup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, groupName, groupLink }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        console.log("The group has been followed!");
+          const followedGroupsList =
+            document.getElementById("followedGroupsList");
 
+          // Create a new li element
+          const newGroup = document.createElement("li");
+
+          // Set the text of the new li element to the group name
+          newGroup.textContent = groupName;
+
+          // Append the new li element to the ul
+          followedGroupsList.appendChild(newGroup);
+        } else {
+          console.log("The user is already following this group.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      })
+      .finally(() => {
         const followedGroupsList =
           document.getElementById("followedGroupsList");
-
-        // Create a new li element
-        const newGroup = document.createElement("li");
-
-        // Set the text of the new li element to the group name
-        newGroup.textContent = groupName;
-
-        // Append the new li element to the ul
-        followedGroupsList.appendChild(newGroup);
-      } else {
-        console.log("The user is already following this group.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    })
-    .finally(() => {
-      const followedGroupsList = document.getElementById("followedGroupsList");
-      if (!followedGroupsList.hasChildNodes()) {
-        const noGroupsMessage = document.createElement("li");
-        noGroupsMessage.textContent = "Not following any groups";
-        followedGroupsList.appendChild(noGroupsMessage);
-      }
-    });
+        if (!followedGroupsList.hasChildNodes()) {
+          const noGroupsMessage = document.createElement("li");
+          noGroupsMessage.textContent = "Not following any groups";
+          followedGroupsList.appendChild(noGroupsMessage);
+        }
+      });
+  }
 </script>
