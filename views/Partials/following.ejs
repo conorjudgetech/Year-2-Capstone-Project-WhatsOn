@@ -52,7 +52,6 @@
             alert("Login successful!");
             userEmail = email;
             isLoggedIn = true;
-            onLogin();
             closeAllModals();
           } else {
             alert(data.message);
@@ -86,16 +85,6 @@
         });
     }
   }
-
-  function onLogin() {
-  // Update the visibility of all follow buttons
-  for (let id in followButtons) {
-    const followButton = document.getElementById(`follow-btn-${id}`);
-    if (followButton) {
-      followButton.style.display = 'inline';
-    }
-  }
-}
 
   fetch("/isLoggedIn")
     .then((response) => response.json())
