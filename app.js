@@ -63,7 +63,7 @@ app.post("/users/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     console.log(salt);
     console.log(hashedPassword);
-    const user = { email: req.body.email, password: hashedPassword };
+    const newUser = { email: req.body.email, password: hashedPassword };
 
     let users = [];
 
@@ -90,7 +90,12 @@ app.post("/users/register", async (req, res) => {
         return;
       }
     }
-
+   // Check if the email is already in use
+   const existingUser = users.find(user => user.email === newUser.email);
+   if (existingUser) {
+     res.status(400).json({ success: false, message: "Email already in use." });
+     return;
+   }
     // Add the new user
     users.push(user);
 
@@ -137,7 +142,7 @@ app.post("/users/login", async (req, res) => {
     res.status(500).send("Cannot find users file");
     return;
   }
-  const user = users.find((user) => (user.email = req.body.email));
+  const user = users.find((user) => (user.email === req.body.email));
 
   if (user == null) {
     return res.status(400).send("Cannot find user");
@@ -153,6 +158,63 @@ app.post("/users/login", async (req, res) => {
       .status(500)
       .send({ success: false, message: "An error occured during login" });
   }
+});
+
+
+app.get('/isLoggedIn', (req, res) => {
+  if (req.session && req.session.userEmail) {
+    // Read users from the file
+    let users = [];
+    try {
+      const fileContent = fs.readFileSync(
+        path.join(__dirname, "User Details", "users.json"),
+        "utf8"
+      );
+      users = JSON.parse(fileContent);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send();
+      return;
+    }
+
+    // Filter users by the logged in email
+    const accounts = users.filter(user => user.email === req.session.userEmail);
+    res.json({ isLoggedIn: true, accounts });
+  } else {
+    res.json({ isLoggedIn: false });
+  }
+});
+
+
+app.post('/followGroup', (req, res) => {
+  const { userEmail, groupName, groupLink } = req.body;
+
+  fs.readFile('followedGroups.json', 'utf8', (err, data) => {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        const followedGroups = [{ userEmail, groupName, groupLink }];
+        fs.writeFileSync('followedGroups.json', JSON.stringify(followedGroups, null, 2));
+        res.json({ success: true, message: "The group has been followed!" });
+      } else {
+        res.status(500).json({ success: false, message: `Error reading file: ${err}` });
+      }
+      return;
+    }
+
+    const followedGroups = data ? JSON.parse(data) : [];
+    const isFollowing = followedGroups.some(
+      (group) => group.userEmail === userEmail && group.groupName === groupName
+    );
+
+    if (isFollowing) {
+      res.json({ success: false, message: "The user is already following this group." });
+      return;
+    }
+
+    followedGroups.push({ userEmail, groupName, groupLink });
+    fs.writeFileSync("followedGroups.json", JSON.stringify(followedGroups, null, 2));
+    res.json({ success: true, message: "The group has been followed!" });
+  });
 });
 
 app.use((req, res) => {

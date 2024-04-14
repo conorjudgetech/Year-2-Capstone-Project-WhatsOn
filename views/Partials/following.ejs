@@ -89,46 +89,49 @@
     // For testing, show an alert or log a message to the console
     // Add the API interaction code here
   }
-  function followGroup(userEmail, eventName) {
-    // Assume getGroupName is a function that takes an event name and returns the associated group name and link
-    const { groupName, groupLink } = getGroupName(eventName);
+// FFFFFFFFFFFFFFFFFFFFFFFFOOOOOOOOOOOOOOOOOOOOLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW planning
 
-    // Read the existing data from the file
-    fs.readFile("followedGroups.json", "utf8", (err, data) => {
-      if (err) {
-        console.error(`Error reading file: ${err}`);
-        return;
-      }
+fetch('/isLoggedIn')
+  .then(response => response.json())
+  .then(data => {
+    isLoggedIn = data.isLoggedIn;
+    var followButton = document.getElementById("followButton");
+    if (isLoggedIn) {
+      // User is logged in, show the button
+      followButton.style.display = "block";
+    } else {
+      // User is not logged in, hide the button
+      followButton.style.display = "none";
+    }
+  });
 
-      // Parse the JSON data from the file, or start with an empty array if the file is empty
-      const followedGroups = data ? JSON.parse(data) : [];
+// Inside the content for the InfoWindow:
+// content: `
+//   <div class="info-window-content">
+//     // other elements
+//     <button id="follow-btn-${eventData.eventId}" onclick="window.followGroup('${userEmail}', '${eventData.groupName}', '${eventData.groupLink}');">Follow Group</button>
+//   </div>
+// `,
 
-      // Check if the user is already following the group
-      const isFollowing = followedGroups.some(
-        (group) =>
-          group.userEmail === userEmail && group.groupName === groupName
-      );
+// Add the followGroup function to the window objectwindow.followGroup = function(userEmail, groupName, groupLink) {
+  fetch('/followGroup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userEmail, groupName, groupLink }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      console.log("The group has been followed!");
+    } else {
+      console.log("The user is already following this group.");
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 
-      if (isFollowing) {
-        console.log("The user is already following this group.");
-        return;
-      }
 
-      // Add the new group to the array
-      followedGroups.push({ userEmail, groupName, groupLink });
-
-      // Write the updated data back to the file
-      fs.writeFile(
-        "followedGroups.json",
-        JSON.stringify(followedGroups, null, 2),
-        (err) => {
-          if (err) {
-            console.error(`Error writing file: ${err}`);
-          } else {
-            console.log("The group has been followed!");
-          }
-        }
-      );
-    });
-  }
 </script>
