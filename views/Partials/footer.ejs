@@ -95,68 +95,7 @@
       }
     });
 
-    function toggleBlankModal(modalId, event) {
-      var originalWidth, originalHeight;
-
-      if (currentModal) {
-        // Store the original size of the modal
-        originalWidth = currentModal.offsetWidth;
-        originalHeight = currentModal.offsetHeight;
-    
-        currentModal.style.display = "none";
-        currentModal.innerHTML = ""; // Clear the modal content
-      }
-    
-      // Open the new modal
-      currentModal = document.getElementById(modalId);
-      currentModal.innerHTML = "<li>WhatsOn Organizer</li>"
-      currentModal.style.display = "block";
-    
-      // Reapply the original size of the modal
-      currentModal.style.width = originalWidth + "px";
-      currentModal.style.height = originalHeight + "px";
-    
-      // Get the position of the button
-      var button = event.target;
-      var rect = button.getBoundingClientRect();
-    
-      // Account for the border
-      var border = parseInt(getComputedStyle(button).borderWidth);
-    
-      // Position the modal below the button
-      currentModal.style.top = (rect.bottom + border) + "px";
-    
-      // Center the modal horizontally
-      currentModal.style.left = "50%";
-      currentModal.style.transform = "translateX(-50%)";
-    
-      // Slide the modal down to its final position below the button
-      var finalTop = rect.bottom + window.scrollY - 15; // default value
-    
-      // If the modal extends off the right edge of the screen, move it back
-      var modalRight = currentModal.offsetLeft + currentModal.offsetWidth;
-      if (modalRight > window.innerWidth) {
-        currentModal.style.right = "0px";
-    
-        // If it's the legend modal, adjust the finalTop
-        if (modalId === "legendModal") {
-          finalTop = rect.bottom + window.scrollY + 12;
-        }
-      }
-    
-      var currentTop = parseInt(currentModal.style.top);
-      var intervalId = setInterval(function () {
-        if (currentTop < finalTop) {
-          currentTop += 2;
-          currentModal.style.top = currentTop + "px";
-        } else {
-          clearInterval(intervalId);
-        }
-      }, 3); // Adjust this value to change the speed of the animation
-    }
-    
-
-
+ 
     function closeAllModals() {
       var modals = document.getElementsByClassName("modal");
       for (var i = 0; i < modals.length; i++) {
