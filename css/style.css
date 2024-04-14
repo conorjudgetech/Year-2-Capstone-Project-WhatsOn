@@ -30,7 +30,7 @@
   position: relative;
   height: 100vh;
   width: 100vw;
-  border: solid var(--clr-blue) 5px;
+
   margin: 0 auto;
   overflow: hidden;
   z-index: 1;
@@ -259,7 +259,7 @@
     width: 100%;
     height: 100px;
     z-index: 10;
-    position: sticky;
+    position: absolute;
     display: flex;
     justify-content: space-evenly;
   }
@@ -309,7 +309,6 @@
   width: 100%;
   height: 100px;
   z-index: 10;
-  position: sticky;
   display: flex;
   justify-content: space-evenly;
 }
