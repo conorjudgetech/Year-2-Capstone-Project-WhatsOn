@@ -1,30 +1,30 @@
 <footer>
   <script>
-  window.onload = function () {
-  const encodedApiKey = window.prompt("Please enter your name:", "");
-  // Now you can decode the API key
-  fetch("http://localhost:3000/decrypt", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ encryptedApiKey: encodedApiKey }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const apiKey = data.decryptedApiKey;
-      // Now you can use the decoded API key in your application
-      loadGoogleMaps(apiKey);
-    })
-    .catch((error) => console.error("Error:", error));
-};
+    window.onload = function () {
+      const encodedApiKey = window.prompt("Please enter your name:", "");
+      // Now you can decode the API key
+      fetch("http://localhost:3000/decrypt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ encryptedApiKey: encodedApiKey }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const apiKey = data.decryptedApiKey;
+          // Now you can use the decoded API key in your application
+          loadGoogleMaps(apiKey);
+        })
+        .catch((error) => console.error("Error:", error));
+    };
 
-function loadGoogleMaps(apiKey) {
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&map_ids=13185b1ffbbba3af&callback=initMap`;
-  script.async = true;
-  document.body.appendChild(script);
-}
+    function loadGoogleMaps(apiKey) {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&map_ids=13185b1ffbbba3af&callback=initMap`;
+      script.async = true;
+      document.body.appendChild(script);
+    }
     // Variable to store the currently open modal
     var currentModal = null;
 
@@ -120,7 +120,6 @@ function loadGoogleMaps(apiKey) {
       }
     });
 
- 
     function closeAllModals() {
       var modals = document.getElementsByClassName("modal");
       for (var i = 0; i < modals.length; i++) {
@@ -128,9 +127,11 @@ function loadGoogleMaps(apiKey) {
       }
       // Reset the currently open modal
       currentModal = null;
+      if (currentInfoWindow) {
+        currentInfoWindow.close();
+        currentInfoWindow = null;
+      }
     }
-
-
   </script>
   <%- include('following') %> <%- include('contact') %> <%- include('random') %>
   <%- include('api')%>
