@@ -3,7 +3,7 @@
     <button class="item following" onclick="followingButtonClicked()">
       Following
     </button>
-    <div id="followingModal" class="modal">
+    <div id="userModal" class="modal">
       <div class="modal-content">
         <form
           id="authForm"
@@ -25,6 +25,17 @@
           <input id="submit" type="submit" value="Sign Up" />
         </form>
         <button id="switchMode" onclick="switchMode()">Switch to Login</button>
+      </div>
+    </div>
+    <!-- Modal for displaying the list of followed groups -->
+    <div id="followingModal" class="modal">
+      <!-- Content container for the modal -->
+      <div class="modal-content">
+        <h3>Following</h3>
+        <!-- Unordered list where the followed groups will be dynamically added -->
+        <ul id="followedGroupsList">
+          <!-- List items will be added here dynamically -->
+        </ul>
       </div>
     </div>
   </div>
@@ -163,10 +174,10 @@
           id="contactForm"
           action="https://formspree.io/f/mayrlpzk"
           method="POST"
-          onsubmit="event.preventDefault();"
+          onsubmit="return messageSent();"
         >
-          <label for="name">Email:</label><br />
-          <input type="text" id="email" name="email" /><br />
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" required/><br />
           <label for="message">Message:</label><br />
           <textarea id="message" name="message"></textarea><br />
           <input type="submit" value="Submit" />

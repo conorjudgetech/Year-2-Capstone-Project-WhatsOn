@@ -1,31 +1,42 @@
 <script>
   function messageSent() {
-    // Clear the form fields
-    document.getElementById("Contact-Email").value = "";
-    document.getElementById("Contact-Message").value = "";
+    var email = document.forms["contactForm"]["email"].value;
+    var message = document.forms["contactForm"]["message"].value;
 
-    {
-      var emptyName = document.forms["contactForm"]["email"].value; //grabbing the value from the input field
-      var emptyMessage = document.forms["contactForm"]["message"].value;
-      if (emptyName == "") {
-        //if the name field is empty than it will let the user know to fill in that field inorder for the submit to work
-        alert("You need to fill the name field!");
-        return false;
-      } else if (emptyMessage == "") {
-        //if the message field is empty than it will let the user know to fill in that field inorder for the submit to work
-        alert("You need to fill the message field!");
-        return false;
-      } //if both fields are full then the message will be sent through succesfully
-      else {
-        alert(
-          "Your message has successfully been sent to our contact services!"
-        );
-        document.getElementById("email").innerHTML = " ";
-        document.getElementById("message").innerHTML = " ";
-        return true;
-      }
-    } //end of function
+    if (email == "") {
+      alert("You need to fill the email field!");
+      return false;
+    } else if (message == "") {
+      alert("You need to fill the message field!");
+      return false;
+    } else {
+      // Create a new FormData object from the form
+      var formData = new FormData(document.getElementById("contactForm"));
+
+      // Use fetch to send the form data to Formspree
+      fetch("https://formspree.io/f/mayrlpzk", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        },
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          if (responseJson.ok) {
+            alert("Your message has successfully been sent to our contact services!");
+            document.getElementById("email").value = "";
+            document.getElementById("message").value = "";
+          } else {
+            alert("There was an error sending your message. Please try again.");
+          }
+        })
+        .catch((error) => {
+          alert("There was an error sending your message. Please try again.");
+        });
+
+      // Prevent the form from being submitted normally
+      return false;
+    }
   }
-
-  //end of davids code
 </script>
