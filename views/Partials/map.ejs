@@ -213,35 +213,107 @@
 
     //CJ- Dynamic JSON data for markers and info windows
     //CJ- Function to get the icon URL based on the event type
-    function getIconUrl(eventType) {
+    function getIconUrl(eventType, eventTime) {
       //CJ- Create a new image object
       var icon = new Image();
       //CJ- Add an onload event listener to the image object
       icon.onload = function () {
         //CJ- The image has been loaded
       };
+
+      // CJ- Create a variable to store the time category
+      var timeCategory;
+      // CJ- Get the current time in milliseconds
+      var currentTime = new Date().getTime();
+      // CJ- Get the event start time in milliseconds
+      var eventStartTime = new Date(eventTime).getTime();
+      // CJ- Calculate the time difference in hours
+      var timeDifference = (eventStartTime - currentTime) / (1000 * 60 * 60);
+
+      // CJ- Determine the time category based on the time difference
+      if (timeDifference < 8) {
+        // CJ- Event is starting in less than 8 hours
+        timeCategory = "starting_soonest";
+      } else if (timeDifference < 16) {
+        // CJ- Event is starting in between 8 and 16 hours
+        timeCategory = "starting_in_between";
+      } else {
+        // CJ- Event is starting in more than 16 hours
+        timeCategory = "starting_furthest_away";
+      }
+
       //CJ- switch statement to return the icon URL based on the event type
       switch (eventType) {
+        //CJ- case statement for each event type
         case "Charity":
-          return "ChS.png";
+          //CJ- switch statement to return the icon URL based on the time category
+          switch (timeCategory) {
+            case "starting_soonest":
+              return "ChS.png";
+            case "starting_in_between":
+              return "ChO.png";
+            case "starting_furthest_away":
+              return "ChE.png";
+          }
+          break;
         case "Cultural":
-          return "CuS.png";
+          switch (timeCategory) {
+            case "starting_soonest":
+              return "CuS.png";
+            case "starting_in_between":
+              return "CuO.png";
+            case "starting_furthest_away":
+              return "CuE.png";
+          }
+          break;
         case "Education":
-          return "EdS.png";
+          switch (timeCategory) {
+            case "starting_soonest":
+              return "EdS.png";
+            case "starting_in_between":
+              return "EdO.png";
+            case "starting_furthest_away":
+              return "EdE.png";
+          }
+          break;
         case "Entertainment":
-          return "EnS.png";
+          switch (timeCategory) {
+            case "starting_soonest":
+              return "EnS.png";
+            case "starting_in_between":
+              return "EnO.png";
+            case "starting_furthest_away":
+              return "EnE.png";
+          }
+          break;
         case "Social":
-          return "SoS.png";
+          switch (timeCategory) {
+            case "starting_soonest":
+              return "SoS.png";
+            case "starting_in_between":
+              return "SoO.png";
+            case "starting_furthest_away":
+              return "SoE.png";
+          }
+          break;
         case "Sports":
-          return "SpS.png";
+          switch (timeCategory) {
+            case "starting_soonest":
+              return "SpS.png";
+            case "starting_in_between":
+              return "SpO.png";
+            case "starting_furthest_away":
+              return "SpE.png";
+          }
+          //CJ- default case for any other event type
+          break;
         default:
-          //CJ- Default icon if no match is found
+          //CJ- return the default icon URL
           icon.src = "Crosshair.png";
       }
-      //CJ- Return the icon URL
+      //CJ- return the icon URL
       return icon.src;
     }
-
     //CJ- array to store events for random button
     let events = [];
 
@@ -261,7 +333,7 @@
             //CJ- set title of marker to event name
             title: eventData.eventName,
             icon: {
-              url: getIconUrl(eventData.eventType),
+              url: getIconUrl(eventData.eventType, eventData.eventTime),
               scaledSize: new google.maps.Size(48, 48),
             },
             //CJ- set animation to drop from top of map
