@@ -3,7 +3,7 @@
     <button class="item following" onclick="followingButtonClicked()">
       Following
     </button>
-    <div id="followingModal" class="modal">
+    <div id="userModal" class="modal">
       <div class="modal-content">
         <form
           id="authForm"
@@ -25,6 +25,16 @@
           <input id="submit" type="submit" value="Sign Up" />
         </form>
         <button id="switchMode" onclick="switchMode()">Switch to Login</button>
+      </div>
+    </div>
+    <!-- Modal for displaying the list of followed groups -->
+    <div id="followingModal" class="modal">
+      <!-- Content container for the modal -->
+      <div class="modal-content">
+        <!-- Unordered list where the followed groups will be dynamically added -->
+        <ul id="followedGroupsList">
+          <!-- List items will be added here dynamically -->
+        </ul>
       </div>
     </div>
   </div>
