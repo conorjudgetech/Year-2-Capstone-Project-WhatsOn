@@ -119,7 +119,7 @@ fetch('/isLoggedIn')
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ userEmail, groupName, groupLink }),
+    body: JSON.stringify({ email, groupName, groupLink }),
   })
   .then(response => response.json())
   .then(data => {

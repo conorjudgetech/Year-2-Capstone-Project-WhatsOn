@@ -13,13 +13,13 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs'); // this calls for the ejs libary
-app.use(express.static('css')); //loads all of the static files from the css folder
-app.use('/images', express.static(path.join(__dirname, 'Images'))); //shoukl be able to load images from the images folder
-app.use(express.static('Images')); //loads all of the static files from the css folder
+app.set("view engine", "ejs"); // this calls for the ejs libary
+app.use(express.static("css")); //loads all of the static files from the css folder
+app.use("/images", express.static(path.join(__dirname, "Images"))); //shoukl be able to load images from the images folder
+app.use(express.static("Images")); //loads all of the static files from the css folder
 app.use(express.urlencoded({ extended: true })); //takes values from the front end and brings the
-app.use(morgan('dev')); //enables logging information regarding the server
-app.use(express.static('Data Fetching')); //CJ- loads all of the static files from the Data Fetching folder
+app.use(morgan("dev")); //enables logging information regarding the server
+app.use(express.static("Data Fetching")); //CJ- loads all of the static files from the Data Fetching folder
 app.use(bodyParser.json());
 app.use(express.json()); //this is used to parse the json data
 
@@ -81,23 +81,23 @@ app.post("/users/register", async (req, res) => {
       // If file does not exist, ignore the error
       if (error.code !== "ENOENT") {
         console.error(error);
-        res
-          .status(500)
-          .json({
-            success: false,
-            message: "An error occurred while reading the users file.",
-          });
+        res.status(500).json({
+          success: false,
+          message: "An error occurred while reading the users file.",
+        });
         return;
       }
     }
-   // Check if the email is already in use
-   const existingUser = users.find(user => user.email === newUser.email);
-   if (existingUser) {
-     res.status(400).json({ success: false, message: "Email already in use." });
-     return;
-   }
+    // Check if the email is already in use
+    const existingUser = users.find((user) => user.email === newUser.email);
+    if (existingUser) {
+      res
+        .status(400)
+        .json({ success: false, message: "Email already in use." });
+      return;
+    }
     // Add the new user
-    users.push(user);
+    users.push(newUser);
 
     // Write the updated users back to the file
     try {
@@ -108,21 +108,17 @@ app.post("/users/register", async (req, res) => {
       );
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: "An error occurred while writing to the users file.",
-        });
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while writing to the users file.",
+      });
       return;
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "An error occurred during registration.",
-      });
+    res.status(500).json({
+      success: false,
+      message: "An error occurred during registration.",
+    });
     console.log(error);
     return;
   }
@@ -142,7 +138,7 @@ app.post("/users/login", async (req, res) => {
     res.status(500).send("Cannot find users file");
     return;
   }
-  const user = users.find((user) => (user.email === req.body.email));
+  const user = users.find((user) => user.email === req.body.email);
 
   if (user == null) {
     return res.status(400).send("Cannot find user");
@@ -160,8 +156,7 @@ app.post("/users/login", async (req, res) => {
   }
 });
 
-
-app.get('/isLoggedIn', (req, res) => {
+app.get("/isLoggedIn", (req, res) => {
   if (req.session && req.session.userEmail) {
     // Read users from the file
     let users = [];
@@ -178,25 +173,31 @@ app.get('/isLoggedIn', (req, res) => {
     }
 
     // Filter users by the logged in email
-    const accounts = users.filter(user => user.email === req.session.userEmail);
+    const accounts = users.filter(
+      (user) => user.email === req.session.userEmail
+    );
     res.json({ isLoggedIn: true, accounts });
   } else {
     res.json({ isLoggedIn: false });
   }
 });
 
-
-app.post('/followGroup', (req, res) => {
+app.post("/followGroup", (req, res) => {
   const { userEmail, groupName, groupLink } = req.body;
 
-  fs.readFile('followedGroups.json', 'utf8', (err, data) => {
+  fs.readFile("followedGroups.json", "utf8", (err, data) => {
     if (err) {
-      if (err.code === 'ENOENT') {
+      if (err.code === "ENOENT") {
         const followedGroups = [{ userEmail, groupName, groupLink }];
-        fs.writeFileSync('followedGroups.json', JSON.stringify(followedGroups, null, 2));
+        fs.writeFileSync(
+          "followedGroups.json",
+          JSON.stringify(followedGroups, null, 2)
+        );
         res.json({ success: true, message: "The group has been followed!" });
       } else {
-        res.status(500).json({ success: false, message: `Error reading file: ${err}` });
+        res
+          .status(500)
+          .json({ success: false, message: `Error reading file: ${err}` });
       }
       return;
     }
@@ -207,12 +208,18 @@ app.post('/followGroup', (req, res) => {
     );
 
     if (isFollowing) {
-      res.json({ success: false, message: "The user is already following this group." });
+      res.json({
+        success: false,
+        message: "The user is already following this group.",
+      });
       return;
     }
 
     followedGroups.push({ userEmail, groupName, groupLink });
-    fs.writeFileSync("followedGroups.json", JSON.stringify(followedGroups, null, 2));
+    fs.writeFileSync(
+      "followedGroups.json",
+      JSON.stringify(followedGroups, null, 2)
+    );
     res.json({ success: true, message: "The group has been followed!" });
   });
 });
