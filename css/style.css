@@ -39,9 +39,9 @@
   overflow: hidden;
   border-radius: 20px;
   padding: 10px;
-  min-height: 200px;
+  min-height: 150px;
   width: 100%;
-  max-width: 60px; /* Adjust this value as needed */
+  max-width: 600px;
 }
 /* CJ- Text container */
 .text-container {
@@ -52,7 +52,7 @@
   width: 100%;
   height: auto;
   border: 2px solid white;
-  border-radius: 10px; /* Add this line */
+  border-radius: 10px;
 }
 
 /* CJ- infowindow expand/collapse button */
@@ -62,7 +62,7 @@
   border: none;
   cursor: pointer;
   outline: none;
-  border-radius: 5px; /* Add this line */
+  border-radius: 5px; 
 }
 
 /* CJ- Hides the extra text by default */
@@ -76,7 +76,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-  width: 200px; /* Adjust this to match the new width of your image */
+  width: 200px; 
 }
 
 /* CJ- Source button */
@@ -87,12 +87,64 @@
   border: none;
   cursor: pointer;
   outline: none;
-  padding: 5px;
+  padding: 2px;
   text-decoration: none;
   width: fit-content;
   margin-top: 10px;
-  border-radius: 5px; /* Add this line */
+  border-radius: 5px;
 }
+/* CJ- event type */
+.event-type-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* CJ- event type button */
+.toggle-btn {
+  background-color: white;
+  color: var(--clr-blue);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 2px; 
+  text-decoration: none;
+  width: fit-content;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+/*CJ- to align Type and Button*/
+.event-type-container p,
+.event-type-container .toggle-btn {
+  margin: 0;
+  padding: 0;
+}
+/*CJ- directions button*/
+.directions-btn {
+  display: block;
+  background-color: white;
+  color: var(--clr-blue);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 2px; 
+  text-decoration: none;
+  width: fit-content;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* CJ- directions button container */
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* CJ- consistant button borders */
+.toggle-btn, .expand-collapse-btn, .directions-btn, .source-btn {
+  border: 1px solid var(--clr-blue);
+}
+
 /*CJ- nav.ejs styling*/
 /* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
 @media only screen and (orientation: portrait) {

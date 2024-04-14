@@ -21,6 +21,12 @@
     //CJ- Variable to keep track of the open info window
     let currentInfoWindow = null;
 
+    //CJ- variable to keep track of the current filter
+    var currentFilter = null;
+
+    //CJ- variable to keep track of all markers
+    var markers = [];
+
     //CJ- Hardcoded markers and info windows for events
     //CJ- Function to handle marker click events
     function handleMarkerClick(marker, infowindow) {
@@ -338,7 +344,13 @@
             },
             //CJ- set animation to drop from top of map
             animation: google.maps.Animation.DROP,
+            //CJ- add eventType property to marker
+            eventType: eventData.eventType,
           });
+
+          //CJ- Add the marker to the markers array
+          markers.push(marker);
+
           //CJ- Create an info window for the event
           window.expandText = function (id) {
             //CJ- display the hidden text
@@ -367,9 +379,13 @@
               <div class="info-window-content">
                 <div class="text-container">
                   <h3>${eventData.eventName}</h3>
-                  <p><strong>Type:</strong> ${
-                    eventData.eventType
-                  }</p> <!-- Add this line -->
+                  <div class="event-type-container">
+                    <p><strong>Type:</strong></p>
+                    <button class="toggle-btn" onclick="window.filterEvents('${
+                      eventData.eventType
+                    }')">${eventData.eventType}</button>
+
+                  </div>
                   <p><strong>Group Name:</strong> ${eventData.groupName}</p> 
                   <p><strong>Start Time:</strong> ${new Date(
                     eventData.eventTime
@@ -401,13 +417,17 @@
             }');">Collapse</button>
                   </p>
                 </div>
-              <div class="image-source-container">
-                <img src="${eventData.eventImage}" alt="Event Image"> 
-                <a href="${
-                  eventData.eventUrl
-                }" target="_blank" class="source-btn">Source</a>
-              </div>
-            </div>
+                <div class="image-source-container">
+                  <img src="${eventData.eventImage}" alt="Event Image"> 
+                  <div class="btn-container">
+                    <a href="https://www.google.com/maps/dir//${eventData.lat},${
+                              eventData.lon
+                            }" target="_blank" class="directions-btn">Directions</a>
+                    <a href="${
+                      eventData.eventUrl
+                    }" target="_blank" class="source-btn">Source</a>
+                  </div>
+                </div>
             `,
           });
           //CJ- moves marker and info window to events array
@@ -466,6 +486,29 @@
         currentInfoWindow.close();
       }
     });
+
+    //CJ- Function to filter the events based on the event type
+    window.filterEvents = function (eventType) {
+      //CJ- If the current filter is the same as the clicked event type, remove the filter
+      if (currentFilter === eventType) {
+        //CJ- Set the current filter to null
+        currentFilter = null;
+        //CJ- Show all markers
+        markers.forEach((marker) => {
+          //CJ- Set the marker to be visible
+          marker.setVisible(true);
+        });
+      } else {
+        //CJ- If the current filter is not the same as the clicked event type, set the current filter to the clicked event type
+        currentFilter = eventType;
+        //CJ- Hide all markers that do not match the current filter
+        markers.forEach((marker) => {
+          //CJ- Set the marker to be visible if the event type matches the current filter
+          marker.setVisible(marker.eventType === currentFilter);
+        });
+      }
+    };
+
     // CJ- Check if geolocation is available
     if (navigator.geolocation) {
       // CJ- Get user's location
