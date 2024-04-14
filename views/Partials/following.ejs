@@ -52,6 +52,7 @@
             alert("Login successful!");
             toggleBlankModal("followingModal", event);
             isLoggedIn = true;
+            closeAllModals();
           } else {
             alert(data.message);
           }
@@ -109,11 +110,10 @@ fetch('/isLoggedIn')
 // content: `
 //   <div class="info-window-content">
 //     // other elements
-//     <button id="follow-btn-${eventData.eventId}" onclick="window.followGroup('${userEmail}', '${eventData.groupName}', '${eventData.groupLink}');">Follow Group</button>
+//     <button id="follow-btn-${eventData.eventId}" onclick="window.followGroup('${email}', '${eventData.groupName}', '${eventData.groupLink}');">Follow Group</button>
 //   </div>
 // `,
 
-// Add the followGroup function to the window objectwindow.followGroup = function(userEmail, groupName, groupLink) {
   fetch('/followGroup', {
     method: 'POST',
     headers: {
@@ -132,6 +132,5 @@ fetch('/isLoggedIn')
   .catch((error) => {
     console.error('Error:', error);
   });
-
 
 </script>
