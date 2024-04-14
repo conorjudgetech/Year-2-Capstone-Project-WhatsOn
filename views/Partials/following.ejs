@@ -50,7 +50,6 @@
         .then((data) => {
           if (data.success) {
             alert("Login successful!");
-            toggleBlankModal("followingModal", event);
             isLoggedIn = true;
             closeAllModals();
           } else {
