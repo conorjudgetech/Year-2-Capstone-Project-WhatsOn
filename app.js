@@ -6,35 +6,41 @@ import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import crypto from 'crypto';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-//Davey API key attempt
-// const con = process.env.mapApiKey;
-// import env from 'dotenv';
-
-// app.get('/api-key', (req, res) => {
-//   res.json({ apiKey: con  });
-// });
-
-
-
-app.set('view engine', 'ejs'); // this calls for the ejs libary
-app.use(express.static('css')); //loads all of the static files from the css folder
-app.use('/images', express.static(path.join(__dirname, 'Images'))); //shoukl be able to load images from the images folder
-app.use(express.static('Images')); //loads all of the static files from the css folder
+app.set("view engine", "ejs"); // this calls for the ejs libary
+app.use(express.static("css")); //loads all of the static files from the css folder
+app.use("/images", express.static(path.join(__dirname, "Images"))); //shoukl be able to load images from the images folder
+app.use(express.static("Images")); //loads all of the static files from the css folder
 app.use(express.urlencoded({ extended: true })); //takes values from the front end and brings the
-app.use(morgan('dev')); //enables logging information regarding the server
-app.use(express.static('Data Fetching')); //CJ- loads all of the static files from the Data Fetching folder
+app.use(morgan("dev")); //enables logging information regarding the server
+app.use(express.static("Data Fetching")); //CJ- loads all of the static files from the Data Fetching folder
 app.use(bodyParser.json());
 app.use(express.json()); //this is used to parse the json data
 
 app.listen(port, () => {
   console.log("Running on port ", port);
+});
+
+const algorithm = 'aes-256-ctr';
+const secretKey = '01dcfa406f6f7253d0a74c790987ff37c6866fa9226ad76cfe33373b9f3dd7af'; // replace with your 64-character secret key
+
+function decrypt(encryptedApiKey, secretKey) {
+    const key = Buffer.from(secretKey, 'hex');
+    const decipher = crypto.createDecipheriv(algorithm, key, Buffer.alloc(16));
+    const decrypted = Buffer.concat([decipher.update(Buffer.from(encryptedApiKey, 'hex')), decipher.final()]);
+    return decrypted.toString();
+}
+
+app.post('/decrypt', (req, res) => {
+    const encryptedApiKey = req.body.encryptedApiKey;
+    const decryptedApiKey = decrypt(encryptedApiKey, secretKey);
+    res.json({ decryptedApiKey });
 });
 
 app.get("/", async (req, res) => {
@@ -73,7 +79,7 @@ app.post("/users/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     console.log(salt);
     console.log(hashedPassword);
-    const user = { email: req.body.email, password: hashedPassword };
+    const newUser = { email: req.body.email, password: hashedPassword };
 
     let users = [];
 
@@ -91,18 +97,23 @@ app.post("/users/register", async (req, res) => {
       // If file does not exist, ignore the error
       if (error.code !== "ENOENT") {
         console.error(error);
-        res
-          .status(500)
-          .json({
-            success: false,
-            message: "An error occurred while reading the users file.",
-          });
+        res.status(500).json({
+          success: false,
+          message: "An error occurred while reading the users file.",
+        });
         return;
       }
     }
-
+    // Check if the email is already in use
+    const existingUser = users.find((user) => user.email === newUser.email);
+    if (existingUser) {
+      res
+        .status(400)
+        .json({ success: false, message: "Email already in use." });
+      return;
+    }
     // Add the new user
-    users.push(user);
+    users.push(newUser);
 
     // Write the updated users back to the file
     try {
@@ -113,21 +124,17 @@ app.post("/users/register", async (req, res) => {
       );
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: "An error occurred while writing to the users file.",
-        });
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while writing to the users file.",
+      });
       return;
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "An error occurred during registration.",
-      });
+    res.status(500).json({
+      success: false,
+      message: "An error occurred during registration.",
+    });
     console.log(error);
     return;
   }
@@ -147,7 +154,7 @@ app.post("/users/login", async (req, res) => {
     res.status(500).send("Cannot find users file");
     return;
   }
-  const user = users.find((user) => (user.email = req.body.email));
+  const user = users.find((user) => user.email === req.body.email);
 
   if (user == null) {
     return res.status(400).send("Cannot find user");
@@ -163,6 +170,74 @@ app.post("/users/login", async (req, res) => {
       .status(500)
       .send({ success: false, message: "An error occured during login" });
   }
+});
+
+app.get("/isLoggedIn", (req, res) => {
+  if (req.session && req.session.userEmail) {
+    // Read users from the file
+    let users = [];
+    try {
+      const fileContent = fs.readFileSync(
+        path.join(__dirname, "User Details", "users.json"),
+        "utf8"
+      );
+      users = JSON.parse(fileContent);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send();
+      return;
+    }
+
+    // Filter users by the logged in email
+    const accounts = users.filter(
+      (user) => user.email === req.session.userEmail
+    );
+    res.json({ isLoggedIn: true, accounts });
+  } else {
+    res.json({ isLoggedIn: false });
+  }
+});
+
+app.post("/followGroup", (req, res) => {
+  const { userEmail, groupName, groupLink } = req.body;
+
+  fs.readFile("followedGroups.json", "utf8", (err, data) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        const followedGroups = [{ userEmail, groupName, groupLink }];
+        fs.writeFileSync(
+          "followedGroups.json",
+          JSON.stringify(followedGroups, null, 2)
+        );
+        res.json({ success: true, message: "The group has been followed!" });
+      } else {
+        res
+          .status(500)
+          .json({ success: false, message: `Error reading file: ${err}` });
+      }
+      return;
+    }
+
+    const followedGroups = data ? JSON.parse(data) : [];
+    const isFollowing = followedGroups.some(
+      (group) => group.userEmail === userEmail && group.groupName === groupName
+    );
+
+    if (isFollowing) {
+      res.json({
+        success: false,
+        message: "The user is already following this group.",
+      });
+      return;
+    }
+
+    followedGroups.push({ userEmail, groupName, groupLink });
+    fs.writeFileSync(
+      "followedGroups.json",
+      JSON.stringify(followedGroups, null, 2)
+    );
+    res.json({ success: true, message: "The group has been followed!" });
+  });
 });
 
 app.use((req, res) => {
