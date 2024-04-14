@@ -1,152 +1,148 @@
 <script>
-    var isSignupMode = true;
-    var isLoggedIn = false;
-    var users = {};
+  var isSignupMode = true;
+  var isLoggedIn = false;
+  var users = {};
 
-    function followingButtonClicked() {
+  function followingButtonClicked() {
+    if (isLoggedIn) {
+      // User is logged in, show following
+      toggleModal("followingModal", event);
+    } else {
+      // User is not logged in, show the  signup/login modal
+      toggleModal("userModal", event);
+    }
+  }
+  function switchMode() {
+    var form = document.getElementById("authForm");
+    var submitButton = document.getElementById("submit");
+    var switchButton = document.getElementById("switchMode");
+
+    if (isSignupMode) {
+      form.setAttribute("action", "/users/login");
+      submitButton.setAttribute("value", "Login");
+      switchButton.textContent = "Switch to Sign Up";
+    } else {
+      form.setAttribute("action", "/users/register");
+      submitButton.setAttribute("value", "Sign Up");
+      switchButton.textContent = "Switch to Login";
+    }
+
+    isSignupMode = !isSignupMode;
+  }
+
+  //will work along side with backend code to check if the users log in details are correct and will take the message from the backend and display it to the user onb
+  function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    if (!isSignupMode) {
+      var url = "/users/login";
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Login successful!");
+            isLoggedIn = true;
+            closeAllModals();
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      var url = "/users/register";
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Account created successfully!");
+            isLoggedIn = true;
+            closeAllModals();
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }
+
+  fetch("/isLoggedIn")
+    .then((response) => response.json())
+    .then((data) => {
+      isLoggedIn = data.isLoggedIn;
+      var followButton = document.getElementById("followButton");
       if (isLoggedIn) {
-        // User is logged in, show following
-        toggleModal("followingModal", event);
+        // User is logged in, show the button
+        followButton.style.display = "block";
       } else {
-        // User is not logged in, show the  signup/login modal
-        toggleModal("userModal", event);
+        // User is not logged in, hide the button
+        followButton.style.display = "none";
       }
-    }
-    function switchMode() {
-      var form = document.getElementById("authForm");
-      var submitButton = document.getElementById("submit");
-      var switchButton = document.getElementById("switchMode");
+    });
 
-      if (isSignupMode) {
-        form.setAttribute("action", "/users/login");
-        submitButton.setAttribute("value", "Login");
-        switchButton.textContent = "Switch to Sign Up";
+  // Inside the content for the InfoWindow:
+  // content: `
+  //   <div class="info-window-content">
+  //     // other elements
+  //     <button id="follow-btn-${eventData.eventId}" onclick="window.followGroup('${email}', '${eventData.groupName}', '${eventData.groupLink}');">Follow Group</button>
+  //   </div>
+  // `,
+
+  fetch("/followGroup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, groupName, groupLink }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log("The group has been followed!");
+
+        const followedGroupsList =
+          document.getElementById("followedGroupsList");
+
+        // Create a new li element
+        const newGroup = document.createElement("li");
+
+        // Set the text of the new li element to the group name
+        newGroup.textContent = groupName;
+
+        // Append the new li element to the ul
+        followedGroupsList.appendChild(newGroup);
       } else {
-        form.setAttribute("action", "/users/register");
-        submitButton.setAttribute("value", "Sign Up");
-        switchButton.textContent = "Switch to Login";
+        console.log("The user is already following this group.");
       }
-
-      isSignupMode = !isSignupMode;
-    }
-
-    //will work along side with backend code to check if the users log in details are correct and will take the message from the backend and display it to the user onb
-    function handleFormSubmit(event) {
-      event.preventDefault(); // Prevent the form from submitting normally
-      var email = document.getElementById("email").value;
-      var password = document.getElementById("password").value;
-
-      if (!isSignupMode) {
-        var url = "/users/login";
-
-        fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: email, password: password }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              alert("Login successful!");
-              isLoggedIn = true;
-              closeAllModals();
-            } else {
-              alert(data.message);
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      } else {
-        var url = "/users/register";
-
-        fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: email, password: password }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              alert("Account created successfully!");
-              isLoggedIn = true;
-              closeAllModals();
-            } else {
-              alert(data.message);
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
-    }
-
-    fetch("/isLoggedIn")
-      .then((response) => response.json())
-      .then((data) => {
-        isLoggedIn = data.isLoggedIn;
-        var followButton = document.getElementById("followButton");
-        if (isLoggedIn) {
-          // User is logged in, show the button
-          followButton.style.display = "block";
-        } else {
-          // User is not logged in, hide the button
-          followButton.style.display = "none";
-        }
-      });
-
-    // Inside the content for the InfoWindow:
-    // content: `
-    //   <div class="info-window-content">
-    //     // other elements
-    //     <button id="follow-btn-${eventData.eventId}" onclick="window.followGroup('${email}', '${eventData.groupName}', '${eventData.groupLink}');">Follow Group</button>
-    //   </div>
-    // `,
-
-
-
-
-
-
-    fetch("/followGroup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, groupName, groupLink }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          console.log("The group has been followed!");
-
-          const followedGroupsList =
-            document.getElementById("followedGroupsList");
-
-          // Create a new li element
-          const newGroup = document.createElement("li");
-
-          // Set the text of the new li element to the group name
-          newGroup.textContent = groupName;
-
-          // Append the new li element to the ul
-          followedGroupsList.appendChild(newGroup);
-        } else {
-          console.log("The user is already following this group.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      })
-  .finally(() => {
-    const followedGroupsList = document.getElementById("followedGroupsList");
-    if (!followedGroupsList.hasChildNodes()) {
-      const noGroupsMessage = document.createElement("li");
-      noGroupsMessage.textContent = "Not following any groups";
-      followedGroupsList.appendChild(noGroupsMessage);
-      }});
+    .catch((error) => {
+      console.error("Error:", error);
+    })
+    .finally(() => {
+      const followedGroupsList = document.getElementById("followedGroupsList");
+      if (!followedGroupsList.hasChildNodes()) {
+        const noGroupsMessage = document.createElement("li");
+        noGroupsMessage.textContent = "Not following any groups";
+        followedGroupsList.appendChild(noGroupsMessage);
+      }
+    });
 </script>
