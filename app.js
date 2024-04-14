@@ -13,6 +13,16 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
+//Davey API key attempt
+// const con = process.env.mapApiKey;
+// import env from 'dotenv';
+
+// app.get('/api-key', (req, res) => {
+//   res.json({ apiKey: con  });
+// });
+
+
+
 app.set('view engine', 'ejs'); // this calls for the ejs libary
 app.use(express.static('css')); //loads all of the static files from the css folder
 app.use('/images', express.static(path.join(__dirname, 'Images'))); //shoukl be able to load images from the images folder
