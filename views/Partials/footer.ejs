@@ -1,9 +1,9 @@
 <footer>
   <script>
     window.onload = function () {
-      const encodedApiKey = window.prompt("Please enter your name:", "");
+      const encodedApiKey = window.prompt("Hey Julie. Please enter the Encoded API Key. It's in the 4th page of the Technical Report. Above the Executive Summary:", "");
       // Now you can decode the API key
-      fetch("http://localhost:3000/decrypt", {
+      fetch("/decrypt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

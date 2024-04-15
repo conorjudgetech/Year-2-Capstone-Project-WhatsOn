@@ -45,21 +45,21 @@
     }
 
     // CJ- creates new constant named marker to attach to event listener to open info window
-    const marker1 = new google.maps.Marker({
-      // CJ- sets the location of marker
-      position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
-      map,
-      //CJ- title of marker
-      title: "Education: Starting",
-      icon: {
-        // CJ- location of icon image
-        url: "EdS.png",
-        // CJ- new Google maps object that defines the size of icon image
-        scaledSize: new google.maps.Size(48, 48),
-      },
-      //CJ- animation that drops pin from top of the map
-      animation: google.maps.Animation.DROP,
-    });
+    // const marker1 = new google.maps.Marker({
+    //   // CJ- sets the location of marker
+    //   position: { lat: 53.34904445277732, lng: -6.2430142587188975 },
+    //   map,
+    //   //CJ- title of marker
+    //   title: "Education: Starting",
+    //   icon: {
+    //     // CJ- location of icon image
+    //     url: "EdS.png",
+    //     // CJ- new Google maps object that defines the size of icon image
+    //     scaledSize: new google.maps.Size(48, 48),
+    //   },
+    //   //CJ- animation that drops pin from top of the map
+    //   animation: google.maps.Animation.DROP,
+    // });
 
     // //CJ- new info window object set to open when marker is clicked
     // const infowindow1 = new google.maps.InfoWindow({
@@ -237,10 +237,10 @@
       var timeDifference = (eventStartTime - currentTime) / (1000 * 60 * 60);
 
       // CJ- Determine the time category based on the time difference
-      if (timeDifference < 8) {
+      if (timeDifference < 16) {
         // CJ- Event is starting in less than 8 hours
         timeCategory = "starting_soonest";
-      } else if (timeDifference < 16) {
+      } else if (timeDifference < 24) {
         // CJ- Event is starting in between 8 and 16 hours
         timeCategory = "starting_in_between";
       } else {

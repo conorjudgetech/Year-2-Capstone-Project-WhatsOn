@@ -184,6 +184,7 @@
 /* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
 @media only screen and (orientation: portrait) {
   .nav-bar {
+    position: relative;
     display: grid;
     grid-template-areas:
       "top-left . top-right"
@@ -226,7 +227,7 @@
   }
 
   .modal {
-    position: fixed;
+    position: static;
     /* Positioned relative to the viewport */
     width: 80%;
     top: 0;
