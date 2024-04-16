@@ -16,9 +16,7 @@
   margin: 0;
   padding: 0;
 }
-
-/*CJ- index.ejs styling*/
-.map-div {
+.mapandnav-div {
   position: relative;
   height: 100vh;
   width: 100vw;
@@ -27,22 +25,169 @@
   overflow: hidden;
   z-index: 0;
 }
+/*CJ- index.ejs styling*/
+.map-div {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 0;
+}
 
 /* CJ- map.ejs styling */
-/* info window content */
+/* CJ- info window content */
 .info-window-content {
-    background-color: var(--clr-blue);
-    color: white;
-    border: solid var(--clr-white) 5px;
-    overflow: none;
-    border-radius: 20px;
-    padding: 10px;
-    }
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  background-color: var(--clr-blue);
+  color: white;
+  border: solid var(--clr-white) 5px;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 10px;
+  min-height: 150px;
+  width: 100%;
+  max-width: 600px;
+}
+/* CJ- Text container */
+.text-container {
+  padding-right: 20px;
+}
+/* CJ- info window image styling */
+.info-window-content img {
+  width: 100%;
+  height: auto;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+/* CJ- infowindow expand/collapse button */
+.expand-collapse-btn {
+  background-color: white;
+  color: var(--clr-blue);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+}
+
+/* CJ- Hides the extra text by default */
+.extra-text {
+  display: none;
+}
+
+/* CJ- Image and Source button container */
+.image-source-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 200px;
+}
+
+/* CJ- Source button*/
+.source-btn {
+  display: block;
+  background-color: white;
+  color: var(--clr-blue);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 2px;
+  text-decoration: none;
+  width: -moz-fit-content; /* For Firefox */
+  width: fit-content; /* For other browsers */
+  margin-top: 10px;
+  border-radius: 5px;
+}
+/* CJ- event type */
+.event-type-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* CJ- event type button */
+.toggle-btn {
+  background-color: white;
+  color: var(--clr-blue);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 2px;
+  text-decoration: none;
+  width: -moz-fit-content; /* For Firefox */
+  width: fit-content; /* For other browsers */
+  margin-top: 10px;
+  border-radius: 5px;
+}
+/*CJ- to align Type and Button*/
+.event-type-container p,
+.event-type-container .toggle-btn {
+  margin: 0;
+  padding: 0;
+}
+/*CJ- directions button*/
+.directions-btn {
+  display: block;
+  background-color: white;
+  color: var(--clr-blue);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 2px;
+  text-decoration: none;
+  width: -moz-fit-content; /* For Firefox */
+  width: fit-content; /* For other browsers */
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* CJ- directions button container */
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* CJ- consistant button borders */
+.toggle-btn,
+.expand-collapse-btn,
+.directions-btn,
+.source-btn {
+  border: 1px solid var(--clr-blue);
+}
+
+@media only screen and (max-width: 600px) {
+  /*CJ- Adjusting the grid layout for smaller screens */
+  .info-window-content {
+    grid-template-columns: 1fr;
+  }
+
+  /*CJ- Adjusting the image and source button container for smaller screens */
+  .image-source-container {
+    width: 100%;
+    align-items: center;
+  }
+
+  /*CJ- Adjusting the text container padding for smaller screens */
+  .text-container {
+    padding-right: 0;
+  }
+
+  /*CJ- Adjusting the button container for smaller screens */
+  .btn-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
 /*CJ- nav.ejs styling*/
 /* Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode Portrait Mode */
 @media only screen and (orientation: portrait) {
   .nav-bar {
+    position: absolute;
     display: grid;
     grid-template-areas:
       "top-left . top-right"
@@ -53,6 +198,7 @@
     justify-items: center;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
+    background-color: transparent;
   }
 
   .item:nth-child(1) {
@@ -85,7 +231,7 @@
   }
 
   .modal {
-    position: fixed;
+    position: static;
     /* Positioned relative to the viewport */
     width: 80%;
     top: 0;
@@ -118,7 +264,7 @@
     width: 100%;
     height: 100px;
     z-index: 10;
-    position: sticky;
+    position: absolute;
     display: flex;
     justify-content: space-evenly;
   }
@@ -167,8 +313,7 @@
   margin-top: 20px;
   width: 100%;
   height: 100px;
-  z-index: 10;
-  position: sticky;
+  z-index: 1;
   display: flex;
   justify-content: space-evenly;
 }
@@ -190,6 +335,7 @@
   max-width: 160px;
   min-height: 50px;
   max-height: 80px;
+  z-index: 3;
 }
 
 .item.homeBTN {

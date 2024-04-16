@@ -3,13 +3,13 @@
     <button class="item following" onclick="followingButtonClicked()">
       Following
     </button>
-    <div id="followingModal" class="modal">
+    <div id="userModal" class="modal">
       <div class="modal-content">
         <form
           id="authForm"
-          action="/"
-          method="post"
-          onsubmit="event.preventDefault(); handleFormSubmit();"
+          action=""
+          method="POST"
+          onsubmit="handleFormSubmit(event);"
         >
           <div class="input-group">
             <label for="email">Email:</label>
@@ -24,14 +24,26 @@
           </div>
           <input id="submit" type="submit" value="Sign Up" />
         </form>
+        <br />
         <button id="switchMode" onclick="switchMode()">Switch to Login</button>
       </div>
     </div>
+    <!-- Modal for displaying the list of followed groups -->
+    <div id="followingModal" class="modal">
+      <!-- Content container for the modal -->
+      <div class="modal-content">
+        <h3>Following</h3>
+        <!-- Unordered list where the followed groups will be dynamically added -->
+        <ul id="followedGroupsList">
+          <!-- List items will be added here dynamically -->
+        </ul>
+      </div>
+    </div>
   </div>
-  <button class="item random" onclick="moveCrosshair()">Random</button>
+  <button class="item random">Random</button>
   <div class="parent">
-    <button class="item homeBTN" onclick="closeAllModals(); closeCrosshair();">
-      <img src="logo.png" alt="Home" class="home-logo" />
+    <button class="item homeBTN" onclick="closeAllModals()">
+      <img src="/Images/logo.png" alt="Home" class="home-logo" />
     </button>
   </div>
   <div class="button-modal-container">
@@ -120,28 +132,28 @@
             <strong>Examples</strong> Below are some examples:
             <ul>
               <li>
-                <img src="EnO.png" alt="Entertainment Icon" />
+                <img src="/Images/EnO.png" alt="Entertainment Icon" />
                 Entertainment Event Ongoing
               </li>
               <li>
-                <img src="EdS.png" alt="Educational Icon" />
+                <img src="/Images/EdS.png" alt="Educational Icon" />
                 Educational Event Starting
               </li>
               <li>
-                <img src="SoS.png" alt="Social Icon" /> Social Event
+                <img src="/Images/SoS.png" alt="Social Icon" /> Social Event
                 Starting
               </li>
               <li>
-                <img src="SpO.png" alt="Sports Icon" /> Sports Event
+                <img src="/Images/SpO.png" alt="Sports Icon" /> Sports Event
                 Ongoing
               </li>
               <li>
-                <img src="CuE.png" alt="Cultural Icon" /> Cultural
-                Event Ending
+                <img src="/Images/CuE.png" alt="Cultural Icon" /> Cultural Event
+                Ending
               </li>
               <li>
-                <img src="ChE.png" alt="Charity Icon" /> Charity
-                Event Ending
+                <img src="/Images/ChE.png" alt="Charity Icon" /> Charity Event
+                Ending
               </li>
             </ul>
           </li>
@@ -159,9 +171,14 @@
     </button>
     <div id="contactModal" class="modal contact-modal">
       <div class="modal-content">
-        <form id="contactForm"  action="https://formspree.io/f/mayrlpzk" method="POST" onsubmit="event.preventDefault();">
-          <label for="name">Email:</label><br />
-          <input type="text" id="email" name="email" /><br />
+        <form
+          id="contactForm"
+          action="https://formspree.io/f/mayrlpzk"
+          method="POST"
+          onsubmit="return messageSent();"
+        >
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" required /><br />
           <label for="message">Message:</label><br />
           <textarea id="message" name="message"></textarea><br />
           <input type="submit" value="Submit" />

@@ -1,6 +1,8 @@
-# Team Project: Group 1: WhatsOn
-Authors: Eoin Fitzsimons | Conor Judge | David O'Connor
+# Team Project
+ Authors: Eoin Fitzsimons | Conor Judge | David O'Connor
 
-https://trello.com/b/maGItaKQ/team-project-edc
+To run this application you will need to type into the terminal the following:
+npm install
+npx nodemon app
 
-Legacy Code (We have moved away from these ideas but it is important to represent our progress)
+To view this applicationin the browser you will need to enter an encoded API key to run Google Maps
