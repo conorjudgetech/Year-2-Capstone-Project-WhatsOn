@@ -87,7 +87,7 @@
   width: 200px;
 }
 
-/* CJ- Source button */
+/* CJ- Source button*/
 .source-btn {
   display: block;
   background-color: white;
@@ -97,7 +97,8 @@
   outline: none;
   padding: 2px;
   text-decoration: none;
-  width: fit-content;
+  width: -moz-fit-content; /* For Firefox */
+  width: fit-content; /* For other browsers */
   margin-top: 10px;
   border-radius: 5px;
 }
@@ -116,7 +117,8 @@
   outline: none;
   padding: 2px;
   text-decoration: none;
-  width: fit-content;
+  width: -moz-fit-content; /* For Firefox */
+  width: fit-content; /* For other browsers */
   margin-top: 10px;
   border-radius: 5px;
 }
@@ -136,7 +138,8 @@
   outline: none;
   padding: 2px;
   text-decoration: none;
-  width: fit-content;
+  width: -moz-fit-content; /* For Firefox */
+  width: fit-content; /* For other browsers */
   margin-top: 10px;
   border-radius: 5px;
 }
