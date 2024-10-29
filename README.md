@@ -31,59 +31,8 @@ For an in-depth look at the development of WhatsOn, check out our comprehensive 
 - **[Watch Demo Video](https://youtu.be/ffd4UqCUldw)**: See WhatsOn in action.
 - **[Try the App Live](https://whatson-kbt9.onrender.com)**: *Note: The deployed app requires an encrypted API key to function properly.*
 
-## Getting Started
-
-### Prerequisites
-
-- **Node.js and npm**: Install from the [official website](https://nodejs.org/).
-- **Google Maps API Key**: Obtain one from the [Google Cloud Console](https://console.cloud.google.com/).
-  - *Note: An encrypted API key is required for the app to function correctly.*
-
-### Installation
-
-1. **Install dependencies**:
-
-   ```bash
-   npm install
-   ```
-
-2. **Configure API Key**:
-
-   - Create a `.env` file in the root directory.
-   - Add your encrypted API key:
-
-     ```env
-     ENCRYPTED_GOOGLE_MAPS_API_KEY=your_encrypted_google_maps_api_key
-     ```
-
-3. **Start the app**:
-
-   ```bash
-   npm start
-   ```
-
-   *Alternatively, use Nodemon for automatic restarts during development:*
-
-   ```bash
-   npx nodemon app.js
-   ```
-
-4. **Visit the app**:
-
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Usage
-
-1. **Open the App**: Launch WhatsOn and allow location permissions.
-2. **Explore Events**: Browse events displayed on the map in your vicinity.
-3. **Filter Events**: Click on an event icon or use the legend to filter events by type.
-4. **Random Event**: Click the random event button for a surprise activity.
-5. **Event Details**: Select an event marker to view more information.
-6. **Get Directions**: Use the directions link to navigate to the event.
 
 ## Diagrams
-
-### Map View
 
 ### Desktop View
 ![Desktop View](./diagrams/Desktop.png)
@@ -155,6 +104,55 @@ We aim to enhance WhatsOn with:
 - **Advanced Personalization**: Improved filtering and personalized recommendations.
 - **Social Features**: Event sharing, friend lists, and group planning.
 
+## Getting Started
+
+### Prerequisites
+
+- **Node.js and npm**: Install from the [official website](https://nodejs.org/).
+- **Google Maps API Key**: Obtain one from the [Google Cloud Console](https://console.cloud.google.com/).
+  - *Note: An encrypted API key is required for the app to function correctly.*
+
+### Installation
+
+1. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+2. **Configure API Key**:
+
+   - Create a `.env` file in the root directory.
+   - Add your encrypted API key:
+
+     ```env
+     ENCRYPTED_GOOGLE_MAPS_API_KEY=your_encrypted_google_maps_api_key
+     ```
+
+3. **Start the app**:
+
+   ```bash
+   npm start
+   ```
+
+   *Alternatively, use Nodemon for automatic restarts during development:*
+
+   ```bash
+   npx nodemon app.js
+   ```
+
+4. **Visit the app**:
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Usage
+
+1. **Open the App**: Launch WhatsOn and allow location permissions.
+2. **Explore Events**: Browse events displayed on the map in your vicinity.
+3. **Filter Events**: Click on an event icon or use the legend to filter events by type.
+4. **Random Event**: Click the random event button for a surprise activity.
+5. **Event Details**: Select an event marker to view more information.
+6. **Get Directions**: Use the directions link to navigate to the event.
 
 ## Troubleshooting
 
@@ -181,6 +179,7 @@ We aim to enhance WhatsOn with:
   - Verify your Google Maps API key is correct and active.
   - Ensure the key is properly referenced in your `.env` file.
   - **Security Reminder**: Never commit your `.env` file or API keys to version control. Add `.env` to your `.gitignore` file.
+
 
 ## Acknowledgments
 
