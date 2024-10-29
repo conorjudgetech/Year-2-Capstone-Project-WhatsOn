@@ -101,12 +101,6 @@ For an in-depth look at the development of WhatsOn, check out our comprehensive 
 *A high-level view of the main interactions between the user and the WhatsOn system.*
 
 
-### Event Details
-
-![Event Details](./screenshots/event_details.png)
-
-*Get detailed information about events.*
-
 ## Technologies Used
 
 ### Frontend
