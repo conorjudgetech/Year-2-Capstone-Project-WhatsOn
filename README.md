@@ -18,12 +18,12 @@ WhatsOn is designed to make finding and attending events effortless. With a focu
 
 For an in-depth look at the development of WhatsOn, check out our comprehensive documentation:
 
-1. **[Project Proposal](./documentation/Project_Proposal.pdf)**: Overview of the project, market research, and application features.
-2. **[Requirements Specification](./documentation/Requirements_Specification.pdf)**: Detailed functional and non-functional requirements.
-3. **[Technical Report](./documentation/Technical_Report.pdf)**: System architecture, implementation challenges, and technology stack.
-4. **[Business Plan](./documentation/Business_Plan.pdf)**: Business concept, market analysis, and strategic positioning.
-5. **[Testing Report](./documentation/Testing_Report.pdf)**: Testing strategies and results to ensure functionality and user experience.
-6. **[Presentation Slides](./documentation/Presentation_Slides.pdf)**: Visual summary of the project and key outcomes.
+1. **[Project Proposal](./documentation/1%20-%20Project%20Proposal.pdf)**: Overview of the project, market research, and application features.
+2. **[Requirements Specification](./documentation/2%20-%20Requirements%20Specification.pdf)**: Detailed functional and non-functional requirements.
+3. **[Technical Report](./documentation/3%20-%20Technical%20Report.pdf)**: System architecture, implementation challenges, and technology stack.
+4. **[Presentation Slides](./documentation/4%20-%20Presentation%20Slides.pdf)**: Visual summary of the project and key outcomes.
+5. **[Testing Report](./documentation/5%20-%20Testing%20Report.pdf)**: Testing strategies and results to ensure functionality and user experience.
+6. **[Business Plan](./documentation/6%20-%20Business%20Plan.pdf)**: Business concept, market analysis, and strategic positioning.
 
 
 ## Demo
